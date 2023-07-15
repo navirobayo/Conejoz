@@ -1,12 +1,10 @@
-# Welcome to Conejoz, your digital dream journal. 
+# Welcome to Conejoz, your digital dream journal.
 
-Created for dreamers by dreamers.
+Conejoz is a beautiful and effective way to document and explore your dreams
 
-Conejoz is an easy and effective way to document and explore your dreams. 
+This Mobile and Web Application is designed so it can be used as a modern yet simple creative tool
 
-This Mobile and Web Application is designed so it can be used as a modern yet simple creative tool. 
-
-Created with Flutter and powered by Firebase all your information linked directly to the cloud. Dream anywhere. 
+Created with Flutter and powered by Firebase all your information linked directly to the cloud. Dream anywhere
 
 ## Features:
 
@@ -16,6 +14,8 @@ Created with Flutter and powered by Firebase all your information linked directl
 
 -------------------------------------------
 
-Available this next fall in English and Spanish at the Google Play Store 
+First prototype available this next fall in English and Spanish at the Google Play Store
 
-This is a free Open Source App created by Ivan Robayo.
+For dreamers by dreamers
+
+A free open source app created by Ivan Robayo
