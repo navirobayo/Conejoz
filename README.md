@@ -1,4 +1,4 @@
-# Welcome to Conejoz, your digital dream journal.
+# Welcome to Conejoz, your digital dream journal
 
 Conejoz is a beautiful and effective way to register and explore your dreams
 
