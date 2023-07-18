@@ -1,4 +1,7 @@
 import 'package:conejoz/components/theme_service.dart';
+import 'package:conejoz/presentation/feed_screen.dart';
+import 'package:conejoz/presentation/journal_screen.dart';
+import 'package:conejoz/presentation/settings_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:conejoz/components/theme.dart';
 import 'package:flutter/material.dart';
@@ -39,14 +42,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,16 +50,44 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: IndexedStack(
+        index: _currentIndex,
+        children: const [
+          FeedScreen(),
+          JournalScreen(),
+        ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.skateboarding_sharp),
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 0;
+                });
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            IconButton(
+              icon: const Icon(Icons.menu_book_sharp),
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 1;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),
