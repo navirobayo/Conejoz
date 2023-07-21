@@ -1,7 +1,8 @@
 import 'package:conejoz/components/theme_service.dart';
 import 'package:conejoz/presentation/feed_screen.dart';
 import 'package:conejoz/presentation/journal_screen.dart';
-import 'package:conejoz/presentation/settings_screen.dart';
+import 'package:conejoz/presentation/profile_screen/profile_screen.dart';
+import 'package:conejoz/presentation/settings_screen/settings_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:conejoz/components/theme.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Icon(Icons.code_rounded),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
@@ -55,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: const [
           FeedScreen(),
           JournalScreen(),
+          ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -63,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.skateboarding_sharp),
+              icon: const Icon(Icons.emoji_food_beverage_rounded),
               onPressed: () {
                 setState(() {
                   _currentIndex = 0;
@@ -75,6 +78,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 setState(() {
                   _currentIndex = 1;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.adjust_outlined),
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 2;
                 });
               },
             ),
@@ -91,12 +102,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed:
-            Provider.of<ThemeService>(context, listen: false).switchTheme,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

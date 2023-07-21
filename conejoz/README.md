@@ -1,16 +1,21 @@
-# conejoz
+# Welcome to Conejoz, your digital dream journal
 
-A new Flutter project.
+Conejoz is a beautiful and effective way to register and explore your dreams
 
-## Getting Started
+This Mobile and Web Application is designed so it can be used as a modern yet simple creative tool
 
-This project is a starting point for a Flutter application.
+Created with Flutter and powered by Firebase all your information linked directly to the cloud. Dream anywhere
 
-A few resources to get you started if this is your first Flutter project:
+## Features:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Create images all from text or audio input. 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Organize and track your ideas on the go.
+
+-------------------------------------------
+
+First prototype available this next fall in English and Spanish at the Google Play Store
+
+For dreamers by dreamers
+
+A free open source app created by Ivan Robayo

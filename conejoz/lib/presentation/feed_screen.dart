@@ -5,18 +5,26 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'This is a test of the Conejoz Prototype.',
-          ),
-          Text(
-            'Hello dreamer',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("Dreamscape"),
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Hello dreamer',
+            ),
+            Text(
+              'Here you will see other user\'s dreams',
+            ),
+            Text(
+              '+',
+            ),
+          ],
+        ),
       ),
     );
   }
