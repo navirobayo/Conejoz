@@ -1,13 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conejoz/components/theme_service.dart';
+import 'package:conejoz/firebase_options.dart';
 import 'package:conejoz/presentation/feed_screen.dart';
 import 'package:conejoz/presentation/journal_screen.dart';
 import 'package:conejoz/presentation/profile_screen/profile_screen.dart';
 import 'package:conejoz/presentation/settings_screen/settings_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:conejoz/components/theme.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseFirestore.instance.settings = const Settings(
+    persistenceEnabled: true,
+    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+  );
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeService(),
     child: const MyApp(),
