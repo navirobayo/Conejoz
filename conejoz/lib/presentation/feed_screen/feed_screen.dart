@@ -19,7 +19,7 @@ class _FeedScreenState extends State<FeedScreen> {
 
   Future<void> readData() async {
     final QuerySnapshot<Map<String, dynamic>> event =
-        await FirebaseFirestore.instance.collection("Dreamers").get();
+        await FirebaseFirestore.instance.collection("rabbits").get();
     final List<String> dreamers = [];
     for (var doc in event.docs) {
       dreamers.add("${doc.id} => ${doc.data()}");

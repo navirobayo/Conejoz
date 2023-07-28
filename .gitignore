@@ -1,1 +1,2 @@
-/conejoz/ios/Runner/GoogleService-Info.plist
+conejoz/ios/Runner/GoogleService-Info.plist
+conejoz/lib/components/firebase_options.dart

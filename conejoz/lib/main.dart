@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conejoz/components/theme_service.dart';
-import 'package:conejoz/firebase_options.dart';
-import 'package:conejoz/presentation/feed_screen.dart';
-import 'package:conejoz/presentation/journal_screen.dart';
+import 'package:conejoz/components/firebase_options.dart';
+import 'package:conejoz/presentation/feed_screen/feed_screen.dart';
+import 'package:conejoz/presentation/journal_screen/journal_screen.dart';
 import 'package:conejoz/presentation/profile_screen/profile_screen.dart';
 import 'package:conejoz/presentation/settings_screen/settings_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: IndexedStack(
         index: _currentIndex,
-        children: const [
+        children: [
           FeedScreen(),
           JournalScreen(),
           ProfileScreen(),
