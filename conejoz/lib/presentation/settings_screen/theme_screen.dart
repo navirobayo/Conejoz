@@ -1,4 +1,4 @@
-import 'package:conejoz/components/theme_service.dart';
+import 'package:conejoz/components/theme/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
