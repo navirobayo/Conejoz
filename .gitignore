@@ -1,3 +1,4 @@
 conejoz/ios/Runner/GoogleService-Info.plist
 conejoz/lib/components/firebase/firebase_options.dart
+conejoz/lib/components/test_01/.env
 conejoz/lib/components/huggingface/.env
