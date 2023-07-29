@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           title: 'Conejoz Prototype',
           theme: ConejozTheme.lightTheme,
           darkTheme: ConejozTheme.darkTheme,
-          themeMode: themeService.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          themeMode: themeService.isDarkMode ? ThemeMode.light : ThemeMode.dark,
           home: const MyHomePage(title: 'Conejoz Prototype'),
         );
       },

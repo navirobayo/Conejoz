@@ -25,21 +25,23 @@ class ProfileScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 image: const DecorationImage(
                   image: NetworkImage(
-                      'https://avatars.githubusercontent.com/u/101908819?v=4'),
+                      'https://avatars.githubusercontent.com/u/140388501?s=200&v=4'),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            Text('John Doe', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Taskforce909 \n Pedro Smith',
+                style: Theme.of(context).textTheme.labelLarge),
+            SizedBox(
+              width: regularSpacer,
+            )
           ],
         ),
         SizedBox(height: regularSpacer),
-        const Text(
-            "A quote about dreaming. The user can select it from a selection available for the users, or can create one."),
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
+            splashColor: Theme.of(context).cardColor,
             onTap: () {
               // Open dream
             },
@@ -54,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
         Card(
           clipBehavior: Clip.hardEdge,
           child: InkWell(
-            splashColor: Colors.blue.withAlpha(30),
+            splashColor: Theme.of(context).cardColor,
             onTap: () {
               // Open dream
             },

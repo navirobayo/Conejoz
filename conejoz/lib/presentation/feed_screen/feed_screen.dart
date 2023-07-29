@@ -1,23 +1,25 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
-  const FeedScreen({Key? key});
+  const FeedScreen({super.key});
 
   @override
-  _FeedScreenState createState() => _FeedScreenState();
+  State<FeedScreen> createState() => _FeedScreenState();
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  List<String> _dreamers = [];
+  /* List<String> _dreamers = [];
 
+ 
+ 
   @override
   void initState() {
     super.initState();
     readData();
   }
 
-  Future<void> readData() async {
+   Future<void> readData() async {
     final QuerySnapshot<Map<String, dynamic>> event =
         await FirebaseFirestore.instance.collection("rabbits").get();
     final List<String> dreamers = [];
@@ -27,7 +29,7 @@ class _FeedScreenState extends State<FeedScreen> {
     setState(() {
       _dreamers = dreamers;
     });
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +38,25 @@ class _FeedScreenState extends State<FeedScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Dreamscape"),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'Hello dreamer',
             ),
-            const Text(
+            Text(
               'Here you will see other user\'s dreams:',
             ),
-            const SizedBox(height: 16),
-            Expanded(
+            SizedBox(height: 16),
+            /* Expanded(
               child: ListView.builder(
                 itemCount: _dreamers.length,
                 itemBuilder: (context, index) {
                   return Text(_dreamers[index]);
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),

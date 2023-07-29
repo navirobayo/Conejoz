@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ConejozTheme {
   ConejozTheme._();
 
-  static const Color _lightPrimaryColor = Colors.lime;
+  static const Color _lightPrimaryColor = Colors.blueGrey;
 
   static const Color _darkPrimaryColor = Colors.indigo;
 
