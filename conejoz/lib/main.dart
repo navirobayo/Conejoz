@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conejoz/components/theme/theme_service.dart';
 import 'package:conejoz/components/firebase/firebase_options.dart';
-import 'package:conejoz/presentation/feed_screen/feed_screen.dart';
-import 'package:conejoz/presentation/journal_screen/journal_screen.dart';
-import 'package:conejoz/presentation/profile_screen/profile_screen.dart';
-import 'package:conejoz/presentation/settings_screen/settings_screen.dart';
+import 'package:conejoz/presentation/auth_screen/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:conejoz/components/theme/theme.dart';
@@ -12,7 +9,6 @@ import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -38,83 +34,9 @@ class MyApp extends StatelessWidget {
           theme: ConejozTheme.lightTheme,
           darkTheme: ConejozTheme.darkTheme,
           themeMode: themeService.isDarkMode ? ThemeMode.light : ThemeMode.dark,
-          home: const MyHomePage(title: 'Conejoz Prototype'),
+          home: const WelcomeScreen(),
         );
       },
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.code_rounded),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: [
-          FeedScreen(),
-          JournalScreen(),
-          ProfileScreen(),
-        ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.emoji_food_beverage_rounded),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 0;
-                });
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.menu_book_sharp),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 1;
-                });
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.adjust_outlined),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 2;
-                });
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsScreen(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
