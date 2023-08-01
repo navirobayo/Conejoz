@@ -1,19 +1,19 @@
-import 'package:conejoz/presentation/feed_screen/feed_screen.dart';
-import 'package:conejoz/presentation/journal_screen/journal_screen.dart';
-import 'package:conejoz/presentation/profile_screen/profile_screen.dart';
-import 'package:conejoz/presentation/settings_screen/settings_screen.dart';
+import 'package:conejoz/src/features/feed/screens/feed_screen.dart';
+import 'package:conejoz/src/features/journal/screens/journal_screen.dart';
+import 'package:conejoz/src/features/profile/screens/profile_screen.dart';
+import 'package:conejoz/src/features/settings/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
-class MainMenu extends StatefulWidget {
-  const MainMenu({super.key, required this.title});
+class NavigationBar extends StatefulWidget {
+  const NavigationBar({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MainMenu> createState() => _MainMenuState();
+  State<NavigationBar> createState() => _NavigationBarState();
 }
 
-class _MainMenuState extends State<MainMenu> {
+class _NavigationBarState extends State<NavigationBar> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {

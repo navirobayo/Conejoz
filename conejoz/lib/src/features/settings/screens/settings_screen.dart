@@ -1,5 +1,5 @@
-import 'package:conejoz/presentation/settings_screen/about_screen.dart';
-import 'package:conejoz/presentation/settings_screen/theme_screen.dart';
+import 'package:conejoz/src/features/settings/screens/about_screen.dart';
+import 'package:conejoz/src/features/settings/screens/theme_screen.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {

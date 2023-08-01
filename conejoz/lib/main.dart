@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conejoz/components/theme/theme_service.dart';
-import 'package:conejoz/components/firebase/firebase_options.dart';
-import 'package:conejoz/presentation/auth_screen/welcome_screen.dart';
+import 'package:conejoz/src/features/theme/theme_service.dart';
+import 'package:conejoz/firebase_options.dart';
+import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:conejoz/components/theme/theme.dart';
+import 'package:conejoz/src/features/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {

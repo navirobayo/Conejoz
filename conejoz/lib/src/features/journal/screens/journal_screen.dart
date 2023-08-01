@@ -1,4 +1,4 @@
-import 'package:conejoz/presentation/journal_screen/dream_creator.dart';
+import 'package:conejoz/src/features/journal/screens/dream_creator.dart';
 import 'package:flutter/material.dart';
 
 class JournalScreen extends StatelessWidget {
