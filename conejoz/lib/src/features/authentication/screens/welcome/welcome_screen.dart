@@ -1,4 +1,4 @@
-import 'package:conejoz/src/features/authentication/screens/signup/signup_screen.dart';
+import 'package:conejoz/src/features/authentication/screens/registration_screen/signup_screen.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 

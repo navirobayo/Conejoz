@@ -1,66 +1,23 @@
+import 'package:conejoz/src/features/authentication/controllers/signup_controller.dart';
 import 'package:conejoz/src/features/authentication/screens/registration_screen/google_registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _SignupScreenState createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-
-  bool _isLoading = false;
-
-  Future<void> _signUpWithEmail() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      final String email = _emailController.text.trim();
-      final String password = _passwordController.text.trim();
-      final String confirmPassword = _confirmPasswordController.text.trim();
-
-      if (password != confirmPassword) {
-        throw 'Passwords do not match';
-      }
-
-      final UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      final User? user = userCredential.user;
-
-      if (user != null) {
-        // Navigate to the home screen
-        Navigator.pushReplacementNamed(context, '/home');
-      }
-    } catch (e) {
-      // Handle sign-up errors here
-      print('Error during sign-up: $e');
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignUpController());
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20.0),
-          child: Center(
+          child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 const SizedBox(height: 100.0),
@@ -72,43 +29,74 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 const SizedBox(height: 50.0),
-                TextField(
-                  controller: _emailController,
+                TextFormField(
+                  controller: controller.rabbit,
+                  decoration: const InputDecoration(
+                    labelText: 'Username',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your username';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  controller: controller.email,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Email',
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 20.0),
-                TextField(
-                  controller: _passwordController,
+                TextFormField(
+                  controller: controller.password,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Password',
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 20.0),
-                TextField(
-                  controller: _confirmPasswordController,
+                TextFormField(
+                  controller: controller.confirmPassword,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Confirm Password',
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please confirm your password';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 50.0),
                 ElevatedButton(
-                  onPressed: _signUpWithEmail,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      SignUpController.instance.registerUser(
+                          controller.email.text.trim(),
+                          controller.password.text.trim());
+                    }
+                  },
                   child: const Text('Register with Email'),
                 ),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const GoogleRegistrationScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                   child: const Text('Register with Google'),
                 ),
                 const SizedBox(height: 20.0),

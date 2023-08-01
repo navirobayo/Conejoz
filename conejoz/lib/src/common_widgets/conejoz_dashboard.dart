@@ -4,16 +4,14 @@ import 'package:conejoz/src/features/profile/screens/profile_screen.dart';
 import 'package:conejoz/src/features/settings/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
-class NavigationBar extends StatefulWidget {
-  const NavigationBar({super.key, required this.title});
-
-  final String title;
+class ConejozDashboard extends StatefulWidget {
+  const ConejozDashboard({super.key});
 
   @override
-  State<NavigationBar> createState() => _NavigationBarState();
+  State<ConejozDashboard> createState() => _ConejozDashboardState();
 }
 
-class _NavigationBarState extends State<NavigationBar> {
+class _ConejozDashboardState extends State<ConejozDashboard> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class _NavigationBarState extends State<NavigationBar> {
       appBar: AppBar(
         leading: const Icon(Icons.code_rounded),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text("Conejoz Dashboard"),
       ),
       body: IndexedStack(
         index: _currentIndex,
