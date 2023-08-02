@@ -1,4 +1,5 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
@@ -38,17 +39,22 @@ class _FeedScreenState extends State<FeedScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Dreamscape"),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Hello dreamer',
             ),
-            Text(
+            const Text(
               'Here you will see other user\'s dreams:',
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            IconButton(
+                onPressed: () {
+                  AuthenticationRepository.instance.logout();
+                },
+                icon: const Icon(Icons.abc))
             /* Expanded(
               child: ListView.builder(
                 itemCount: _dreamers.length,

@@ -31,9 +31,6 @@ class AuthenticationRepository extends GetxController {
         email: email,
         password: password,
       );
-      firebaseUser.value != null
-          ? Get.offAll(() => const ConejozDashboard())
-          : Get.to(() => WelcomeScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       print("FIREBASE AUTH EXCEPTION - ${ex.message}");
