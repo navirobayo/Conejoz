@@ -11,27 +11,43 @@ class LoginScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(16),
-          child: const Center(
+          child: Center(
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 100.0,
                 ),
-                Text(
+                const Text(
                   eLogin,
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                const Text(
                   "Cool text goes here",
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                LoginFormWidget()
+                const LoginFormWidget(),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text("OR"),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: () {},
+                          icon:
+                              const Icon(Icons.account_balance_wallet_rounded),
+                          label: const Text("SignInWithGoogle"),
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {}, child: const Text(eCreateAnAccount))
+                    ]),
               ],
             ),
           ),
