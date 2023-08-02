@@ -1,5 +1,6 @@
 import 'package:conejoz/src/features/dashboard/screens/conejoz_dashboard.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
+import 'package:conejoz/src/repository/authentication_repository/exceptions/login_email_password_failure.dart';
 import 'package:conejoz/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -49,7 +50,14 @@ class AuthenticationRepository extends GetxController {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-    } catch (_) {}
+      final ex = LogInWithEmailAndPasswordFailure.code(e.code);
+      print("FIREBASE AUTH EXCEPTION - ${ex.message}");
+      rethrow; // Rethrow the exception to handle it in the UI.
+    } catch (e) {
+      final ex = LogInWithEmailAndPasswordFailure();
+      print("EXCEPTION - ${ex.message}");
+      rethrow; // Rethrow the exception to handle it in the UI.
+    }
   }
 
   Future<void> logout() async => await _auth.signOut();

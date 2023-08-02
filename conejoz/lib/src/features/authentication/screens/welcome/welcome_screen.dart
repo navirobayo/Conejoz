@@ -1,5 +1,5 @@
 import 'package:conejoz/src/features/authentication/screens/login/login_screen.dart';
-import 'package:conejoz/src/features/authentication/screens/registration_screen/signup_screen.dart';
+import 'package:conejoz/src/features/authentication/screens/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
