@@ -1,5 +1,7 @@
+import 'package:conejoz/src/features/profile/screens/update_profile.dart';
 import 'package:conejoz/src/features/settings/screens/about_screen.dart';
 import 'package:conejoz/src/features/settings/screens/theme_screen.dart';
+import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -42,6 +44,22 @@ class SettingsScreen extends StatelessWidget {
           ),
           ListTile(
             leading: IconButton(
+              icon: const Icon(Icons.person),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UpdateProfileScreen(),
+                  ),
+                );
+              },
+            ),
+            title: const Text('Profile'),
+            subtitle: const Text('Customize that rabbit pal'),
+            trailing: const Icon(Icons.arrow_forward_ios),
+          ),
+          ListTile(
+            leading: IconButton(
               icon: const Icon(Icons.info_outline_rounded),
               onPressed: () {
                 Navigator.push(
@@ -54,6 +72,17 @@ class SettingsScreen extends StatelessWidget {
             ),
             title: const Text('About'),
             subtitle: const Text('What\'s Conejoz anyway?'),
+            trailing: const Icon(Icons.arrow_forward_ios),
+          ),
+          ListTile(
+            leading: IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                AuthenticationRepository.instance.logout();
+              },
+            ),
+            title: const Text('Logout'),
+            subtitle: const Text('See you later rabbitz'),
             trailing: const Icon(Icons.arrow_forward_ios),
           ),
         ],

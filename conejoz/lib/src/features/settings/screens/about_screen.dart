@@ -18,7 +18,7 @@ class AboutScreen extends StatelessWidget {
               'Conejoz Ver 1.0.0',
             ),
             Text(
-              'An Open Source App!',
+              'For dreamers by dreamers. \n Created with passion by Ivan Robayo',
             ),
             Text(
               'github.com/navirobayo',

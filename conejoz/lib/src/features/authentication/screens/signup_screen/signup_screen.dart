@@ -1,4 +1,5 @@
 import 'package:conejoz/src/features/authentication/controllers/signup_controller.dart';
+import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -89,6 +90,12 @@ class SignupScreen extends StatelessWidget {
                           controller.email.text.trim(),
                           controller.password.text.trim());
                     }
+                    final user = RabbitModel(
+                      rabbit: controller.rabbit.text.trim(),
+                      email: controller.email.text.trim(),
+                      password: controller.password.text.trim(),
+                    );
+                    SignUpController.instance.createUser(user);
                   },
                   child: const Text('Register with Email'),
                 ),

@@ -1,5 +1,5 @@
 import 'package:conejoz/src/features/authentication/controllers/profile_controller.dart';
-import 'package:conejoz/src/features/authentication/models/user_model.dart';
+import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,10 +22,55 @@ class UpdateProfileScreen extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
-                  UserModel userData = snapshot.data as UserModel;
+                  RabbitModel userData = snapshot.data as RabbitModel;
                   return Column(
                     children: [
-                      // full screen goes here.
+                      Stack(
+                        children: [
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(10),
+                              image: const DecorationImage(
+                                image: NetworkImage(
+                                    'https://avatars.githubusercontent.com/u/140388501?s=200&v=4'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Implement profile picture change logic
+                              },
+                              child: const Icon(Icons.camera_alt),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Username',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
                     ],
                   );
                 } else if (snapshot.hasError) {
