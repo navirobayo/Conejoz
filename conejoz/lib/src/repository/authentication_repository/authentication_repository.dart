@@ -1,4 +1,4 @@
-import 'package:conejoz/src/common_widgets/conejoz_dashboard.dart';
+import 'package:conejoz/src/features/dashboard/screens/conejoz_dashboard.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:conejoz/src/repository/authentication_repository/exceptions/signup_email_password_failure.dart';
 import 'package:firebase_auth/firebase_auth.dart';
