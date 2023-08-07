@@ -1,3 +1,5 @@
+import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
+import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,19 +39,37 @@ class _DreamCreatorState extends State<DreamCreator> {
       );
 
       if (response.statusCode == 200) {
-        // If the request is successful, parse the JSON response to get the image URL
         final data = jsonDecode(response.body);
-        setState(() {
-          _imageUrl = data['image_url'];
-          _imageFile =
-              null; // Reset the image file when you get a new image URL
-        });
+        final imageUrl = data['image_url'];
+
+        if (imageUrl != null) {
+          // Store the image file temporarily
+          final imageFile = await getImageFileFromUrl(imageUrl);
+          setState(() {
+            _imageUrl = imageUrl;
+            _imageFile = imageFile;
+          });
+
+          // The image is already stored in _imageFile, so we can directly upload it to Firebase Storage
+          final imageName =
+              'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
+          final downloadUrl =
+              await uploadImageToFirebase(_imageFile!, imageName);
+
+          if (downloadUrl != null) {
+            // Save the image downloadUrl to Firestore.
+            final user = AuthenticationRepository.instance.firebaseUser.value;
+            if (user != null) {
+              final userId = user.uid;
+              await UserRepository.instance
+                  .updateUserDefaultJournal(userId, downloadUrl);
+            }
+          }
+        }
       } else {
-        // Handle error cases here
         print('API request failed with status code: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle exceptions here
       print('Error during API request: $e');
     }
   }
@@ -141,9 +161,14 @@ class _DreamCreatorState extends State<DreamCreator> {
                   final downloadUrl =
                       await uploadImageToFirebase(_imageFile!, imageName);
                   if (downloadUrl != null) {
-                    // TODO: Save the image downloadUrl to Firestore.
-                    // Use Firebase Firestore to save the downloadUrl to the user's journal document.
-                    // You can use Firebase's official Firestore plugin to achieve this.
+                    // Save the image downloadUrl to Firestore.
+                    final user =
+                        AuthenticationRepository.instance.firebaseUser.value;
+                    if (user != null) {
+                      final userId = user.uid;
+                      await UserRepository.instance
+                          .updateUserDefaultJournal(userId, downloadUrl);
+                    }
                   }
                 }
               },

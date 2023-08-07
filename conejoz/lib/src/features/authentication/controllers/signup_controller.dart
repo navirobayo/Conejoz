@@ -43,7 +43,8 @@ class SignUpController extends GetxController {
         "description": "Created by default",
         "created": DateTime.now(),
         "updated": DateTime.now(),
-        "entries": []
+        "entries": [],
+        "image_url": "",
       }
     };
 

@@ -24,6 +24,21 @@ class UserRepository extends GetxController {
     });
   }
 
+  Future<void> updateUserDefaultJournal(String userId, String imageUrl) async {
+    final defaultJournalRef = _db
+        .collection("rabbits")
+        .doc(userId)
+        .collection("journals")
+        .doc("default");
+
+    try {
+      await defaultJournalRef.update({"image_url": imageUrl});
+    } catch (error) {
+      print("Error updating user's default journal: $error");
+      throw error;
+    }
+  }
+
   Future<UserModel> getUserDetails(String email) async {
     final snapshot =
         await _db.collection("rabbits").where("Email", isEqualTo: email).get();
