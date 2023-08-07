@@ -31,6 +31,27 @@ class UserRepository extends GetxController {
     return userData;
   }
 
+// This is a function that should help with the validation of the username. Not working yet.
+  Future<UserModel?> getUserDetailsByUsername(String username) async {
+    try {
+      final snapshot = await _db
+          .collection("rabbits")
+          .where("rabbitname", isEqualTo: username)
+          .limit(1)
+          .get();
+
+      if (snapshot.docs.isEmpty) {
+        return null; // Username does not exist
+      }
+
+      final userData = snapshot.docs.first;
+      return UserModel.fromSnapshot(userData);
+    } catch (error) {
+      print("Error getting user details by username: $error");
+      return null;
+    }
+  }
+
   Future<List<UserModel>> allUser() async {
     final snapshot = await _db.collection("rabbits").get();
     final userData =
