@@ -22,7 +22,7 @@ class UpdateProfileScreen extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
-                  RabbitModel userData = snapshot.data as RabbitModel;
+                  UserModel userData = snapshot.data as UserModel;
                   return Column(
                     children: [
                       Stack(

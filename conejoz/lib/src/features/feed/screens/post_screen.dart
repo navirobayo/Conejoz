@@ -16,14 +16,27 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(rabbit),
-        Text(dream),
-        Text(title),
-        Text(time),
-        Text(caption),
-      ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.blueGrey,
+        borderRadius: BorderRadius.circular(15),
+      ),
+      margin: EdgeInsets.only(top: 25, left: 25, right: 25),
+      padding: EdgeInsets.all(25),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(rabbit),
+          Column(
+            children: [
+              Text(dream),
+              Text(title),
+              Text(time),
+              Text(caption),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

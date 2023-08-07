@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RabbitModel {
+class UserModel {
   final String? id;
   final String rabbit;
   final String email;
   final String password;
 
-  const RabbitModel({
+  const UserModel({
     this.id,
     required this.rabbit,
     required this.email,
@@ -17,10 +17,10 @@ class RabbitModel {
     return {"Rabbit": rabbit, "Email": email, "Password": password};
   }
 
-  factory RabbitModel.fromSnapshot(
+  factory UserModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
-    return RabbitModel(
+    return UserModel(
       id: document.id,
       email: data["Email"],
       password: data["Password"],

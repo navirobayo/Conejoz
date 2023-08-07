@@ -22,7 +22,7 @@ class SignUpController extends GetxController {
         .createUserWithEmailAndPassword(email, password);
   }
 
-  Future<void> createUser(RabbitModel user) async {
+  Future<void> createUser(UserModel user) async {
     await userRepo.createUser(user);
     Get.to(() => const ConejozDashboard());
   }

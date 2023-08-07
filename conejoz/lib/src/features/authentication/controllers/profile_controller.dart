@@ -1,4 +1,3 @@
-import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,7 @@ class ProfileController extends GetxController {
   getUserData() {
     final email = _authRepo.firebaseUser.value?.email;
     if (email != null) {
-      return _userRepo.getRabbitDetails(email);
+      return _userRepo.getUserDetails(email);
     } else {
       Get.snackbar("Error", "Login to continue");
     }

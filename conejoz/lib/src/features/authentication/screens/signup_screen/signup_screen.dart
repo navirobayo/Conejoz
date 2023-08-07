@@ -35,7 +35,7 @@ class SignupScreen extends StatelessWidget {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your username';
+                      return 'Please enter your rabbitname';
                     }
                     return null;
                   },
@@ -86,16 +86,11 @@ class SignupScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      //This register the user with email and password into Firebase.
                       SignUpController.instance.registerUser(
                           controller.email.text.trim(),
                           controller.password.text.trim());
                     }
-                    final user = RabbitModel(
-                      rabbit: controller.rabbit.text.trim(),
-                      email: controller.email.text.trim(),
-                      password: controller.password.text.trim(),
-                    );
-                    SignUpController.instance.createUser(user);
                   },
                   child: const Text('Register with Email'),
                 ),
