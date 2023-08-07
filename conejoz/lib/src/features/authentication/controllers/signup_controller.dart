@@ -1,5 +1,3 @@
-import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
-import 'package:conejoz/src/features/dashboard/screens/conejoz_dashboard.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +17,53 @@ class SignUpController extends GetxController {
   // Call this function from Desing and it will do the rest.
   void registerUser(String email, String password) {
     AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(email, password);
+        .createUserWithEmailAndPassword(email, password)
+        .then((_) {
+      createRabbitDocument();
+    }).catchError((error) {
+      print("error: $error");
+    });
   }
 
-  Future<void> createUser(UserModel user) async {
-    await userRepo.createUser(user);
-    Get.to(() => const ConejozDashboard());
+  void createRabbitDocument() {
+    final rabbitDocument = {
+      "rabbitname": rabbit.text.trim(),
+      "defaultjournal": {
+        "title": "My First Journal",
+        "description": "This is my first journal",
+        "created": DateTime.now(),
+        "updated": DateTime.now(),
+        "entries": [
+          {
+            "title": "My First Entry",
+            "description": "This is my first entry",
+            "created": DateTime.now(),
+            "updated": DateTime.now(),
+            "tags": ["first", "entry"]
+          }
+        ]
+      }
+    };
+
+    userRepo.createRabbit(rabbit.text.trim(), rabbitDocument).then((_) {
+      Get.snackbar(
+        "Success",
+        "You are a rabbit now",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.withOpacity(0.1),
+        colorText: Colors.green,
+      );
+      // Optionally, you can navigate to the next screen here.
+      // For example: Get.to(() => NextScreen());
+    }).catchError((error) {
+      Get.snackbar(
+        "Error",
+        "Something went wrong. Try again",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1),
+        colorText: Colors.red,
+      );
+      print(error.toString());
+    });
   }
 }

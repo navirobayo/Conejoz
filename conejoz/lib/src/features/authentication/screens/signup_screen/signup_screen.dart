@@ -1,5 +1,4 @@
 import 'package:conejoz/src/features/authentication/controllers/signup_controller.dart';
-import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -88,8 +87,9 @@ class SignupScreen extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       //This register the user with email and password into Firebase.
                       SignUpController.instance.registerUser(
-                          controller.email.text.trim(),
-                          controller.password.text.trim());
+                        controller.email.text.trim(),
+                        controller.password.text.trim(),
+                      );
                     }
                   },
                   child: const Text('Register with Email'),

@@ -8,8 +8,9 @@ class UserRepository extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
-  createUser(UserModel user) async {
-    await _db.collection("Users").add(user.toJson()).whenComplete(() {
+  Future<void> createRabbit(
+      String username, Map<String, dynamic> rabbitDocument) async {
+    await _db.collection("rabbits").doc(username).set(rabbitDocument).then((_) {
       Get.snackbar("Success", "You are a rabbit now",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green.withOpacity(0.1),
@@ -25,19 +26,19 @@ class UserRepository extends GetxController {
 
   Future<UserModel> getUserDetails(String email) async {
     final snapshot =
-        await _db.collection("Users").where("Email", isEqualTo: email).get();
+        await _db.collection("rabbits").where("Email", isEqualTo: email).get();
     final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
     return userData;
   }
 
   Future<List<UserModel>> allUser() async {
-    final snapshot = await _db.collection("Users").get();
+    final snapshot = await _db.collection("rabbits").get();
     final userData =
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
     return userData;
   }
 
-  /*Future<void> updateRabbitRecord(RabbitModel user) async {
+  /*Future<void> updateUserRecord(UserModel user) async {
     await _db.collection("rabbits");
   }*/
 }
