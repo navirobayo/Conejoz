@@ -7,19 +7,18 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-class DreamCreator extends StatefulWidget {
-  const DreamCreator({Key? key});
+class ImageCreator extends StatefulWidget {
+  const ImageCreator({Key? key});
 
   @override
-  _DreamCreatorState createState() => _DreamCreatorState();
+  _ImageCreatorState createState() => _ImageCreatorState();
 }
 
-class _DreamCreatorState extends State<DreamCreator> {
+class _ImageCreatorState extends State<ImageCreator> {
   final TextEditingController _textEditingController = TextEditingController();
 
   String? _imageUrl;
-  File? _imageFile; // Add this variable to store the actual image file
-  String? _imageName; // Add this variable to store the image name
+  File? _imageFile;
 
   @override
   void dispose() {
@@ -49,22 +48,6 @@ class _DreamCreatorState extends State<DreamCreator> {
             _imageUrl = imageUrl;
             _imageFile = imageFile;
           });
-
-          // The image is already stored in _imageFile, so we can directly upload it to Firebase Storage
-          final imageName =
-              'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
-          final downloadUrl =
-              await uploadImageToFirebase(_imageFile!, imageName);
-
-          if (downloadUrl != null) {
-            // Save the image downloadUrl to Firestore.
-            final user = AuthenticationRepository.instance.firebaseUser.value;
-            if (user != null) {
-              final userId = user.uid;
-              await UserRepository.instance
-                  .updateUserDefaultJournal(userId, downloadUrl);
-            }
-          }
         }
       } else {
         print('API request failed with status code: ${response.statusCode}');
@@ -79,7 +62,7 @@ class _DreamCreatorState extends State<DreamCreator> {
     try {
       final ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('YOUR_STORAGE_DIRECTORY')
+          .child('DREAM_PICTURES')
           .child(imageName);
       final uploadTask = ref.putFile(imageFile);
       final snapshot = await uploadTask;
@@ -183,3 +166,20 @@ class _DreamCreatorState extends State<DreamCreator> {
     );
   }
 }
+
+/*
+// The image is already stored in _imageFile, so we can directly upload it to Firebase Storage
+          final imageName =
+              'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
+          final downloadUrl =
+              await uploadImageToFirebase(_imageFile!, imageName);
+
+          if (downloadUrl != null) {
+            // Save the image downloadUrl to Firestore.
+            final user = AuthenticationRepository.instance.firebaseUser.value;
+            if (user != null) {
+              final userId = user.uid;
+              await UserRepository.instance
+                  .updateUserDefaultJournal(userId, downloadUrl);
+            }
+          } */

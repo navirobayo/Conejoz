@@ -21,18 +21,43 @@ class PostScreen extends StatelessWidget {
         color: Colors.blueGrey,
         borderRadius: BorderRadius.circular(15),
       ),
-      margin: EdgeInsets.only(top: 25, left: 25, right: 25),
-      padding: EdgeInsets.all(25),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
+      padding: const EdgeInsets.all(25),
+      child: Column(
         children: [
-          Text(rabbit),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(rabbit),
+              const Spacer(),
+              Text(time),
+            ],
+          ),
+          Container(
+            height: 100,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10),
+              image: const DecorationImage(
+                image: NetworkImage(
+                    'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691514996955.jpg?alt=media&token=efc0c98e-0600-406e-a215-7bf0ce9c3e89'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Column(
             children: [
-              Text(dream),
-              Text(title),
-              Text(time),
-              Text(caption),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
+                  fontWeight:
+                      Theme.of(context).textTheme.titleMedium?.fontWeight,
+                ),
+              ),
+              Text(
+                caption,
+              ),
             ],
           ),
         ],
