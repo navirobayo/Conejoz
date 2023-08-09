@@ -24,9 +24,9 @@ class _DreamBoardState extends State<DreamBoard> {
       body: IndexedStack(
         index: _currentIndex,
         children: const [
+          ImageCreator(),
           TextEntry(),
           AudioEntry(),
-          ImageCreator(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -40,7 +40,10 @@ class _DreamBoardState extends State<DreamBoard> {
                     _currentIndex = 0;
                   });
                 },
-                icon: const Icon(Icons.notes_outlined),
+                icon: Icon(
+                  Icons.donut_large_sharp,
+                  color: _currentIndex == 0 ? Colors.black : Colors.grey,
+                ),
               ),
               IconButton(
                 onPressed: () {
@@ -48,7 +51,10 @@ class _DreamBoardState extends State<DreamBoard> {
                     _currentIndex = 1;
                   });
                 },
-                icon: const Icon(Icons.mic),
+                icon: Icon(
+                  Icons.notes_outlined,
+                  color: _currentIndex == 1 ? Colors.black : Colors.grey,
+                ),
               ),
               IconButton(
                 onPressed: () {
@@ -56,7 +62,10 @@ class _DreamBoardState extends State<DreamBoard> {
                     _currentIndex = 2;
                   });
                 },
-                icon: const Icon(Icons.donut_large_sharp),
+                icon: Icon(
+                  Icons.mic,
+                  color: _currentIndex == 2 ? Colors.black : Colors.grey,
+                ),
               ),
             ],
           )),

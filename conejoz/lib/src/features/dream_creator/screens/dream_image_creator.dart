@@ -82,92 +82,110 @@ class _ImageCreatorState extends State<ImageCreator> {
     return tempFile;
   }
 
+  Future<void> saveData() async {
+    if (_imageUrl != null && _imageFile == null) {
+      final imageFile = await getImageFileFromUrl(_imageUrl!);
+      setState(() {
+        _imageFile = imageFile;
+      });
+    }
+    if (_imageFile != null) {
+      final imageName =
+          'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final downloadUrl = await uploadImageToFirebase(_imageFile!, imageName);
+      if (downloadUrl != null) {
+        final user = AuthenticationRepository.instance.firebaseUser.value;
+        if (user != null) {
+          final userId = user.uid;
+          await UserRepository.instance
+              .updateUserDefaultJournal(userId, downloadUrl);
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Add a callback to the WidgetsBinding to call the saveData function after the frame has been rendered.
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      saveData();
+    });
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("New Note Test"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            const SizedBox(height: 16),
-            Stack(
-              children: <Widget>[
-                Container(
-                  height: 200,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: const Text("New Note Test"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 225,
+                child: Container(
                   decoration: BoxDecoration(
-                    image: _imageUrl != null
-                        ? DecorationImage(
-                            image: _imageFile != null
-                                ? FileImage(_imageFile!)
-                                : NetworkImage(_imageUrl!)
-                                    as ImageProvider<Object>,
-                            fit: BoxFit.cover,
-                          )
-                        : null, // Show a placeholder image or empty if _imageUrl is null
+                    border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      if (_imageUrl != null)
+                        Image(
+                          image: _imageFile != null
+                              ? FileImage(_imageFile!)
+                              : NetworkImage(_imageUrl!)
+                                  as ImageProvider<Object>,
+                          fit: BoxFit.fitWidth,
+                        ),
+                      if (_imageUrl == null)
+                        const Center(
+                          child: Text(
+                            'Welcome to the Oracle.',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-            TextField(
-              controller: _textEditingController,
-              decoration: const InputDecoration(
-                hintText: 'Write your entry here.',
-                border: InputBorder.none,
               ),
-              maxLines: null,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
+              TextField(
+                controller: _textEditingController,
+                decoration: const InputDecoration(
+                  hintText: 'Write the prompt here.',
+                  border: InputBorder.none,
+                ),
+                maxLines: null,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
               onPressed: () {
                 createImage(_textEditingController.text);
               },
-              child: const Text('Create image'),
+              child: const Icon(Icons.android),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                if (_imageUrl != null && _imageFile == null) {
-                  final imageFile = await getImageFileFromUrl(
-                      _imageUrl!); // Function to convert the URL to File
-                  setState(() {
-                    _imageFile = imageFile;
-                  });
-                }
-                if (_imageFile != null) {
-                  final imageName =
-                      'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
-                  final downloadUrl =
-                      await uploadImageToFirebase(_imageFile!, imageName);
-                  if (downloadUrl != null) {
-                    // Save the image downloadUrl to Firestore.
-                    final user =
-                        AuthenticationRepository.instance.firebaseUser.value;
-                    if (user != null) {
-                      final userId = user.uid;
-                      await UserRepository.instance
-                          .updateUserDefaultJournal(userId, downloadUrl);
-                    }
-                  }
-                }
-              },
-              child: const Text('Save dream'),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
 
 /*
+
+Unused function. 
 // The image is already stored in _imageFile, so we can directly upload it to Firebase Storage
           final imageName =
               'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
@@ -182,4 +200,39 @@ class _ImageCreatorState extends State<ImageCreator> {
               await UserRepository.instance
                   .updateUserDefaultJournal(userId, downloadUrl);
             }
+
+
+Unused Function. 
+   FloatingActionButton(
+                onPressed: () async {
+                  if (_imageUrl != null && _imageFile == null) {
+                    final imageFile = await getImageFileFromUrl(
+                        _imageUrl!); // Function to convert the URL to File
+                    setState(() {
+                      _imageFile = imageFile;
+                    });
+                  }
+                  if (_imageFile != null) {
+                    final imageName =
+                        'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
+                    final downloadUrl =
+                        await uploadImageToFirebase(_imageFile!, imageName);
+                    if (downloadUrl != null) {
+                      // Save the image downloadUrl to Firestore.
+                      final user =
+                          AuthenticationRepository.instance.firebaseUser.value;
+                      if (user != null) {
+                        final userId = user.uid;
+                        await UserRepository.instance
+                            .updateUserDefaultJournal(userId, downloadUrl);
+                      }
+                    }
+                  }
+                },
+                child: const Icon(Icons.save)),
+
+
+
+  Unused Function.
+  
           } */
