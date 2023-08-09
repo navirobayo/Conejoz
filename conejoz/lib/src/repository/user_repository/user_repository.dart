@@ -110,8 +110,8 @@ class UserRepository extends GetxController {
       return null;
     }
   }
-
+}
   /*Future<void> updateUserRecord(UserModel user) async {
     await _db.collection("rabbits");
   }*/
-}
+

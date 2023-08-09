@@ -1,12 +1,43 @@
+import 'package:conejoz/src/features/authentication/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
+import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
 double regularSpacer = 25;
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  // Instance of UserRepository to access user data
+  final _userRepo = UserRepository.instance;
+
+  // The username retrieved from the repository
+  String? _username;
+
+  @override
+  void initState() {
+    super.initState();
+    // Trigger the function to get the username once the screen is opened
+    _getUsername();
+  }
+
+  // Function to retrieve the username from the UserRepository
+  void _getUsername() async {
+    final username = await _userRepo.getRabbitNameByUserId();
+    setState(() {
+      _username = username;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Get.put(UserRepository());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -31,8 +62,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Text('Taskforce909',
-                  style: Theme.of(context).textTheme.labelLarge),
+              // Access username from _username variable
+              Text(_username ?? "Loading..."),
               SizedBox(
                 width: regularSpacer,
               )

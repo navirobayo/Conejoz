@@ -1,3 +1,4 @@
+import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -8,14 +9,28 @@ class ProfileController extends GetxController {
   final _authRepo = Get.put(AuthenticationRepository());
   final _userRepo = Get.put(UserRepository());
 
-  getUserData() {
+  Rx<UserModel?> user = Rx<UserModel?>(null);
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Fetch user data when the controller is initialized
+    getUserData();
+  }
+
+  void getUserData() {
     final email = _authRepo.firebaseUser.value?.email;
     if (email != null) {
-      return _userRepo.getUserDetails(email);
+      _userRepo.getUserDetails(email).then((userData) {
+        user.value = userData; // Notify listeners that user data is available
+      }).catchError((error) {
+        Get.snackbar("Error", "Failed to fetch user data");
+      });
     } else {
       Get.snackbar("Error", "Login to continue");
     }
   }
+}
 
   /*Future<List<RabbitModel>> getAllRabbits() async =>
       await _userRepo.allRabbits();
@@ -23,4 +38,4 @@ class ProfileController extends GetxController {
   updateRecord(RabbitModel user) async {
     await _userRepo.updateRabbitRecord(user);
   } */
-}
+
