@@ -73,50 +73,6 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: regularSpacer),
-                Card(
-                  clipBehavior: Clip.hardEdge,
-                  child: InkWell(
-                    splashColor: Theme.of(context).cardColor,
-                    onTap: () {
-                      // Open dream
-                    },
-                    child: const SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Center(child: Text("Journal 2")),
-                    ),
-                  ),
-                ),
-                SizedBox(height: regularSpacer),
-                Card(
-                  clipBehavior: Clip.hardEdge,
-                  child: InkWell(
-                    splashColor: Theme.of(context).cardColor,
-                    onTap: () {
-                      // Open dream
-                    },
-                    child: const SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Center(child: Text("Journal 2")),
-                    ),
-                  ),
-                ),
-                SizedBox(height: regularSpacer),
-                Card(
-                  clipBehavior: Clip.hardEdge,
-                  child: InkWell(
-                    splashColor: Theme.of(context).cardColor,
-                    onTap: () {
-                      // Open dream
-                    },
-                    child: const SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: Center(child: Text("Journal 2")),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

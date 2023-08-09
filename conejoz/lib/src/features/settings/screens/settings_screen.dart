@@ -49,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const UpdateProfileScreen(),
+                    builder: (context) => const AboutScreen(),
                   ),
                 );
               },

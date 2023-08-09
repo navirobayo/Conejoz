@@ -1,3 +1,5 @@
+/* 
+
 import 'package:conejoz/src/features/authentication/controllers/profile_controller.dart';
 import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:get/get.dart';
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
 
-  @override
+ @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProfileController());
     return Scaffold(
@@ -85,3 +87,6 @@ class UpdateProfileScreen extends StatelessWidget {
     );
   }
 }
+
+
+*/

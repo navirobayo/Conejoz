@@ -48,7 +48,7 @@ class SignUpController extends GetxController {
       }
     };
 
-    userRepo.createRabbit(rabbit.text.trim(), rabbitDocument).then((_) {
+    userRepo.createRabbit(rabbitDocument).then((_) {
       Get.snackbar(
         "Success",
         "You are a rabbit now",
