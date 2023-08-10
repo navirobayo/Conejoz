@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class ImageCreator extends StatefulWidget {
   const ImageCreator({Key? key});
@@ -141,15 +142,13 @@ class _ImageCreatorState extends State<ImageCreator> {
                         ),
                       if (_imageUrl == null)
                         const Center(
-                          child: Text(
-                            'Welcome to the Oracle.',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                            child: LoadingIndicator(
+                          indicatorType: Indicator.ballPulse,
+                          colors: [Colors.black],
+                          strokeWidth: 2,
+                          backgroundColor: Colors.indigo,
+                          pathBackgroundColor: Colors.indigoAccent,
+                        )),
                     ],
                   ),
                 ),
