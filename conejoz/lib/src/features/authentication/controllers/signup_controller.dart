@@ -13,16 +13,6 @@ class SignUpController extends GetxController {
   final confirmPassword = TextEditingController();
 
   final userRepo = Get.put(UserRepository());
-// This needs to be implemented. Not working yet.
-  Future<bool> checkUsernameAvailability(String username) async {
-    try {
-      final user = await userRepo.getUserDetailsByUsername(username);
-      return user == null;
-    } catch (error) {
-      print("Error checking username availability: $error");
-      return false;
-    }
-  }
 
   // Call this function from Desing and it will do the rest.
   void registerUser(String email, String password) {
@@ -37,15 +27,17 @@ class SignUpController extends GetxController {
 
   void createRabbitDocument() {
     final rabbitDocument = {
-      "rabbitname": rabbit.text.trim(),
       "defaultjournal": {
-        "title": "Default Journal",
-        "description": "Created by default",
-        "created": DateTime.now(),
-        "updated": DateTime.now(),
+        "title": "A private journal",
+        "description": "Created by default by the Conejoz app",
         "entries": [],
-        "image_url": "",
-      }
+        "coverimage": "",
+      },
+      "usergallery": {
+        "title": "Dream images",
+        "userimages": [],
+      },
+      "rabbitname": rabbit.text.trim(),
     };
 
     userRepo.createRabbit(rabbitDocument).then((_) {

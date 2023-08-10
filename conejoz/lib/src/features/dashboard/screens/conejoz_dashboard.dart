@@ -26,7 +26,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         children: [
           FeedScreen(),
           JournalScreen(),
-          ProfileScreen(),
+          ProfileScreen(), // RABBIT ICON FOR THIS SCREEN
         ],
       ),
       bottomNavigationBar: BottomAppBar(

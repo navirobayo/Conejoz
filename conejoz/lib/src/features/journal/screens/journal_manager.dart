@@ -1,17 +1,19 @@
-import 'package:conejoz/src/features/dream_creator/screens/dream_board.dart';
-import 'package:conejoz/src/features/journal/screens/journal_manager.dart';
-import 'package:conejoz/src/features/journal/screens/user_gallery.dart';
 import 'package:flutter/material.dart';
 
-class JournalScreen extends StatelessWidget {
-  const JournalScreen({super.key});
+class JournalManager extends StatefulWidget {
+  const JournalManager({super.key});
 
+  @override
+  State<JournalManager> createState() => _JournalManagerState();
+}
+
+class _JournalManagerState extends State<JournalManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Cloud Journal"),
+        title: const Text("Journal Manager"),
       ),
       body: Center(
         child: Column(
@@ -22,12 +24,12 @@ class JournalScreen extends StatelessWidget {
               child: InkWell(
                 splashColor: Theme.of(context).cardColor,
                 onTap: () {
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const JournalManager(),
+                      builder: (context) => const ImageCreator(),
                     ),
-                  );
+                  ); */
                 },
                 child: const SizedBox(
                   width: 300,
@@ -42,37 +44,18 @@ class JournalScreen extends StatelessWidget {
               child: InkWell(
                 splashColor: Theme.of(context).cardColor,
                 onTap: () {
+                  /*
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const DreamBoard(),
                     ),
-                  );
+                  ); */
                 },
                 child: const SizedBox(
                   width: 300,
                   height: 150,
                   child: Center(child: Icon(Icons.memory_sharp)),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Card(
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Theme.of(context).cardColor,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const UserGallery(),
-                    ),
-                  );
-                },
-                child: const SizedBox(
-                  width: 300,
-                  height: 150,
-                  child: Center(child: Icon(Icons.image_search_rounded)),
                 ),
               ),
             ),

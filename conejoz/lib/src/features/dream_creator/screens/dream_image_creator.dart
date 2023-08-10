@@ -98,7 +98,7 @@ class _ImageCreatorState extends State<ImageCreator> {
         if (user != null) {
           final userId = user.uid;
           await UserRepository.instance
-              .updateUserDefaultJournal(userId, downloadUrl);
+              .addImageToUserGallery(userId, downloadUrl);
         }
       }
     }

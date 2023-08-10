@@ -45,17 +45,15 @@ class UserRepository extends GetxController {
     return UserModel.fromSnapshot(querySnapshot.docs.first);
   }
 
-  Future<void> updateUserDefaultJournal(String userId, String imageUrl) async {
-    final defaultJournalRef = _db
-        .collection("rabbits")
-        .doc(userId)
-        .collection("journals")
-        .doc("default");
+  Future<void> addImageToUserGallery(String userId, String imageUrl) async {
+    final userDocumentRef = _db.collection("rabbits").doc(userId);
 
     try {
-      await defaultJournalRef.update({"image_url": imageUrl});
+      await userDocumentRef.update({
+        "usergallery.userimages": FieldValue.arrayUnion([imageUrl]),
+      });
     } catch (error) {
-      print("Error updating user's default journal: $error");
+      print("Error adding image to user's gallery: $error");
       throw error;
     }
   }
@@ -110,8 +108,45 @@ class UserRepository extends GetxController {
       return null;
     }
   }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDocument(
+      String userId) async {
+    try {
+      final userDocumentRef = _db.collection("rabbits").doc(userId);
+      final docSnapshot = await userDocumentRef.get();
+      if (docSnapshot.exists) {
+        return docSnapshot;
+      } else {
+        print("User document does not exist.");
+        return null;
+      }
+    } catch (error) {
+      print("Error getting user document: $error");
+      return null;
+    }
+  }
 }
+
+
+// NOT USED. DELETE LATER
+
   /*Future<void> updateUserRecord(UserModel user) async {
     await _db.collection("rabbits");
   }*/
+
+  
+  /* Future<void> updateUserDefaultJournal(String userId, String imageUrl) async {
+    final defaultJournalRef = _db
+        .collection("rabbits")
+        .doc(userId)
+        .collection("journals")
+        .doc("default");
+
+    try {
+      await defaultJournalRef.update({"image_url": imageUrl});
+    } catch (error) {
+      print("Error updating user's default journal: $error");
+      throw error;
+    }
+  } */
 
