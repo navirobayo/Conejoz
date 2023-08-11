@@ -143,10 +143,10 @@ class _ImageCreatorState extends State<ImageCreator> {
                       if (_imageUrl == null)
                         const Center(
                             child: LoadingIndicator(
-                          indicatorType: Indicator.ballPulse,
-                          colors: [Colors.black],
+                          indicatorType: Indicator.ballClipRotateMultiple,
+                          colors: [Colors.grey],
                           strokeWidth: 2,
-                          backgroundColor: Colors.indigo,
+                          backgroundColor: Colors.transparent,
                           pathBackgroundColor: Colors.indigoAccent,
                         )),
                     ],
