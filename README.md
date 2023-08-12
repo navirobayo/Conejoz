@@ -18,4 +18,4 @@ First prototype available this next fall in English and Spanish at the Google Pl
 
 For dreamers by dreamers
 
-A free open source app created by Ivan Robayo
+A mobile and web app created by Ivan Robayo
