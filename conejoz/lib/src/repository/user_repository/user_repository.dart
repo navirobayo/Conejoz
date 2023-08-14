@@ -125,6 +125,20 @@ class UserRepository extends GetxController {
       return null;
     }
   }
+
+  Future<void> saveNote(
+      String userUniqueId, Map<String, dynamic> noteData) async {
+    final userDocumentRef = _db.collection("rabbits").doc(userUniqueId);
+
+    try {
+      await userDocumentRef.update({
+        "defaultjournal.entries": FieldValue.arrayUnion([noteData]),
+      });
+    } catch (error) {
+      print("Error saving note: $error");
+      throw error;
+    }
+  }
 }
 
 

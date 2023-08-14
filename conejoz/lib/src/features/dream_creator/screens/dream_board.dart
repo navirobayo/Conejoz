@@ -1,4 +1,5 @@
 import 'package:conejoz/src/features/dream_creator/screens/dream_audio_entry.dart';
+import 'package:conejoz/src/features/dream_creator/screens/dream_file_creator.dart';
 import 'package:conejoz/src/features/dream_creator/screens/dream_image_creator.dart';
 import 'package:conejoz/src/features/dream_creator/screens/dream_text_entry.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _DreamBoardState extends State<DreamBoard> {
         children: const [
           ImageCreator(),
           TextEntry(),
-          AudioEntry(),
+          // AudioEntry(), Not implemented yet.
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -56,7 +57,7 @@ class _DreamBoardState extends State<DreamBoard> {
                   color: _currentIndex == 1 ? Colors.black : Colors.grey,
                 ),
               ),
-              IconButton(
+              /*IconButton( Not implemented yet. 
                 onPressed: () {
                   setState(() {
                     _currentIndex = 2;
@@ -66,11 +67,19 @@ class _DreamBoardState extends State<DreamBoard> {
                   Icons.mic,
                   color: _currentIndex == 2 ? Colors.black : Colors.grey,
                 ),
-              ),
+              ),*/
             ],
           )),
-      floatingActionButton:
-          const FloatingActionButton(onPressed: null, child: Icon(Icons.save)),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DreamFileCreator(),
+              ),
+            );
+          },
+          label: Text("Finish Dream")),
     );
   }
 }
