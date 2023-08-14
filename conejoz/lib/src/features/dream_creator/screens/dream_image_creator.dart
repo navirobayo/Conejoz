@@ -20,6 +20,7 @@ class _ImageCreatorState extends State<ImageCreator> {
 
   String? _imageUrl;
   File? _imageFile;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -29,8 +30,12 @@ class _ImageCreatorState extends State<ImageCreator> {
 
 // This functions handles the image creation. Do not modify.
   Future<void> createImage(String text) async {
-    final apiUrl =
-        'https://pyconejoz.onrender.com/process_text'; // Replace with your Flask API endpoint
+    final apiUrl = 'https://pyconejoz.onrender.com/process_text';
+
+    setState(() {
+      _isLoading =
+          true; // Set the loading state to true when the request is being handled
+    });
 
     try {
       final response = await http.post(
@@ -55,6 +60,10 @@ class _ImageCreatorState extends State<ImageCreator> {
       }
     } catch (e) {
       print('Error during API request: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -140,7 +149,7 @@ class _ImageCreatorState extends State<ImageCreator> {
                                   as ImageProvider<Object>,
                           fit: BoxFit.fitWidth,
                         ),
-                      if (_imageUrl == null)
+                      if (_imageUrl == null && _isLoading)
                         const Center(
                             child: LoadingIndicator(
                           indicatorType: Indicator.ballClipRotateMultiple,
@@ -181,57 +190,3 @@ class _ImageCreatorState extends State<ImageCreator> {
         ));
   }
 }
-
-/*
-
-Unused function. 
-// The image is already stored in _imageFile, so we can directly upload it to Firebase Storage
-          final imageName =
-              'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
-          final downloadUrl =
-              await uploadImageToFirebase(_imageFile!, imageName);
-
-          if (downloadUrl != null) {
-            // Save the image downloadUrl to Firestore.
-            final user = AuthenticationRepository.instance.firebaseUser.value;
-            if (user != null) {
-              final userId = user.uid;
-              await UserRepository.instance
-                  .updateUserDefaultJournal(userId, downloadUrl);
-            }
-
-
-Unused Function. 
-   FloatingActionButton(
-                onPressed: () async {
-                  if (_imageUrl != null && _imageFile == null) {
-                    final imageFile = await getImageFileFromUrl(
-                        _imageUrl!); // Function to convert the URL to File
-                    setState(() {
-                      _imageFile = imageFile;
-                    });
-                  }
-                  if (_imageFile != null) {
-                    final imageName =
-                        'dream_image_${DateTime.now().millisecondsSinceEpoch}.jpg';
-                    final downloadUrl =
-                        await uploadImageToFirebase(_imageFile!, imageName);
-                    if (downloadUrl != null) {
-                      // Save the image downloadUrl to Firestore.
-                      final user =
-                          AuthenticationRepository.instance.firebaseUser.value;
-                      if (user != null) {
-                        final userId = user.uid;
-                        await UserRepository.instance
-                            .updateUserDefaultJournal(userId, downloadUrl);
-                      }
-                    }
-                  }
-                },
-                child: const Icon(Icons.save)),
-
-
-
-  Unused Function.
-  
-          } */
