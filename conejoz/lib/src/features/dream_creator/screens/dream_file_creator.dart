@@ -12,12 +12,31 @@ class DreamFileCreator extends StatefulWidget {
 }
 
 class _DreamFileCreatorState extends State<DreamFileCreator> {
-  // Instance of UserRepository to access user data
   final _userRepo = UserRepository.instance;
+  int _radioValue = 1;
+  final TextEditingController _tagsController = TextEditingController();
+
+  String? lastUserImage;
+  String? lastEntryTitle;
+  String? lastEntryText;
 
   @override
   void initState() {
     super.initState();
+    // Load initial data
+    loadLastUserData();
+  }
+
+  Future<void> loadLastUserData() async {
+    print("Loading last user data"); // Debugging line
+    lastUserImage = await _userRepo.getLastUserImage();
+    final lastEntry = await _userRepo.getLastJournalEntry();
+    if (lastEntry != null) {
+      print("Last Entry: $lastEntry"); // Debugging line
+      lastEntryTitle = lastEntry['dreamtitle'];
+      lastEntryText = lastEntry['dreamentry'];
+    }
+    setState(() {});
   }
 
   @override
@@ -40,17 +59,18 @@ class _DreamFileCreatorState extends State<DreamFileCreator> {
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(10),
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                        'https://avatars.githubusercontent.com/u/140388501?s=200&v=4'), //This is an example. The actual immage should be the last available picture in the userimages file via firebase. ,
-                    fit: BoxFit.cover,
-                  ),
+                  image: lastUserImage != null
+                      ? DecorationImage(
+                          image: NetworkImage(lastUserImage!),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
                 ),
               ),
-              Text("Users Dream title from the database"),
+              Text(lastEntryTitle ?? "Users Dream title from the database"),
               SizedBox(
                 width: regularSpacer,
-              )
+              ),
             ],
           ),
           SizedBox(height: regularSpacer),
@@ -65,15 +85,69 @@ class _DreamFileCreatorState extends State<DreamFileCreator> {
                     onTap: () {
                       // Open dream
                     },
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: 150,
                       height: 150,
                       child: Center(
-                          child: Text("User dream text from the database")),
+                        child: Text(lastEntryText ??
+                            "User dream text from the database"),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: regularSpacer),
+                // A text input to add tags to the dream
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: TextField(
+                    controller: _tagsController,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Tags',
+                    ),
+                  ),
+                ),
+                SizedBox(height: regularSpacer),
+                // Two radio buttons to select the dream's visibility
+                ListTile(
+                  title: Row(
+                    children: [
+                      Radio(
+                        value: 1,
+                        groupValue: _radioValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _radioValue = value as int;
+                          });
+                        },
+                      ),
+                      const Text('Public'),
+                      Radio(
+                        value: 2,
+                        groupValue: _radioValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _radioValue = value as int;
+                          });
+                        },
+                      ),
+                      const Text('Private'),
+                    ],
+                  ),
+                ),
+                // A button to save the dream
+                ElevatedButton(
+                  onPressed: () async {
+                    final tags = _tagsController.text.split(',');
+                    final rabbitName = await _userRepo.getRabbitNameByUserId();
+                    if (rabbitName != null) {
+                      print("Rabbit Name: $rabbitName"); // Debugging line
+                      await _userRepo.addTagsToDream(rabbitName, tags);
+                      // Save dream
+                    }
+                  },
+                  child: const Text('Save'),
+                ),
               ],
             ),
           ),

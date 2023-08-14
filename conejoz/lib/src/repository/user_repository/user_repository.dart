@@ -1,4 +1,5 @@
 import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
+import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -126,6 +127,22 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<String?> getLastUserImage() async {
+    final user = AuthenticationRepository.instance.firebaseUser.value;
+    if (user != null) {
+      final userId = user.uid;
+      final userDocument = await getUserDocument(userId);
+      if (userDocument != null) {
+        final userImageUrls =
+            List<String>.from(userDocument['usergallery']['userimages']);
+        if (userImageUrls.isNotEmpty) {
+          return userImageUrls.last;
+        }
+      }
+    }
+    return null;
+  }
+
   Future<void> saveNote(
       String userUniqueId, Map<String, dynamic> noteData) async {
     final userDocumentRef = _db.collection("rabbits").doc(userUniqueId);
@@ -139,28 +156,33 @@ class UserRepository extends GetxController {
       throw error;
     }
   }
-}
 
-
-// NOT USED. DELETE LATER
-
-  /*Future<void> updateUserRecord(UserModel user) async {
-    await _db.collection("rabbits");
-  }*/
-
-  
-  /* Future<void> updateUserDefaultJournal(String userId, String imageUrl) async {
-    final defaultJournalRef = _db
-        .collection("rabbits")
-        .doc(userId)
-        .collection("journals")
-        .doc("default");
+  Future<void> addTagsToDream(String userUniqueId, List<String> tags) async {
+    final userDocumentRef = _db.collection("rabbits").doc(userUniqueId);
 
     try {
-      await defaultJournalRef.update({"image_url": imageUrl});
+      await userDocumentRef.update({
+        "defaultjournal.tags": FieldValue.arrayUnion(tags),
+      });
     } catch (error) {
-      print("Error updating user's default journal: $error");
+      print("Error adding tags to dream: $error");
       throw error;
     }
-  } */
+  }
 
+  Future<Map<String, dynamic>?> getLastJournalEntry() async {
+    final user = AuthenticationRepository.instance.firebaseUser.value;
+    if (user != null) {
+      final userId = user.uid;
+      final userDocument = await getUserDocument(userId);
+      if (userDocument != null) {
+        final journalEntries = List<Map<String, dynamic>>.from(
+            userDocument['defaultjournal']['entries']);
+        if (journalEntries.isNotEmpty) {
+          return journalEntries.last;
+        }
+      }
+    }
+    return null;
+  }
+}
