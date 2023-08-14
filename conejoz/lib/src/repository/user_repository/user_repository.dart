@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepository extends GetxController {
-  static UserRepository get instance => Get.find();
+  static UserRepository get instance =>
+      Get.find(); // This allows to use the controller anywhere in the app.
 
   final _db = FirebaseFirestore.instance;
 
+// This function creates a new user in the "rabbits" collection.
   Future<void> createRabbit(Map<String, dynamic> rabbitDocument) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {

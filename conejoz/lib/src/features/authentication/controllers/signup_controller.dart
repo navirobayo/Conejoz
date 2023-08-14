@@ -3,19 +3,22 @@ import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpController extends GetxController {
-  static SignUpController get instance => Get.find();
+// * This file controls functions for the SignUp Screen.
 
-  //Textfield Controllers to get data from TextFields.
+class SignUpController extends GetxController {
+  static SignUpController get instance =>
+      Get.find(); // This allows to use the controller anywhere in the app.
+
   final rabbit = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
 
-  final userRepo = Get.put(UserRepository());
+  final userRepo =
+      Get.put(UserRepository()); // This is an instance of the UserRepository.
 
-  // Call this function from Desing and it will do the rest.
   void registerUser(String email, String password) {
+    // This function registers the user and then triggers the creation of the RabbitDocument.
     AuthenticationRepository.instance
         .createUserWithEmailAndPassword(email, password)
         .then((_) {
@@ -26,6 +29,7 @@ class SignUpController extends GetxController {
   }
 
   void createRabbitDocument() {
+    // This function creates the RabbitDocument inside of the user's document.
     final rabbitDocument = {
       "defaultjournal": {
         "title": "A private journal",
@@ -39,26 +43,7 @@ class SignUpController extends GetxController {
       },
       "rabbitname": rabbit.text.trim(),
     };
-
-    userRepo.createRabbit(rabbitDocument).then((_) {
-      Get.snackbar(
-        "Success",
-        "You are a rabbit now",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green.withOpacity(0.1),
-        colorText: Colors.green,
-      );
-      // Optionally, you can navigate to the next screen here.
-      // For example: Get.to(() => NextScreen());
-    }).catchError((error) {
-      Get.snackbar(
-        "Error",
-        "Something went wrong. Try again",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.1),
-        colorText: Colors.red,
-      );
-      print(error.toString());
-    });
+    userRepo.createRabbit(
+        rabbitDocument); // This function is located in the UserRepository.
   }
 }

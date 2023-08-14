@@ -7,15 +7,17 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SignUpController());
-    final _formKey = GlobalKey<FormState>();
+    final controller = Get.put(
+        SignUpController()); // Dependency Injection of the SignUpController.
+    final signUpFormKey =
+        GlobalKey<FormState>(); // Form Key to validate the form.
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20.0),
           child: Form(
-            key: _formKey,
+            key: signUpFormKey,
             child: Column(
               children: [
                 const SizedBox(height: 100.0),
@@ -84,7 +86,7 @@ class SignupScreen extends StatelessWidget {
                 const SizedBox(height: 50.0),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (signUpFormKey.currentState!.validate()) {
                       //This register the user with email and password into Firebase.
                       SignUpController.instance.registerUser(
                         controller.email.text.trim(),
@@ -96,7 +98,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {}, // TODO: Implement Google Sign Up.
                   child: const Text('Register with Google'),
                 ),
                 const SizedBox(height: 20.0),
