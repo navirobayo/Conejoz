@@ -1,4 +1,4 @@
-import 'package:conejoz/src/constants/ENG/text_strings_eng.dart';
+import 'package:conejoz/src/constants/text_strings_eng.dart';
 import 'package:conejoz/src/features/authentication/screens/forget_password/forget_password_widget.dart';
 import 'package:conejoz/src/repository/authentication_repository/exceptions/login_email_password_failure.dart';
 import 'package:flutter/material.dart';

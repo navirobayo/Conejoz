@@ -4,7 +4,7 @@ import 'package:conejoz/src/repository/authentication_repository/authentication_
 import 'package:conejoz/src/repository/user_repository/user_repository.dart'; // Import UserRepository
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:conejoz/src/features/theme/theme.dart';
+import 'package:conejoz/src/constants/conejoz_theme.dart';
 import 'package:flutter/material.dart';
 
 // * Welcome

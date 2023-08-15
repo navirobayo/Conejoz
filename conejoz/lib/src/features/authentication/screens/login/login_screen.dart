@@ -1,4 +1,4 @@
-import 'package:conejoz/src/constants/ENG/text_strings_eng.dart';
+import 'package:conejoz/src/constants/text_strings_eng.dart';
 import 'package:conejoz/src/features/authentication/screens/login/login_form_widget.dart';
 import 'package:flutter/material.dart';
 
