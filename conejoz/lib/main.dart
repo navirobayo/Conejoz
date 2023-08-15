@@ -1,3 +1,4 @@
+import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
@@ -86,7 +87,9 @@ Future<void> initializeDependencies() async {
   Get.put(
       AuthenticationRepository()); // This repository handles authentication functions.
   Get.put(
-      UserRepository()); // This repository handles data fetching and writing for the user's folder.
+      UserRepository()); // This repository handles data fetching and writing for the user's folder. // This controller handles the image creation.
+  Get.put(
+      DreamImageCreatorController()); // This controller handles the image creation.
 }
 
 // The main function of the app.

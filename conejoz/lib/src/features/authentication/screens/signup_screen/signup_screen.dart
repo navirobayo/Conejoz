@@ -7,7 +7,7 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(
+    final signUpController = Get.put(
         SignUpController()); // Dependency Injection of the SignUpController.
     final signUpFormKey =
         GlobalKey<FormState>(); // Form Key to validate the form.
@@ -30,7 +30,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 50.0),
                 TextFormField(
-                  controller: controller.rabbit,
+                  controller: signUpController.rabbit,
                   decoration: const InputDecoration(
                     labelText: 'Username',
                   ),
@@ -43,7 +43,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
-                  controller: controller.email,
+                  controller: signUpController.email,
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Email',
@@ -57,7 +57,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
-                  controller: controller.password,
+                  controller: signUpController.password,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Password',
@@ -71,7 +71,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
-                  controller: controller.confirmPassword,
+                  controller: signUpController.confirmPassword,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Confirm Password',
@@ -89,8 +89,8 @@ class SignupScreen extends StatelessWidget {
                     if (signUpFormKey.currentState!.validate()) {
                       //This register the user with email and password into Firebase.
                       SignUpController.instance.registerUser(
-                        controller.email.text.trim(),
-                        controller.password.text.trim(),
+                        signUpController.email.text.trim(),
+                        signUpController.password.text.trim(),
                       );
                     }
                   },

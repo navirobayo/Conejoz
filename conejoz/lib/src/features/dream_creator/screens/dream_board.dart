@@ -24,7 +24,7 @@ class _DreamBoardState extends State<DreamBoard> {
       ),
       body: IndexedStack(
         index: _currentIndex,
-        children: const [
+        children: [
           ImageCreator(),
           TextEntry(),
           // AudioEntry(), Not implemented yet.

@@ -127,6 +127,8 @@ class UserRepository extends GetxController {
     }
   }
 
+  // * Functions used in the "Dream Creator" feature:
+
   // * Functions used in the "Dream File Creator" feature:
 
   Future<void> saveNote(

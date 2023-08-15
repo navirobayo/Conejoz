@@ -6,16 +6,15 @@ import 'package:get/get.dart';
 // * This file controls functions for the SignUp Screen.
 
 class SignUpController extends GetxController {
-  static SignUpController get instance =>
-      Get.find(); // This allows to use the controller anywhere in the app.
+  static SignUpController get instance => Get.find();
+  // This allows to use the controller anywhere in the app.
 
   final rabbit = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
 
-  final userRepo =
-      Get.put(UserRepository()); // This is an instance of the UserRepository.
+  final UserRepository userRepo = Get.find();
 
   void registerUser(String email, String password) {
     // This function triggers registration and then triggers the creation of the RabbitDocument.
