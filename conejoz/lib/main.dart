@@ -42,6 +42,7 @@ import 'package:flutter/material.dart';
 // * Folder structure:
 
 // ! src:
+
 // This folder contains all the code of the app.
 
 // ! src/features:
