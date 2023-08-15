@@ -5,28 +5,39 @@ import 'package:conejoz/src/repository/authentication_repository/exceptions/sign
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class AuthenticationRepository extends GetxController {
-  static AuthenticationRepository get instance => Get.find();
+// * This file controls authentication features.
 
-  // Variables.
+class AuthenticationRepository extends GetxController {
+  static AuthenticationRepository get instance => Get
+      .find(); // This allows to access the class instance from anywhere in the app.
+
   final _auth = FirebaseAuth.instance;
-  late final Rx<User?> firebaseUser;
+  late final Rx<User?> firebaseUser; // Reactive variable.
+  // This allows to listen to changes in the variable.
 
   @override
   void onReady() {
+    // This method is called immediately after the widget is allocated memory.
+    // This is important because it allows to initialize the reactive variable.
+    // So every time that the user changes, the app will be redirected to the
+    // correct screen.
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
     ever(firebaseUser, _setInitialScreen);
   }
 
   _setInitialScreen(User? user) {
+    // This method is called every time the firebaseUser variable changes.
+    // It redirects the user to the correct screen.
     user == null
         ? Get.offAll(() => const WelcomeScreen())
         : Get.offAll(() => const ConejozDashboard());
   }
 
   Future<void> createUserWithEmailAndPassword(
-      String email, String password) async {
+      // This method creates a new user with email and password.
+      String email,
+      String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -44,6 +55,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> loginWithEmailAndPassword(String email, String password) async {
+    // This method logs in a user with email and password.
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
@@ -61,4 +73,5 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> logout() async => await _auth.signOut();
+  // This method logs out the current user.
 }

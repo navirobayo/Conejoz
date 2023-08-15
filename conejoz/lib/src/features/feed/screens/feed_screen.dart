@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conejoz/src/features/feed/screens/post_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:conejoz/src/features/feed/screens/widgets/public_dream_widget.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
@@ -11,20 +10,6 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  final currentRabbit = FirebaseAuth.instance.currentUser!;
-
-  // Post message.
-  void postMessage(String message, String caption) {
-    // TODO: Add condition to see if there is a dream created.
-    FirebaseFirestore.instance.collection("publicdreams").add({
-      "Rabbit": currentRabbit.uid,
-      "Dream": message,
-      "Title": "Title",
-      "TimeStamp": DateTime.now(),
-      "Caption": caption,
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +32,7 @@ class _FeedScreenState extends State<FeedScreen> {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final post = snapshot.data!.docs[index];
-                        return PostScreen(
+                        return PublicDreamWidget(
                           rabbit: post["Rabbit"],
                           dream: post["Dream"],
                           title: post["Title"],
@@ -67,25 +52,6 @@ class _FeedScreenState extends State<FeedScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Dream',
-              ),
-              onFieldSubmitted: (value) {
-                postMessage(value, value);
-              },
-            ),
-            const SizedBox(height: 16),
-
-            /*
-            ElevatedButton( //Use this as a test. 
-              onPressed: () {
-                postMessage('Default message', 'Default caption');
-              },
-              child: const Text('Post Message'),
-            ),
-            */
           ],
         ),
       ),

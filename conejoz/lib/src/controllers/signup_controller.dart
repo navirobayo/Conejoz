@@ -18,9 +18,10 @@ class SignUpController extends GetxController {
       Get.put(UserRepository()); // This is an instance of the UserRepository.
 
   void registerUser(String email, String password) {
-    // This function registers the user and then triggers the creation of the RabbitDocument.
+    // This function triggers registration and then triggers the creation of the RabbitDocument.
     AuthenticationRepository.instance
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(email,
+            password) // Note that this function is located in the AuthenticationRepository.
         .then((_) {
       createRabbitDocument();
     }).catchError((error) {
@@ -44,6 +45,7 @@ class SignUpController extends GetxController {
       "rabbitname": rabbit.text.trim(),
     };
     userRepo.createRabbit(
-        rabbitDocument); // This function is located in the UserRepository.
+        // This function is located in the UserRepository.
+        rabbitDocument);
   }
 }

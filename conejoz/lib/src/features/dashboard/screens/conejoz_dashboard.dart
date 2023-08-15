@@ -4,6 +4,9 @@ import 'package:conejoz/src/features/profile/screens/profile_screen.dart';
 import 'package:conejoz/src/features/settings/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
+// * Main navigation board for the app.
+// * By default the user will see the feed screen.
+
 class ConejozDashboard extends StatefulWidget {
   const ConejozDashboard({super.key});
 
@@ -26,7 +29,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         children: [
           FeedScreen(),
           JournalScreen(),
-          ProfileScreen(), // RABBIT ICON FOR THIS SCREEN
+          ProfileScreen(), // TODO: RABBIT ICON FOR THIS SCREEN
         ],
       ),
       bottomNavigationBar: BottomAppBar(

@@ -1,7 +1,7 @@
-import 'package:conejoz/src/features/authentication/controllers/profile_controller.dart';
+import 'package:conejoz/src/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
+import 'package:conejoz/src/repository/models/rabbit_model.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
 double regularSpacer = 25;

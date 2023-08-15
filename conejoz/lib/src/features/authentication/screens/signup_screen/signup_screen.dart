@@ -1,4 +1,4 @@
-import 'package:conejoz/src/features/authentication/controllers/signup_controller.dart';
+import 'package:conejoz/src/controllers/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

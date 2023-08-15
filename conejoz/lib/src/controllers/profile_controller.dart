@@ -1,4 +1,4 @@
-import 'package:conejoz/src/features/authentication/models/rabbit_model.dart';
+import 'package:conejoz/src/repository/models/rabbit_model.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
@@ -14,8 +14,7 @@ class ProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Fetch user data when the controller is initialized
-    getUserData();
+    getUserData(); // Fetch user data when the controller is initialized
   }
 
   void getUserData() {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class PostScreen extends StatelessWidget {
+class PublicDreamWidget extends StatelessWidget {
   final String rabbit;
   final String dream;
   final String title;
   final String time;
   final String caption;
-  const PostScreen(
+  const PublicDreamWidget(
       {super.key,
       required this.rabbit,
       required this.dream,
