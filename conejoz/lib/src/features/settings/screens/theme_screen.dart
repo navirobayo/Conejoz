@@ -1,7 +1,8 @@
-import 'package:conejoz/src/features/theme/theme_service.dart';
+import 'package:conejoz/src/controllers/theme_service_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ! Not used at the moment.
 class ThemeScreen extends StatelessWidget {
   const ThemeScreen({super.key});
 

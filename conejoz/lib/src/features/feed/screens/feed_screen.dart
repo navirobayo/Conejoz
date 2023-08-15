@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conejoz/src/features/feed/screens/widgets/public_dream_widget.dart';
+import 'package:conejoz/src/features/feed/widgets/public_dream_widget.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatefulWidget {
