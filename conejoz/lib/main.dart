@@ -1,4 +1,4 @@
-import 'package:conejoz/firebase_options.dart';
+import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart'; // Import UserRepository
