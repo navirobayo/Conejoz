@@ -5,14 +5,14 @@ class PublicDreamWidget extends StatelessWidget {
   final String dream;
   final String title;
   final String time;
-  final String caption;
+  final String tags;
   const PublicDreamWidget(
       {super.key,
       required this.rabbit,
       required this.dream,
       required this.title,
       required this.time,
-      required this.caption});
+      required this.tags});
 
   @override
   Widget build(BuildContext context) {
@@ -51,21 +51,47 @@ class PublicDreamWidget extends StatelessWidget {
               ),
             ),
           ),
-          Column(
+          const SizedBox(height: 10),
+          Row(
             children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
-                  fontWeight:
-                      Theme.of(context).textTheme.titleMedium?.fontWeight,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
+                    fontWeight:
+                        Theme.of(context).textTheme.titleMedium?.fontWeight,
+                  ),
                 ),
               ),
-              Text(caption,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                  )),
+              GestureDetector(
+                onLongPress: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Tags'),
+                        content: Text(tags),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Close'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  child: Text(tags,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onSecondary)),
+                ),
+              ),
             ],
           ),
         ],

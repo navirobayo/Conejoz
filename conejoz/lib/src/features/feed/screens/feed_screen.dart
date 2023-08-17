@@ -40,7 +40,7 @@ class _FeedScreenState extends State<FeedScreen> {
                           dream: post["Dream"],
                           title: post["Title"],
                           time: post["TimeStamp"].toString(),
-                          caption: post["Caption"],
+                          tags: post["Tags"],
                         );
                       },
                     );
