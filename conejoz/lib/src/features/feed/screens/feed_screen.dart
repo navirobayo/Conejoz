@@ -15,7 +15,10 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Dreamscape"),
+        title: Text(
+          "Dreamscape",
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        ),
       ),
       body: Center(
         child: Column(

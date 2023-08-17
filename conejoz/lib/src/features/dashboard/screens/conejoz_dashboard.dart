@@ -20,9 +20,13 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.code_rounded),
+        leading: Icon(
+          Icons.code_rounded,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Conejoz Dashboard"),
+        title: Text("Welcome rabbit.",
+            style: TextStyle(color: Theme.of(context).colorScheme.surface)),
       ),
       body: IndexedStack(
         index: _currentIndex,

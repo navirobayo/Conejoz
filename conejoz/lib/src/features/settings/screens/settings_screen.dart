@@ -11,7 +11,17 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: IconButton(
+          color: Theme.of(context).colorScheme.surface,
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text("Settings",
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant)),
       ),
       body: ListView(
         children: [
@@ -22,9 +32,13 @@ class SettingsScreen extends StatelessWidget {
                 // Navigate to the language settings screen.
               },
             ),
-            title: const Text('Language'),
+            title: Text(
+              'Language',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
             subtitle: const Text('Change journal\'s language'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.surface),
           ),
           ListTile(
             leading: IconButton(
@@ -38,9 +52,13 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
             ),
-            title: const Text('Theme'),
+            title: Text(
+              'Theme',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
             subtitle: const Text('Change journal\'s theme'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.surface),
           ),
           ListTile(
             leading: IconButton(
@@ -54,9 +72,13 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
             ),
-            title: const Text('Profile'),
+            title: Text(
+              'Profile',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
             subtitle: const Text('Customize that rabbit pal'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.surface),
           ),
           ListTile(
             leading: IconButton(
@@ -70,9 +92,13 @@ class SettingsScreen extends StatelessWidget {
                 );
               },
             ),
-            title: const Text('About'),
+            title: Text(
+              'About',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
             subtitle: const Text('What\'s Conejoz anyway?'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.surface),
           ),
           ListTile(
             leading: IconButton(
@@ -81,9 +107,13 @@ class SettingsScreen extends StatelessWidget {
                 AuthenticationRepository.instance.logout();
               },
             ),
-            title: const Text('Logout'),
+            title: Text(
+              'Logout',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
             subtitle: const Text('See you later rabbitz'),
-            trailing: const Icon(Icons.arrow_forward_ios),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.surface),
           ),
         ],
       ),

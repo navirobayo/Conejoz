@@ -18,7 +18,6 @@ class PublicDreamWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.blueGrey,
         borderRadius: BorderRadius.circular(15),
       ),
       margin: const EdgeInsets.only(top: 25, left: 25, right: 25),
@@ -28,11 +27,18 @@ class PublicDreamWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(rabbit),
+              Text(rabbit,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface)),
               const Spacer(),
-              Text(time),
+              Text(time,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: Theme.of(context).colorScheme.surface)),
             ],
           ),
+          const SizedBox(height: 10),
           Container(
             height: 100,
             decoration: BoxDecoration(
@@ -50,14 +56,16 @@ class PublicDreamWidget extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
                   fontWeight:
                       Theme.of(context).textTheme.titleMedium?.fontWeight,
                 ),
               ),
-              Text(
-                caption,
-              ),
+              Text(caption,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  )),
             ],
           ),
         ],

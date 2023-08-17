@@ -18,6 +18,7 @@ class JournalScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Card(
+              color: Theme.of(context).colorScheme.secondary,
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 splashColor: Theme.of(context).cardColor,
@@ -38,6 +39,7 @@ class JournalScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Card(
+              color: Theme.of(context).colorScheme.secondary,
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 splashColor: Theme.of(context).cardColor,
@@ -58,6 +60,7 @@ class JournalScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Card(
+              color: Theme.of(context).colorScheme.secondary,
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 splashColor: Theme.of(context).cardColor,

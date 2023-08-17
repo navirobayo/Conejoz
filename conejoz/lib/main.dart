@@ -1,3 +1,5 @@
+import 'package:conejoz/src/constants/conejoz_atari_theme.dart';
+import 'package:conejoz/src/constants/conejoz_monokai_theme.dart';
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
@@ -109,8 +111,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Conejoz Prototype',
-      theme: ConejozTheme.lightTheme,
-      darkTheme: ConejozTheme.darkTheme,
+      theme: ConejozMonokaiTheme.lightTheme,
+      darkTheme: ConejozMonokaiTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       home: const WelcomeScreen(),
