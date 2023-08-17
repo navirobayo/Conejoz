@@ -20,8 +20,6 @@ class PublicDreamWidget extends StatefulWidget {
 }
 
 class _PublicDreamWidgetState extends State<PublicDreamWidget> {
-  bool _expanded = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,9 +81,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    setState(() {
-                      _expanded = !_expanded;
-                    });
+                    // Do nothing here, as we want to show the popup menu immediately
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Theme.of(context).colorScheme.onSecondary,
@@ -96,7 +92,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                   ),
                   child: Text(
                     widget.tags,
-                    overflow: TextOverflow.visible,
+                    overflow: TextOverflow.values[2],
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSecondary,
                       decoration: TextDecoration.underline,
@@ -104,20 +100,21 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                   ),
                 ),
               ),
-              if (_expanded)
-                PopupMenuButton<String>(
-                  onSelected: (value) {
-                    // Handle tag selection if needed
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return widget.tags.split(', ').map((tag) {
-                      return PopupMenuItem<String>(
-                        value: tag,
-                        child: Text(tag),
-                      );
-                    }).toList();
-                  },
-                ),
+              PopupMenuButton<String>(
+                onSelected: (value) {
+                  // Handle tag selection if needed
+                },
+                itemBuilder: (BuildContext context) {
+                  return widget.tags.split(', ').map((tag) {
+                    return PopupMenuItem<String>(
+                      value: tag,
+                      child: Container(
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                          child: Text(tag)),
+                    );
+                  }).toList();
+                },
+              ),
             ],
           ),
         ],
