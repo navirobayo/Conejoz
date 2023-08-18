@@ -25,7 +25,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
           color: Theme.of(context).colorScheme.onSurfaceVariant,
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Welcome rabbit.",
+        title: Text("Welcome.",
             style: TextStyle(color: Theme.of(context).colorScheme.surface)),
       ),
       body: IndexedStack(
@@ -42,7 +42,12 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.emoji_food_beverage_rounded),
+              icon: Icon(
+                Icons.emoji_food_beverage_rounded,
+                color: _currentIndex == 0
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               onPressed: () {
                 setState(() {
                   _currentIndex = 0;
@@ -50,7 +55,12 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.menu_book_sharp),
+              icon: Icon(
+                Icons.menu_book_sharp,
+                color: _currentIndex == 1
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               onPressed: () {
                 setState(() {
                   _currentIndex = 1;
@@ -58,7 +68,12 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.adjust_outlined),
+              icon: Icon(
+                Icons.adjust_outlined,
+                color: _currentIndex == 2
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               onPressed: () {
                 setState(() {
                   _currentIndex = 2;
@@ -66,7 +81,9 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(
+                Icons.settings,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,

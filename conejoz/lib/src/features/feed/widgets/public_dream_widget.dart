@@ -92,7 +92,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                   ),
                   child: Text(
                     widget.tags,
-                    overflow: TextOverflow.values[2],
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSecondary,
                       decoration: TextDecoration.underline,
@@ -108,9 +108,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                   return widget.tags.split(', ').map((tag) {
                     return PopupMenuItem<String>(
                       value: tag,
-                      child: Container(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                          child: Text(tag)),
+                      child: Text(tag),
                     );
                   }).toList();
                 },

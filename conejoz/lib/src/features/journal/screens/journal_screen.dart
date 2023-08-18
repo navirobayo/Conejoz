@@ -11,73 +11,124 @@ class JournalScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Cloud Journal"),
+        title: Text(
+          "Cloud Journal",
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Card(
-              color: Theme.of(context).colorScheme.secondary,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Theme.of(context).cardColor,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const JournalManager(),
-                    ),
-                  );
-                },
-                child: const SizedBox(
-                  width: 300,
-                  height: 150,
-                  child: Center(child: Icon(Icons.book)),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  "Journal Manager",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.surface,
+                      fontSize: 15),
                 ),
-              ),
+                Spacer(),
+                Card(
+                  color: Theme.of(context).colorScheme.secondary,
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const JournalManager(),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Center(
+                          child: Icon(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              Icons.book)),
+                    ),
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
             const SizedBox(height: 20),
-            Card(
-              color: Theme.of(context).colorScheme.secondary,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Theme.of(context).cardColor,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DreamBoard(),
-                    ),
-                  );
-                },
-                child: const SizedBox(
-                  width: 300,
-                  height: 150,
-                  child: Center(child: Icon(Icons.memory_sharp)),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  "New Entry",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.surface,
+                      fontSize: 15),
                 ),
-              ),
+                Spacer(),
+                Card(
+                  color: Theme.of(context).colorScheme.secondary,
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DreamBoard(),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Center(
+                          child: Icon(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              Icons.memory_sharp)),
+                    ),
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
             const SizedBox(height: 20),
-            Card(
-              color: Theme.of(context).colorScheme.secondary,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Theme.of(context).cardColor,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const UserGallery(),
-                    ),
-                  );
-                },
-                child: const SizedBox(
-                  width: 300,
-                  height: 150,
-                  child: Center(child: Icon(Icons.image_search_rounded)),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  "Images Gallery",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.surface,
+                      fontSize: 15),
                 ),
-              ),
+                Spacer(),
+                Card(
+                  color: Theme.of(context).colorScheme.secondary,
+                  clipBehavior: Clip.hardEdge,
+                  child: InkWell(
+                    splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UserGallery(),
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Center(
+                          child: Icon(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              Icons.image_search_rounded)),
+                    ),
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
           ],
         ),

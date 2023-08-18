@@ -41,7 +41,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Dreamerspace"),
+        title: Text(
+          "Dreamerspace",
+          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+        ),
       ),
       body: Column(
         children: [
@@ -75,31 +78,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 SizedBox(height: regularSpacer),
                 Card(
+                  color: Theme.of(context).colorScheme.secondary,
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
-                    splashColor: Theme.of(context).cardColor,
+                    splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     onTap: () {
                       // Open dream
                     },
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: 150,
                       height: 150,
-                      child: Center(child: Text("Journal 1")),
+                      child: Center(
+                        child: Text(
+                          "Nightmares",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: regularSpacer),
                 Card(
+                  color: Theme.of(context).colorScheme.secondary,
                   clipBehavior: Clip.hardEdge,
                   child: InkWell(
-                    splashColor: Theme.of(context).cardColor,
+                    splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     onTap: () {
                       // Open dream
                     },
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: 150,
                       height: 150,
-                      child: Center(child: Text("Journal 2")),
+                      child: Center(
+                        child: Text(
+                          "Psychedelics",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

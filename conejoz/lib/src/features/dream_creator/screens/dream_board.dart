@@ -17,11 +17,6 @@ class _DreamBoardState extends State<DreamBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
-      appBar: AppBar(
-        leading: const Icon(Icons.code_rounded),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Conejoz Dashboard"),
-      ),
       body: IndexedStack(
         index: _currentIndex,
         children: [
@@ -31,7 +26,7 @@ class _DreamBoardState extends State<DreamBoard> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -43,7 +38,9 @@ class _DreamBoardState extends State<DreamBoard> {
                 },
                 icon: Icon(
                   Icons.donut_large_sharp,
-                  color: _currentIndex == 0 ? Colors.black : Colors.grey,
+                  color: _currentIndex == 0
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               IconButton(
@@ -54,7 +51,9 @@ class _DreamBoardState extends State<DreamBoard> {
                 },
                 icon: Icon(
                   Icons.notes_outlined,
-                  color: _currentIndex == 1 ? Colors.black : Colors.grey,
+                  color: _currentIndex == 1
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               /*IconButton( Not implemented yet. 
@@ -71,6 +70,7 @@ class _DreamBoardState extends State<DreamBoard> {
             ],
           )),
       floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Theme.of(context).colorScheme.onSurfaceVariant,
           onPressed: () {
             Navigator.push(
               context,
