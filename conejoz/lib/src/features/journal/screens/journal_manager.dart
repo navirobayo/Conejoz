@@ -23,39 +23,11 @@ class _JournalManagerState extends State<JournalManager> {
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 splashColor: Theme.of(context).cardColor,
-                onTap: () {
-                  /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ImageCreator(),
-                    ),
-                  ); */
-                },
+                onTap: () {},
                 child: const SizedBox(
                   width: 300,
                   height: 150,
-                  child: Center(child: Icon(Icons.book)),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Card(
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Theme.of(context).cardColor,
-                onTap: () {
-                  /*
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DreamBoard(),
-                    ),
-                  ); */
-                },
-                child: const SizedBox(
-                  width: 300,
-                  height: 150,
-                  child: Center(child: Icon(Icons.memory_sharp)),
+                  child: Center(child: Text("Here goes a list of entries.")),
                 ),
               ),
             ),

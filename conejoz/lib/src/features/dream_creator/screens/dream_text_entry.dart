@@ -14,6 +14,7 @@ class TextEntry extends StatefulWidget {
 class _TextEntryState extends State<TextEntry> {
   final TextEditingController _titleEditingController = TextEditingController();
   final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _tagsEditingController = TextEditingController();
 
   @override
   void dispose() {
@@ -50,9 +51,17 @@ class _TextEntryState extends State<TextEntry> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text("New Note Test"),
-        ),
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            leading: IconButton(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              icon: const Icon(Icons.arrow_back_outlined),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: Text("New Note Test",
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.surface))),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: ListView(
@@ -62,6 +71,15 @@ class _TextEntryState extends State<TextEntry> {
                 controller: _titleEditingController,
                 decoration: const InputDecoration(
                   hintText: 'Create a title here.',
+                  border: InputBorder.none,
+                ),
+                maxLines: null,
+              ),
+              const SizedBox(height: 5),
+              TextField(
+                controller: _tagsEditingController,
+                decoration: const InputDecoration(
+                  hintText: 'Add tags here.',
                   border: InputBorder.none,
                 ),
                 maxLines: null,
@@ -80,6 +98,11 @@ class _TextEntryState extends State<TextEntry> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-            onPressed: _saveNote, child: Icon(Icons.check_circle_outline)));
+            splashColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: Theme.of(context).colorScheme.onError,
+            onPressed: _saveNote,
+            child: Icon(
+                color: Theme.of(context).colorScheme.onPrimary,
+                Icons.check_circle_outline)));
   }
 }

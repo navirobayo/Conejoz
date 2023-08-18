@@ -87,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     child: SizedBox(
                       width: 150,
-                      height: 150,
+                      height: 50,
                       child: Center(
                         child: Text(
                           "Nightmares",
@@ -110,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     child: SizedBox(
                       width: 150,
-                      height: 150,
+                      height: 50,
                       child: Center(
                         child: Text(
                           "Psychedelics",

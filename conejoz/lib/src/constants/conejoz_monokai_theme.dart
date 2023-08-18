@@ -16,8 +16,7 @@ class ConejozMonokaiTheme {
   static const Color _secondaryColor = Color(0xFF55393D); //* Do not modify.
   static const Color _primaryContainer = Color(0xFF394634); //* Do not modify.
   static const Color _errorColor = Color(0xFFF69C5E); //* Do not modify.
-
-  static const Color _onErrorColor = Color(0xFF3F51B5);
+  static const Color _onErrorColor = Color(0xFF24272E); //* Do not modify.
 
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
@@ -36,8 +35,7 @@ class ConejozMonokaiTheme {
       onBackground: ConejozMonokaiTheme._onBackgroundColor, //*
       primaryContainer: ConejozMonokaiTheme._primaryContainer, //*
       error: ConejozMonokaiTheme._errorColor, //*
-
-      onError: ConejozMonokaiTheme._onErrorColor,
+      onError: ConejozMonokaiTheme._onErrorColor, //*
     ),
     cardColor: _surfaceColor,
   );
@@ -58,9 +56,8 @@ class ConejozMonokaiTheme {
         onSecondary: ConejozMonokaiTheme._onSecondaryColor, //*
         onBackground: ConejozMonokaiTheme._onBackgroundColor, //*
         primaryContainer: ConejozMonokaiTheme._primaryContainer, //*
-
-        error: ConejozMonokaiTheme._errorColor,
-        onError: ConejozMonokaiTheme._onErrorColor,
+        error: ConejozMonokaiTheme._errorColor, //*
+        onError: ConejozMonokaiTheme._onErrorColor, //*
       ),
       cardColor: _surfaceColor);
 }

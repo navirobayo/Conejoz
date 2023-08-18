@@ -71,13 +71,17 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                 child: Text(
                   widget.title,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
                     fontWeight:
                         Theme.of(context).textTheme.titleMedium?.fontWeight,
                   ),
                 ),
               ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text("("),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {

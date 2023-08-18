@@ -4,6 +4,8 @@ import 'package:conejoz/src/features/dream_creator/screens/dream_image_creator.d
 import 'package:conejoz/src/features/dream_creator/screens/dream_text_entry.dart';
 import 'package:flutter/material.dart';
 
+// ! Not used at the moment. Delete if not used in the future.
+
 class DreamBoard extends StatefulWidget {
   const DreamBoard({super.key});
 
