@@ -2,7 +2,6 @@ import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TextEntry extends StatefulWidget {
   const TextEntry({Key? key}) : super(key: key);
@@ -34,11 +33,14 @@ class _TextEntryState extends State<TextEntry> {
 
     final userUniqueId = user.uid;
 
+    final tags =
+        _tagsEditingController.text.replaceAll(',', '').trim().split(' ');
+
     try {
       await userRepo.saveNote(userUniqueId, {
         'title': _titleEditingController.text,
         'dreamdescription': _textEditingController.text,
-        'tags': [], // Empty array for tags
+        'tags': tags,
       });
 
       // Note saved successfully, navigate back or perform any desired action.

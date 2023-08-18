@@ -139,7 +139,7 @@ class UserRepository extends GetxController {
 
     try {
       await userDocumentRef.update({
-        "defaultjournal.entries": FieldValue.arrayUnion([noteData]),
+        "cloudjournal.entries": FieldValue.arrayUnion([noteData]),
       });
     } catch (error) {
       print("Error saving note: $error");
@@ -154,7 +154,7 @@ class UserRepository extends GetxController {
 
     try {
       await userDocumentRef.update({
-        "defaultjournal.tags": FieldValue.arrayUnion(tags),
+        "cloudjournal.tags": FieldValue.arrayUnion(tags),
       });
     } catch (error) {
       print("Error adding tags to dream: $error");

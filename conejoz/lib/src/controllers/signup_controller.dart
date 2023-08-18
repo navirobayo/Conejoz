@@ -31,14 +31,11 @@ class SignUpController extends GetxController {
   void createRabbitDocument() {
     // This function creates the RabbitDocument inside of the user's document.
     final rabbitDocument = {
-      "defaultjournal": {
-        "title": "A private journal",
-        "description": "Created by default by the Conejoz app",
+      "cloudjournal": {
         "entries": [],
-        "coverimage": "",
+        "profileimage": "",
       },
       "usergallery": {
-        "title": "Dream images",
         "userimages": [],
       },
       "rabbitname": rabbit.text.trim(),
