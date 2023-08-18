@@ -36,11 +36,14 @@ class _TextEntryState extends State<TextEntry> {
     final tags =
         _tagsEditingController.text.replaceAll(',', '').trim().split(' ');
 
+    final now = DateTime.now();
+
     try {
       await userRepo.saveNote(userUniqueId, {
         'title': _titleEditingController.text,
         'dreamdescription': _textEditingController.text,
         'tags': tags,
+        'date': now,
       });
 
       // Note saved successfully, navigate back or perform any desired action.

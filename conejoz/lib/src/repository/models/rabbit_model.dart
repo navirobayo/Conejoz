@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserModel {
+/* class UserModel {
   final String? id;
   final String rabbit;
   final String email;
@@ -27,4 +27,4 @@ class UserModel {
       rabbit: data["Rabbit"],
     );
   }
-}
+} */ //! Not used. Delete if not used in the future.

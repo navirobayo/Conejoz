@@ -3,7 +3,9 @@ import 'package:conejoz/src/repository/authentication_repository/authentication_
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:get/get.dart';
 
-class ProfileController extends GetxController {
+// ! Not used. Delete if not used in the future.
+
+/*class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
 
   final _authRepo = Get.put(AuthenticationRepository());
@@ -37,4 +39,4 @@ class ProfileController extends GetxController {
   updateRecord(RabbitModel user) async {
     await _userRepo.updateRabbitRecord(user);
   } */
-
+*/

@@ -62,18 +62,6 @@ class UserRepository extends GetxController {
 
   // * Functions used in the "Profile" feature:
 
-  Future<UserModel?> getUserDetails(String email) async {
-    // This function gets the user details from the "rabbits" collection.
-    // Specifically, it gets the user details by email.
-    final querySnapshot =
-        await _db.collection("rabbits").where("Email", isEqualTo: email).get();
-
-    if (querySnapshot.size == 0) {
-      return null;
-    }
-    return UserModel.fromSnapshot(querySnapshot.docs.first);
-  }
-
   Future<String?> getRabbitNameByUserId() async {
     // This function gets the rabbit username by the user's unique id.
     final user = FirebaseAuth.instance.currentUser;
@@ -229,3 +217,15 @@ class UserRepository extends GetxController {
     return userData;
   }
   */
+
+  /* Future<UserModel?> getUserDetails(String email) async {
+    // This function gets the user details from the "rabbits" collection.
+    // Specifically, it gets the user details by email.
+    final querySnapshot =
+        await _db.collection("rabbits").where("Email", isEqualTo: email).get();
+
+    if (querySnapshot.size == 0) {
+      return null;
+    }
+    return UserModel.fromSnapshot(querySnapshot.docs.first);
+  } */ //! Not used. Delete if not used in the future.
