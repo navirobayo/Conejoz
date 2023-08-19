@@ -1,3 +1,4 @@
+import 'package:conejoz/src/constants/conejoz_logos.dart';
 import 'package:flutter/material.dart';
 
 class JournalManager extends StatefulWidget {
@@ -27,7 +28,7 @@ class _JournalManagerState extends State<JournalManager> {
                 child: const SizedBox(
                   width: 300,
                   height: 150,
-                  child: Center(child: Text("Here goes a list of entries.")),
+                  child: Center(child: Icon(ConejozLogos.conejozBlackBorder)),
                 ),
               ),
             ),
