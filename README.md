@@ -1,10 +1,10 @@
 # Welcome to Conejoz, your digital dream journal
 
-Conejoz is a beautiful and customizable way to register and explore your dreams or creative ideas in general.
+Conejoz is a beautiful and customizable way to register and explore your dreams and ideas
 
 This Mobile and Web Application is designed so it can be used as a modern yet simple creative tool
 
-Created with Flutter and powered by Firebase all your information linked directly to the cloud. Dream anywhere
+Created and optimized for creatives in general. All your information linked directly to the cloud. Dream anywhere
 
 ## Features:
 
