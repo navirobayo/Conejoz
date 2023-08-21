@@ -43,7 +43,7 @@ class _TextEntryState extends State<TextEntry> {
         'title': _titleEditingController.text,
         'dreamdescription': _textEditingController.text,
         'tags': tags,
-        'date': now,
+        'timestamp': now,
       });
 
       // Note saved successfully, navigate back or perform any desired action.

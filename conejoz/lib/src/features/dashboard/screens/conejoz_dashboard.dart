@@ -6,7 +6,7 @@ import 'package:conejoz/src/features/settings/screens/settings_screen.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 
-//*
+//* Main Screen of the app.
 
 class ConejozDashboard extends StatefulWidget {
   const ConejozDashboard({super.key});
@@ -61,8 +61,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         children: [
           const FeedScreen(),
           const JournalScreen(),
-          ProfileScreen(
-              username: _username!), // TODO: RABBIT ICON FOR THIS SCREEN
+          ProfileScreen(username: _username!),
         ],
       ),
       bottomNavigationBar: BottomAppBar(

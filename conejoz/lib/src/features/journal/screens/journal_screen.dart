@@ -1,9 +1,13 @@
+import 'package:conejoz/src/common_widgets/conejoz_route_button.dart';
+import 'package:conejoz/src/common_widgets/conejoz_text_for_route_button.dart';
 import 'package:conejoz/src/features/dream_creator/screens/dream_image_creator.dart';
 import 'package:conejoz/src/features/dream_creator/screens/dream_text_entry.dart';
 import 'package:conejoz/src/features/journal/screens/journal_manager.dart';
 import 'package:conejoz/src/features/journal/screens/user_gallery.dart';
 import 'package:conejoz/src/features/tags_explorer/screens/tags_explorer_screen.dart';
 import 'package:flutter/material.dart';
+
+//* Main features of the app.
 
 double defaultTextSpacer = 60;
 double defaultCardSpacer = 20;
@@ -24,7 +28,7 @@ class JournalScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Spacer(),
+          const Spacer(),
           Center(
             child: Container(
               child: Row(
@@ -35,17 +39,22 @@ class JournalScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        _buildText("New Text Entry", context),
+                        ConejozTextForRouteButton(
+                            text: "New Text Entry", context: context),
                         SizedBox(height: defaultTextSpacer),
-                        _buildText("AI Image", context),
+                        ConejozTextForRouteButton(
+                            text: "AI Image", context: context),
                         SizedBox(height: defaultTextSpacer),
                         /*_buildText("New Audio Entry", context),
                         SizedBox(height: defaultTextSpacer),*/
-                        _buildText("Entries", context),
+                        ConejozTextForRouteButton(
+                            text: "Logs", context: context),
                         SizedBox(height: defaultTextSpacer),
-                        _buildText("Images Explorer", context),
+                        ConejozTextForRouteButton(
+                            text: "Images Gallery", context: context),
                         SizedBox(height: defaultTextSpacer),
-                        _buildText("Tags Explorer", context),
+                        ConejozTextForRouteButton(
+                            text: "Tags Explorer", context: context),
                       ],
                     ),
                   ),
@@ -54,18 +63,30 @@ class JournalScreen extends StatelessWidget {
                     flex: 1, // Takes half of the available space
                     child: Column(
                       children: [
-                        _buildCardButton(
-                            context, Icons.create_rounded, TextEntry()),
+                        ConejozRouteButton(
+                            context: context,
+                            icon: Icons.create_rounded,
+                            page: TextEntry()),
                         SizedBox(height: defaultCardSpacer),
-                        _buildCardButton(
-                            context, Icons.memory_sharp, ImageCreator()),
+                        ConejozRouteButton(
+                            context: context,
+                            icon: Icons.memory_sharp,
+                            page: ImageCreator()),
                         SizedBox(height: defaultCardSpacer),
-                        _buildCardButton(context, Icons.book, JournalManager()),
+                        ConejozRouteButton(
+                            context: context,
+                            icon: Icons.book,
+                            page: JournalManager()),
                         SizedBox(height: defaultCardSpacer),
-                        _buildCardButton(
-                            context, Icons.image_search_rounded, UserGallery()),
+                        ConejozRouteButton(
+                            context: context,
+                            icon: Icons.image_search_rounded,
+                            page: UserGallery()),
                         SizedBox(height: defaultCardSpacer),
-                        _buildCardButton(context, Icons.tag, TagsExplorer()),
+                        ConejozRouteButton(
+                            context: context,
+                            icon: Icons.tag,
+                            page: TagsExplorer()),
                       ],
                     ),
                   ),
@@ -73,44 +94,8 @@ class JournalScreen extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
         ],
-      ),
-    );
-  }
-
-  Widget _buildText(String text, BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: Theme.of(context).colorScheme.surface,
-        fontSize: 15,
-      ),
-    );
-  }
-
-  Widget _buildCardButton(BuildContext context, IconData icon, Widget page) {
-    return Card(
-      color: Theme.of(context).colorScheme.secondary,
-      clipBehavior: Clip.hardEdge,
-      child: InkWell(
-        splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => page),
-          );
-        },
-        child: SizedBox(
-          width: 50,
-          height: 50,
-          child: Center(
-            child: Icon(
-              color: Theme.of(context).colorScheme.onPrimary,
-              icon,
-            ),
-          ),
-        ),
       ),
     );
   }

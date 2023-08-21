@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class PublicDreamWidget extends StatefulWidget {
   final String rabbit;
-  final String dream;
+  final String textentry;
   final String title;
-  final String time;
+  final String timestamp;
   final String tags;
   const PublicDreamWidget({
     Key? key,
     required this.rabbit,
-    required this.dream,
+    required this.textentry,
     required this.title,
-    required this.time,
+    required this.timestamp,
     required this.tags,
   }) : super(key: key);
 
@@ -42,7 +42,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
               ),
               const Spacer(),
               Text(
-                widget.time,
+                widget.timestamp,
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!

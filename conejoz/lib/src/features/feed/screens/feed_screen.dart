@@ -28,7 +28,7 @@ class _FeedScreenState extends State<FeedScreen> {
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("publicdreams") // Updated collection name
-                    .orderBy("TimeStamp", descending: false)
+                    .orderBy("timestamp", descending: false)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
@@ -37,11 +37,11 @@ class _FeedScreenState extends State<FeedScreen> {
                       itemBuilder: (context, index) {
                         final post = snapshot.data!.docs[index];
                         return PublicDreamWidget(
-                          rabbit: post["Rabbit"],
-                          dream: post["Dream"],
-                          title: post["Title"],
-                          time: post["TimeStamp"].toString(),
-                          tags: post["Tags"],
+                          rabbit: post["rabbit"],
+                          textentry: post["textentry"],
+                          title: post["title"],
+                          timestamp: post["timestamp"].toString(),
+                          tags: post["tags"],
                         );
                       },
                     );
