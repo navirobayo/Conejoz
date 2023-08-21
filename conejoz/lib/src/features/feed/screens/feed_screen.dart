@@ -16,8 +16,9 @@ class _FeedScreenState extends State<FeedScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          "Dreamscape",
-          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          "Public Logs.",
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
         ),
       ),
       body: Center(
