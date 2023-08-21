@@ -7,32 +7,21 @@ import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 double regularSpacer = 25;
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final String username; // Add a parameter to the constructor
 
+  const ProfileScreen({Key? key, required this.username}) : super(key: key);
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // Instance of UserRepository to access user data
-  final _userRepo = UserRepository.instance;
-
-  // The username retrieved from the repository
-  String? _username;
+  String? _username; // Store the username in a private variable
 
   @override
   void initState() {
     super.initState();
-    // Trigger the function to get the username once the screen is opened
-    _getUsername();
-  }
-
-  // Function to retrieve the username from the UserRepository
-  void _getUsername() async {
-    final username = await _userRepo.getRabbitNameByUserId();
-    setState(() {
-      _username = username;
-    });
+    _username = widget
+        .username; // Initialize the private variable with the value from the constructor
   }
 
   @override
@@ -42,8 +31,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          "Dreamerspace",
-          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          "Profile.",
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
         ),
       ),
       body: Column(

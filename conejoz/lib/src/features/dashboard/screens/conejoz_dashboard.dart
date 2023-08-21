@@ -6,8 +6,7 @@ import 'package:conejoz/src/features/settings/screens/settings_screen.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 
-// * Main navigation board for the app.
-// * By default the user will see the feed screen.
+//*
 
 class ConejozDashboard extends StatefulWidget {
   const ConejozDashboard({super.key});
@@ -47,9 +46,9 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Row(
           children: [
-            Text("Welcome.",
+            Text("Welcome",
                 style: TextStyle(color: Theme.of(context).colorScheme.surface)),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Text(
               _username ?? " ",
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
@@ -60,13 +59,13 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          FeedScreen(),
-          JournalScreen(),
-          ProfileScreen(), // TODO: RABBIT ICON FOR THIS SCREEN
+          const FeedScreen(),
+          const JournalScreen(),
+          ProfileScreen(
+              username: _username!), // TODO: RABBIT ICON FOR THIS SCREEN
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

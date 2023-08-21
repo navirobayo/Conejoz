@@ -17,8 +17,9 @@ class JournalScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          "Cloud Journal",
-          style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          "Journal.",
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
         ),
       ),
       body: Column(

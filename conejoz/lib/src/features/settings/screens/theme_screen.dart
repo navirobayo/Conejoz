@@ -1,8 +1,5 @@
-import 'package:conejoz/src/controllers/theme_service_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-// ! Not used at the moment.
 class ThemeScreen extends StatelessWidget {
   const ThemeScreen({super.key});
 
@@ -11,7 +8,7 @@ class ThemeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("T H E M E"),
+        title: const Text("Theme Selector"),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: const Center(
@@ -24,11 +21,10 @@ class ThemeScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed:
-            Provider.of<ThemeService>(context, listen: false).switchTheme,
+      floatingActionButton: const FloatingActionButton(
+        onPressed: null,
         tooltip: 'Increment',
-        child: const Icon(Icons.adb_rounded),
+        child: Icon(Icons.adb_rounded),
       ),
     );
   }
