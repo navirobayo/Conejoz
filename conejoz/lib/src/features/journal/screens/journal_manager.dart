@@ -1,3 +1,4 @@
+import 'package:conejoz/src/features/journal/screens/entry_screen.dart';
 import 'package:flutter/material.dart';
 
 class JournalManager extends StatefulWidget {
@@ -37,9 +38,17 @@ class _JournalManagerState extends State<JournalManager> {
                   TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
             trailing: Text(
-              'Aug 17 at 5:24 PM',
+              'Aug 17 at 5:24:32 UTC-5',
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
             ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EntryScreen(),
+                ),
+              );
+            },
           ),
           Divider(height: 0),
           ListTile(
@@ -55,9 +64,12 @@ class _JournalManagerState extends State<JournalManager> {
                   TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
             trailing: Text(
-              'Aug 17 at 5:24 PM',
+              'Aug 17 at 5:24:32 UTC-5',
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
             ),
+            onTap: () {
+              // Open the entry.
+            },
           ),
           Divider(height: 0),
           ListTile(
@@ -73,7 +85,7 @@ class _JournalManagerState extends State<JournalManager> {
                   TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
             trailing: Text(
-              'Aug 17 at 5:24 PM',
+              'Aug 17 at 5:24:32 UTC-5',
               style: TextStyle(color: Theme.of(context).colorScheme.surface),
             ),
           ),

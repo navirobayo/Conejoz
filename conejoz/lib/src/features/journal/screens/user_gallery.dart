@@ -49,6 +49,7 @@ class _UserGalleryState extends State<UserGallery> {
         itemCount: userImageUrls.length,
         itemBuilder: (context, index) {
           return Card(
+            color: Theme.of(context).colorScheme.onError,
             clipBehavior: Clip.hardEdge,
             child: InkWell(
               splashColor: Theme.of(context).cardColor,

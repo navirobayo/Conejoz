@@ -29,7 +29,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
   void _getUsername() async {
     final username = await _userRepo.getRabbitNameByUserId();
     setState(() {
-      _username = username;
+      _username = username ?? "";
     });
   }
 
@@ -50,7 +50,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
                 style: TextStyle(color: Theme.of(context).colorScheme.surface)),
             const SizedBox(width: 5),
             Text(
-              _username ?? " ",
+              _username != null ? _username.toString() : " ",
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             )
           ],
@@ -61,7 +61,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         children: [
           const FeedScreen(),
           const JournalScreen(),
-          ProfileScreen(username: _username!),
+          ProfileScreen(username: _username.toString()),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
