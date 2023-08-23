@@ -34,6 +34,21 @@ class UserRepository extends GetxController {
     }
   }
 
+  // * Functions used in the "JournalManager" feature:
+
+  Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {
+    final userDocument = await getUserDocument(userId);
+    if (userDocument != null) {
+      final cloudJournal = userDocument['cloudjournal'];
+      if (cloudJournal != null) {
+        final userEntries = List<Map<String, dynamic>>.from(
+            cloudJournal['entries'] ?? <Map<String, dynamic>>[]);
+        return userEntries;
+      }
+    }
+    return [];
+  }
+
   // * Functions used in the "Authentication" feature:
 
   Future<void> createRabbit(Map<String, dynamic> rabbitDocument) async {
