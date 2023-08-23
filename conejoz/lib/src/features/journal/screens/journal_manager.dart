@@ -1,4 +1,4 @@
-import 'package:conejoz/src/features/journal/screens/entry_screen.dart';
+import 'package:conejoz/src/features/journal/screens/entry_dashboard.dart';
 import 'package:flutter/material.dart';
 
 class JournalManager extends StatefulWidget {
@@ -45,7 +45,7 @@ class _JournalManagerState extends State<JournalManager> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const EntryScreen(),
+                  builder: (context) => const EntryDashboard(),
                 ),
               );
             },

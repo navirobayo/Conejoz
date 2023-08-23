@@ -33,7 +33,9 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
     });
   }
 
+  // Index of the current screen
   int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
