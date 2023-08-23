@@ -8,9 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EntryDashboard extends StatefulWidget {
-  final Map<String, dynamic> entry; // Add this line
+  final Map<String, dynamic> entry;
 
-  const EntryDashboard({Key? key, required this.entry}) : super(key: key);
+  const EntryDashboard({
+    Key? key,
+    required this.entry,
+  }) : super(key: key);
 
   @override
   State<EntryDashboard> createState() => _EntryDashboardState();
@@ -19,6 +22,7 @@ class EntryDashboard extends StatefulWidget {
 class _EntryDashboardState extends State<EntryDashboard> {
   // Index of the current screen
   int _currentIndex = 2;
+
   @override
   Widget build(BuildContext context) {
     DateTime entryDate = widget.entry['timestamp']?.toDate();
@@ -42,8 +46,12 @@ class _EntryDashboardState extends State<EntryDashboard> {
         children: [
           ImagePicker(),
           VoiceNoteScreen(),
-          ReadEntryScreen(entry: widget.entry),
-          EntryEditor(),
+          ReadEntryScreen(
+            entry: widget.entry,
+          ),
+          EntryEditor(
+            entry: widget.entry,
+          ),
           EntryPublisher()
         ],
       ),

@@ -1,8 +1,7 @@
-import 'package:conejoz/src/constants/conejoz_logos.dart';
 import 'package:flutter/material.dart';
 
 class ReadEntryScreen extends StatefulWidget {
-  final Map<String, dynamic> entry; // Add this line
+  final Map<String, dynamic> entry;
 
   const ReadEntryScreen({Key? key, required this.entry}) : super(key: key);
 

@@ -1,5 +1,6 @@
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,12 +39,15 @@ class _TextEntryState extends State<TextEntry> {
 
     final now = DateTime.now();
 
+    final entryId = const Uuid().v4();
+
     try {
       await userRepo.saveNote(userUniqueId, {
         'title': _titleEditingController.text,
         'dreamdescription': _textEditingController.text,
         'tags': tags,
         'timestamp': now,
+        'entryid': entryId,
       });
 
       // Note saved successfully, navigate back or perform any desired action.

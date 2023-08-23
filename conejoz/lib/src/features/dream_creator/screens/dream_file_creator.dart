@@ -23,20 +23,6 @@ class _DreamFileCreatorState extends State<DreamFileCreator> {
   @override
   void initState() {
     super.initState();
-    // Load initial data
-    loadLastUserData();
-  }
-
-  Future<void> loadLastUserData() async {
-    print("Loading last user data"); // Debugging line
-    lastUserImage = await _userRepo.getLastUserImage();
-    final lastEntry = await _userRepo.getLastJournalEntry();
-    if (lastEntry != null) {
-      print("Last Entry: $lastEntry"); // Debugging line
-      lastEntryTitle = lastEntry['dreamtitle'];
-      lastEntryText = lastEntry['dreamentry'];
-    }
-    setState(() {});
   }
 
   @override
@@ -137,15 +123,7 @@ class _DreamFileCreatorState extends State<DreamFileCreator> {
                 ),
                 // A button to save the dream
                 ElevatedButton(
-                  onPressed: () async {
-                    final tags = _tagsController.text.split(',');
-                    final rabbitName = await _userRepo.getRabbitNameByUserId();
-                    if (rabbitName != null) {
-                      print("Rabbit Name: $rabbitName"); // Debugging line
-                      await _userRepo.addTagsToDream(rabbitName, tags);
-                      // Save dream
-                    }
-                  },
+                  onPressed: () {},
                   child: const Text('Save'),
                 ),
               ],

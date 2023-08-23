@@ -1,5 +1,3 @@
-import 'package:conejoz/src/repository/models/rabbit_model.dart';
-import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +15,8 @@ class UserRepository extends GetxController {
   // * Functions used in multiple features:
 
   Future<DocumentSnapshot<Map<String, dynamic>>?> getUserDocument(
-      // This function gets the user document from the "rabbits" collection.
+      // This function gets the user personal document from the "rabbits" collection.
+      // This is the document that contains all of the dependencies of the user.
       String userId) async {
     try {
       final userDocumentRef = _db.collection("rabbits").doc(userId);
@@ -37,12 +36,18 @@ class UserRepository extends GetxController {
   // * Functions used in the "JournalManager" feature:
 
   Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {
+    // This function gets the user's journal entries from his personal document.
     final userDocument = await getUserDocument(userId);
     if (userDocument != null) {
       final cloudJournal = userDocument['cloudjournal'];
       if (cloudJournal != null) {
-        final userEntries = List<Map<String, dynamic>>.from(
-            cloudJournal['entries'] ?? <Map<String, dynamic>>[]);
+        final userEntries = <Map<String, dynamic>>[];
+        final entries = cloudJournal['entries'] ?? {};
+        entries.forEach((key, value) {
+          final entry = Map<String, dynamic>.from(value);
+          entry['uniqueid'] = key;
+          userEntries.add(entry);
+        });
         return userEntries;
       }
     }
@@ -75,6 +80,42 @@ class UserRepository extends GetxController {
     });
   }
 
+  // * Functions used in the "Journal" feature:
+
+  Future<void> addImageToUserGallery(String userId, String imageUrl) async {
+    // This function adds the link of an image to the user's gallery directory.
+    final userDocumentRef = _db.collection("rabbits").doc(userId);
+
+    try {
+      await userDocumentRef.update({
+        "usergallery.userimages": FieldValue.arrayUnion([imageUrl]),
+      });
+    } catch (error) {
+      print("Error adding image to user's gallery: $error");
+      throw error;
+    }
+  }
+
+  // * Functions used in the "Text Entry" feature:
+
+  Future<void> saveNote(
+      // This function saves the text entry of a dream to the user's journal.
+      String userUniqueId,
+      Map<String, dynamic> noteData) async {
+    final userDocumentRef = _db.collection("rabbits").doc(userUniqueId);
+
+    final entryId = noteData['entryid'];
+
+    try {
+      await userDocumentRef.update({
+        "cloudjournal.entries.$entryId": noteData,
+      });
+    } catch (error) {
+      print("Error saving note: $error");
+      throw error;
+    }
+  }
+
   // * Functions used in the "Profile" feature:
 
   Future<String?> getRabbitNameByUserId() async {
@@ -101,146 +142,19 @@ class UserRepository extends GetxController {
     }
   }
 
-  // * Functions used in the "Feed Screen " feature:
-  void postDream(String message, String caption) {
-    // Not implemented yet.
-    // TODO: Edit so it can send a string with the username.
-    FirebaseFirestore.instance.collection("publicdreams").add({
-      "Rabbit": "username", // Fix this.
-      "Dream": message,
-      "Title": "Title",
-      "TimeStamp": DateTime.now(),
-      "Caption": caption,
-    });
-  }
+  //* Update entries
 
-  // * Functions used in the "Journal" feature:
-
-  Future<void> addImageToUserGallery(String userId, String imageUrl) async {
-    // This function adds the link of an image to the user's gallery directory.
+  Future<void> updateEntry(String userId, String entryId,
+      Map<String, dynamic> updatedEntryData) async {
     final userDocumentRef = _db.collection("rabbits").doc(userId);
 
     try {
       await userDocumentRef.update({
-        "usergallery.userimages": FieldValue.arrayUnion([imageUrl]),
+        "cloudjournal.entries.$entryId": updatedEntryData,
       });
     } catch (error) {
-      print("Error adding image to user's gallery: $error");
+      print("Error updating entry: $error");
       throw error;
     }
-  }
-
-  // * Functions used in the "Dream Creator" feature:
-
-  // * Functions used in the "Dream File Creator" feature:
-
-  Future<void> saveNote(
-      // This function saves the text entry of a dream to the user's journal.
-      String userUniqueId,
-      Map<String, dynamic> noteData) async {
-    final userDocumentRef = _db.collection("rabbits").doc(userUniqueId);
-
-    try {
-      await userDocumentRef.update({
-        "cloudjournal.entries": FieldValue.arrayUnion([noteData]),
-      });
-    } catch (error) {
-      print("Error saving note: $error");
-      throw error;
-    }
-  }
-
-  Future<void> addTagsToDream(String userUniqueId, List<String> tags) async {
-    // This function adds tags to the dream object that is being created.
-    // ! Not tested yet.
-    final userDocumentRef = _db.collection("rabbits").doc(userUniqueId);
-
-    try {
-      await userDocumentRef.update({
-        "cloudjournal.tags": FieldValue.arrayUnion(tags),
-      });
-    } catch (error) {
-      print("Error adding tags to dream: $error");
-      throw error;
-    }
-  }
-
-  Future<Map<String, dynamic>?> getLastJournalEntry() async {
-    // This function gets the last journal entry of the user.
-    // ! This seems to not work at the moment.
-    final user = AuthenticationRepository.instance.firebaseUser.value;
-    if (user != null) {
-      final userId = user.uid;
-      final userDocument = await getUserDocument(userId);
-      if (userDocument != null) {
-        final journalEntries = List<Map<String, dynamic>>.from(
-            userDocument['defaultjournal']['entries']);
-        if (journalEntries.isNotEmpty) {
-          return journalEntries.last;
-        }
-      }
-    }
-    return null;
-  }
-
-  Future<String?> getLastUserImage() async {
-    // This function gets the last image uploaded by the user.
-    // ! This seems to not work at the moment.
-    final user = AuthenticationRepository.instance.firebaseUser.value;
-    if (user != null) {
-      final userId = user.uid;
-      final userDocument = await getUserDocument(userId);
-      if (userDocument != null) {
-        final userImageUrls =
-            List<String>.from(userDocument['usergallery']['userimages']);
-        if (userImageUrls.isNotEmpty) {
-          return userImageUrls.last;
-        }
-      }
-    }
-    return null;
   }
 }
-
-// Not used. But can be used to get user details by username.
-/*
-  Future<UserModel?> getUserDetailsByUsername(String username) async {
-    try {
-      final snapshot = await _db
-          .collection("rabbits")
-          .where("rabbitname", isEqualTo: username)
-          .limit(1)
-          .get();
-
-      if (snapshot.docs.isEmpty) {
-        return null; // Username does not exist
-      }
-
-      final userData = snapshot.docs.first;
-      return UserModel.fromSnapshot(userData);
-    } catch (error) {
-      print("Error getting user details by username: $error");
-      return null;
-    }
-  } */
-
-/*
-  Future<List<UserModel>> allUser() async {
-    final snapshot = await _db.collection("rabbits").get();
-    final userData =
-        snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
-    return userData;
-  }
-  */
-
-  /* Future<UserModel?> getUserDetails(String email) async {
-    // This function gets the user details from the "rabbits" collection.
-    // Specifically, it gets the user details by email.
-    final querySnapshot =
-        await _db.collection("rabbits").where("Email", isEqualTo: email).get();
-
-    if (querySnapshot.size == 0) {
-      return null;
-    }
-    return UserModel.fromSnapshot(querySnapshot.docs.first);
-  } */ //! Not used. Delete if not used in the future.
