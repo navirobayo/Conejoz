@@ -3,7 +3,6 @@ import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class EntryEditor extends StatefulWidget {
   final Map<String, dynamic> entry;
@@ -81,22 +80,7 @@ class _EntryEditorState extends State<EntryEditor> {
 
   @override
   Widget build(BuildContext context) {
-    final entryDate = widget.entry['timestamp']?.toDate();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        leading: IconButton(
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-          icon: const Icon(Icons.arrow_back_outlined),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          DateFormat('yy-MM-dd HH:mm:ss').format(entryDate ?? DateTime.now()),
-          style: TextStyle(color: Theme.of(context).colorScheme.surface),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
@@ -105,7 +89,7 @@ class _EntryEditorState extends State<EntryEditor> {
             TextField(
               controller: _titleEditingController,
               decoration: const InputDecoration(
-                hintText: 'EXISTING TITLE',
+                hintText: 'A fancy title',
                 border: InputBorder.none,
               ),
               maxLines: null,
@@ -114,21 +98,78 @@ class _EntryEditorState extends State<EntryEditor> {
             TextField(
               controller: _tagsEditingController,
               decoration: const InputDecoration(
-                hintText: 'EXISTING TAGS',
+                hintText: 'Tags separated by commas',
                 border: InputBorder.none,
               ),
               maxLines: null,
             ),
             const SizedBox(height: 5),
+            Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Card(
+                    color: Theme.of(context).colorScheme.primary,
+                    clipBehavior: Clip.hardEdge,
+                    child: SizedBox(
+                      height: 50,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          SizedBox(width: 10),
+                          Card(
+                            color: Theme.of(context).colorScheme.secondary,
+                            clipBehavior: Clip.hardEdge,
+                            child: InkWell(
+                              splashColor: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Dialog(
+                                      child: SizedBox(
+                                        child: Image.network(
+                                          "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691561892499.jpg?alt=media&token=7ed46836-050d-4090-8785-6473e5146cf1",
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: SizedBox(
+                                child: Center(
+                                  child: Image.network(
+                                    "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691561892499.jpg?alt=media&token=7ed46836-050d-4090-8785-6473e5146cf1",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(onPressed: null, icon: Icon(Icons.add_link)),
+                const Spacer(),
+              ],
+            ),
+            const SizedBox(height: 5),
             TextField(
               controller: _textEditingController,
               decoration: const InputDecoration(
-                hintText: 'EXISTING TEXT',
+                hintText: 'What are you dreaming?',
                 border: InputBorder.none,
               ),
               maxLines: null,
             ),
             const SizedBox(height: 16),
+            // A container that suggest that attachments are available.
           ],
         ),
       ),
