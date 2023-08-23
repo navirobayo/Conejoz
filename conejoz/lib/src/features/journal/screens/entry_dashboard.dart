@@ -5,9 +5,12 @@ import 'package:conejoz/src/features/journal/screens/image_picker.dart';
 import 'package:conejoz/src/features/journal/screens/read_entry_screen.dart';
 import 'package:conejoz/src/features/journal/screens/voice_note_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EntryDashboard extends StatefulWidget {
-  const EntryDashboard({super.key});
+  final Map<String, dynamic> entry; // Add this line
+
+  const EntryDashboard({Key? key, required this.entry}) : super(key: key);
 
   @override
   State<EntryDashboard> createState() => _EntryDashboardState();
@@ -18,6 +21,7 @@ class _EntryDashboardState extends State<EntryDashboard> {
   int _currentIndex = 2;
   @override
   Widget build(BuildContext context) {
+    DateTime entryDate = widget.entry['timestamp']?.toDate();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -29,16 +33,16 @@ class _EntryDashboardState extends State<EntryDashboard> {
           },
         ),
         title: Text(
-          "Aug 17 at 5:24:32 UTC-5",
+          DateFormat('yy-MM-dd HH:mm:ss').format(entryDate),
           style: TextStyle(color: Theme.of(context).colorScheme.surface),
         ),
       ),
       body: IndexedStack(
         index: _currentIndex,
-        children: const [
+        children: [
           ImagePicker(),
           VoiceNoteScreen(),
-          ReadEntryScreen(),
+          ReadEntryScreen(entry: widget.entry),
           EntryEditor(),
           EntryPublisher()
         ],

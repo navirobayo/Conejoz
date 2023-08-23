@@ -93,7 +93,7 @@ class _JournalManagerList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EntryDashboard(),
+                builder: (context) => EntryDashboard(entry: entry),
               ),
             );
           },
