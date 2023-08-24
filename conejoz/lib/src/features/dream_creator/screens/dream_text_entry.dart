@@ -48,6 +48,7 @@ class _TextEntryState extends State<TextEntry> {
         'tags': tags,
         'timestamp': now,
         'entryid': entryId,
+        'attachments': [],
       });
 
       // Note saved successfully, navigate back or perform any desired action.

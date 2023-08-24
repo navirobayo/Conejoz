@@ -6,10 +6,12 @@ import 'package:get/get.dart';
 
 class EntryEditor extends StatefulWidget {
   final Map<String, dynamic> entry;
+  final Function onImagePicked;
 
   const EntryEditor({
     Key? key,
     required this.entry,
+    required this.onImagePicked,
   }) : super(key: key);
 
   @override
@@ -76,6 +78,36 @@ class _EntryEditorState extends State<EntryEditor> {
     }
 
     Navigator.pop(context);
+  }
+
+  void showAttachmentOptions() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Add Attachment"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text("Create new AI Image"),
+                  onTap: () {
+                    // Navigate to AI image creator
+                  },
+                ),
+                Padding(padding: EdgeInsets.all(8.0)),
+                GestureDetector(
+                  child: Text("AI Image already exists"),
+                  onTap: () {
+                    widget.onImagePicked();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -155,7 +187,9 @@ class _EntryEditorState extends State<EntryEditor> {
                     ),
                   ),
                 ),
-                IconButton(onPressed: null, icon: Icon(Icons.add_link)),
+                IconButton(
+                    onPressed: showAttachmentOptions,
+                    icon: Icon(Icons.add_link)),
                 const Spacer(),
               ],
             ),

@@ -23,6 +23,12 @@ class _EntryDashboardState extends State<EntryDashboard> {
   // Index of the current screen
   int _currentIndex = 2;
 
+  void navigateToImagePicker() {
+    setState(() {
+      _currentIndex = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime entryDate = widget.entry['timestamp']?.toDate();
@@ -50,8 +56,11 @@ class _EntryDashboardState extends State<EntryDashboard> {
             entry: widget.entry,
           ),
           EntryEditor(
-            entry: widget.entry,
-          ),
+              entry: widget.entry,
+              onImagePicked: () {
+                Navigator.pop(context);
+                navigateToImagePicker();
+              }),
           EntryPublisher()
         ],
       ),

@@ -86,6 +86,17 @@ class _ImageDialog extends StatelessWidget {
     required this.onAdd,
   }) : super(key: key);
 
+  Future<void> addAttachment() async {
+    final user = AuthenticationRepository.instance.firebaseUser.value;
+    if (user != null) {
+      final userId = user.uid;
+      await UserRepository.instance.updateUserDocument(userId, {
+        'attachments': [imageUrl],
+      });
+      onAdd();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -104,7 +115,10 @@ class _ImageDialog extends StatelessWidget {
                 child: const Text('Back'),
               ),
               ElevatedButton(
-                onPressed: onAdd,
+                onPressed: () async {
+                  await addAttachment();
+                  Navigator.pop(context);
+                },
                 child: const Text('Add this picture'),
               ),
             ],

@@ -142,7 +142,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  //* Update entries
+  //* Update entries TEXT
 
   Future<void> updateEntry(String userId, String entryId,
       Map<String, dynamic> updatedEntryData) async {
@@ -154,6 +154,20 @@ class UserRepository extends GetxController {
       });
     } catch (error) {
       print("Error updating entry: $error");
+      throw error;
+    }
+  }
+
+  //* Update entries IMAGE
+
+  Future<void> updateUserDocument(
+      String userId, Map<String, dynamic> data) async {
+    final userDocumentRef = _db.collection("rabbits").doc(userId);
+
+    try {
+      await userDocumentRef.update(data);
+    } catch (error) {
+      print("Error updating user document: $error");
       throw error;
     }
   }
