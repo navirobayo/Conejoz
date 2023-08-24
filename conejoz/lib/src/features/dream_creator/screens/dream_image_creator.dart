@@ -28,7 +28,7 @@ class ImageCreator extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(left: 45, right: 45, top: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -36,20 +36,19 @@ class ImageCreator extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.onError,
-                      borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withOpacity(0.1),
-                            blurRadius: 10,
-                            offset: Offset.fromDirection(-8, 20)),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withOpacity(0.2),
+                          blurRadius: 80,
+                        ),
                       ],
                     ),
                     child: SizedBox(
                       width: double.infinity,
-                      height: 361, // Set the height to be equal to the width
+                      height: 300, // Set the height to be equal to the width
                       child: Stack(
                         alignment: Alignment.center,
                         children: <Widget>[

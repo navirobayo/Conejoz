@@ -53,6 +53,7 @@ class _EntryEditorState extends State<EntryEditor> {
         _tagsEditingController.text.split(',').map((e) => e.trim()).toList();
     final dreamdescription = _textEditingController.text;
     final timestamp = Timestamp.now();
+    final attachments = widget.entry['attachments'] ?? <String>[];
 
     final updatedEntryData = {
       'entryid': entryId,
@@ -60,6 +61,7 @@ class _EntryEditorState extends State<EntryEditor> {
       'tags': tags,
       'dreamdescription': dreamdescription,
       'timestamp': timestamp,
+      'attachments': attachments,
     };
 
     try {
@@ -112,6 +114,8 @@ class _EntryEditorState extends State<EntryEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final attachments = widget.entry['attachments'] ?? <String>[];
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -149,38 +153,39 @@ class _EntryEditorState extends State<EntryEditor> {
                         scrollDirection: Axis.horizontal,
                         children: [
                           SizedBox(width: 10),
-                          Card(
-                            color: Theme.of(context).colorScheme.secondary,
-                            clipBehavior: Clip.hardEdge,
-                            child: InkWell(
-                              splashColor: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Dialog(
-                                      child: SizedBox(
-                                        child: Image.network(
-                                          "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691561892499.jpg?alt=media&token=7ed46836-050d-4090-8785-6473e5146cf1",
-                                          fit: BoxFit.contain,
+                          for (final attachment in attachments)
+                            Card(
+                              color: Theme.of(context).colorScheme.secondary,
+                              clipBehavior: Clip.hardEdge,
+                              child: InkWell(
+                                splashColor: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                        child: SizedBox(
+                                          child: Image.network(
+                                            attachment,
+                                            fit: BoxFit.contain,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: SizedBox(
-                                child: Center(
-                                  child: Image.network(
-                                    "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691561892499.jpg?alt=media&token=7ed46836-050d-4090-8785-6473e5146cf1",
-                                    fit: BoxFit.cover,
+                                      );
+                                    },
+                                  );
+                                },
+                                child: SizedBox(
+                                  child: Center(
+                                    child: Image.network(
+                                      attachment,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
                           SizedBox(width: 10),
                         ],
                       ),

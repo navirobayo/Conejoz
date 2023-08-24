@@ -160,14 +160,63 @@ class UserRepository extends GetxController {
 
   //* Update entries IMAGE
 
-  Future<void> updateUserDocument(
-      String userId, Map<String, dynamic> data) async {
-    final userDocumentRef = _db.collection("rabbits").doc(userId);
-
+  Future<void> addAttachmentToEntry(
+    // ! Not working. Do not use.
+    String userId,
+    String entryId,
+    String imageUrl,
+  ) async {
     try {
-      await userDocumentRef.update(data);
+      final userDoc = _db.collection('rabbits').doc(userId);
+      final entryDoc = userDoc
+          .collection('cloudjournal')
+          .doc('entries')
+          .collection(entryId)
+          .doc();
+
+      await entryDoc.update({
+        'attachments': FieldValue.arrayUnion([imageUrl]),
+      });
     } catch (error) {
-      print("Error updating user document: $error");
+      print("Error adding attachment to entry: $error");
+      throw error;
+    }
+  }
+
+  Future<void> deleteAttachmentFromEntry(
+      // ! Posibly faulty. Do not use.
+      String userId,
+      String entryId,
+      String attachmentId) async {
+    try {
+      final userDoc = _db.collection('rabbits').doc(userId);
+      final entryDoc = userDoc
+          .collection('cloudjournal')
+          .doc(entryId)
+          .collection('attachments')
+          .doc(attachmentId);
+
+      await entryDoc.delete();
+    } catch (error) {
+      print("Error deleting attachment from entry: $error");
+      throw error;
+    }
+  }
+
+  Future<void> addPictureToEntry(
+    String userId,
+    String entryId,
+    String attachmentId,
+  ) async {
+    try {
+      final userDocumentRef = _db.collection("rabbits").doc(userId);
+
+      await userDocumentRef.update({
+        "cloudjournal.entries.$entryId.attachments":
+            FieldValue.arrayUnion([attachmentId]),
+      });
+    } catch (error) {
+      print("Error adding picture to entry: $error");
       throw error;
     }
   }

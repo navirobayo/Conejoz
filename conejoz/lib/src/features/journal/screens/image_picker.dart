@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
 class ImagePicker extends StatefulWidget {
-  const ImagePicker({Key? key}) : super(key: key);
+  final String entryId;
+
+  const ImagePicker({Key? key, required this.entryId}) : super(key: key);
 
   @override
   State<ImagePicker> createState() => _ImagePickerState();
@@ -33,6 +35,16 @@ class _ImagePickerState extends State<ImagePicker> {
     }
   }
 
+  Future<void> addAttachment(String imageUrl) async {
+    final user = AuthenticationRepository.instance.firebaseUser.value;
+    if (user != null) {
+      final userId = user.uid;
+      await UserRepository.instance
+          .addPictureToEntry(userId, widget.entryId, imageUrl);
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +64,7 @@ class _ImagePickerState extends State<ImagePicker> {
                   return _ImageDialog(
                     imageUrl: userImageUrls[index],
                     onAdd: () {
-                      // Add the selected image to the entry
+                      addAttachment(userImageUrls[index]);
                     },
                   );
                 },
@@ -86,17 +98,6 @@ class _ImageDialog extends StatelessWidget {
     required this.onAdd,
   }) : super(key: key);
 
-  Future<void> addAttachment() async {
-    final user = AuthenticationRepository.instance.firebaseUser.value;
-    if (user != null) {
-      final userId = user.uid;
-      await UserRepository.instance.updateUserDocument(userId, {
-        'attachments': [imageUrl],
-      });
-      onAdd();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -115,10 +116,7 @@ class _ImageDialog extends StatelessWidget {
                 child: const Text('Back'),
               ),
               ElevatedButton(
-                onPressed: () async {
-                  await addAttachment();
-                  Navigator.pop(context);
-                },
+                onPressed: onAdd,
                 child: const Text('Add this picture'),
               ),
             ],

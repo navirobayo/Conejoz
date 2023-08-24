@@ -69,7 +69,6 @@ class _JournalManagerList extends StatelessWidget {
       itemCount: entries.length,
       itemBuilder: (context, index) {
         final entry = entries[index];
-        final entryId = entry['entryid']; // Get the unique ID of the entry
         return ListTile(
           title: Text(
             entry['title'] ?? '',

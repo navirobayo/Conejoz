@@ -50,7 +50,9 @@ class _EntryDashboardState extends State<EntryDashboard> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          ImagePicker(),
+          ImagePicker(
+            entryId: widget.entry['entryid'],
+          ),
           VoiceNoteScreen(),
           ReadEntryScreen(
             entry: widget.entry,
