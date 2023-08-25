@@ -1,5 +1,6 @@
 import 'package:conejoz/src/features/profile/screens/update_profile.dart';
 import 'package:conejoz/src/features/settings/screens/about_screen.dart';
+import 'package:conejoz/src/features/settings/screens/conejoz_manual.dart';
 import 'package:conejoz/src/features/settings/screens/theme_screen.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +113,26 @@ class SettingsScreen extends StatelessWidget {
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
             subtitle: const Text('See you later rabbitz'),
+            trailing: Icon(Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.surface),
+          ),
+          ListTile(
+            leading: IconButton(
+              icon: const Icon(Icons.help),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ConejozManual(),
+                  ),
+                );
+              },
+            ),
+            title: Text(
+              'Manual',
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+            subtitle: const Text('Some cool stuff here'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.surface),
           ),

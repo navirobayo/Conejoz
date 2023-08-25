@@ -104,7 +104,7 @@ class UserRepository extends GetxController {
       final attachments = entryData['attachments'];
       final dreamImage = attachments != null && attachments.isNotEmpty
           ? attachments[0]
-          : 'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691514996955.jpg?alt=media&token=efc0c98e-0600-406e-a215-7bf0ce9c3e89';
+          : 'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2FNo%20attachments%20text.png?alt=media&token=6a4bdc31-14aa-4000-99fe-d614c05cbcd5';
       final publicDreamData = {
         "dreamimage": dreamImage,
         "rabbit":
