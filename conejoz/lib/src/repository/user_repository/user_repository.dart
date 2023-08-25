@@ -140,6 +140,19 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<String> fetchEntryStatus(String entryId) async {
+    final docSnapshot = await FirebaseFirestore.instance
+        .collection("publicdreams")
+        .doc(entryId)
+        .get();
+
+    if (docSnapshot.exists) {
+      return "Public";
+    } else {
+      return "Private";
+    }
+  }
+
   // * Functions used in the "JournalManager" feature:
 
   Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {

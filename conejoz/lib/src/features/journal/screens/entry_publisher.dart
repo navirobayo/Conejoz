@@ -23,6 +23,46 @@ class _EntryPublisherState extends State<EntryPublisher> {
   String entryStatus = isPrivate;
 
   @override
+  void initState() {
+    super.initState();
+    print("Fetching entry status...");
+    fetchEntryStatus();
+  }
+
+  Future<void> fetchEntryStatus() async {
+    final entryId = widget.entry['entryid'];
+    final status = await UserRepository.instance.fetchEntryStatus(entryId);
+    print("Entry status: $status");
+    setState(() {
+      entryStatus = status;
+    });
+  }
+
+  Future<void> toggleEntryStatus() async {
+    final entryId = widget.entry['entryid'];
+
+    try {
+      if (entryStatus == isPrivate) {
+        // Check if the entry is private
+        await UserRepository.instance.createPublicDream(widget.entry);
+        print("Dream created successfully");
+        setState(() {
+          entryStatus = isPublic;
+        });
+      } else {
+        // Entry is already public, so delete it
+        await UserRepository.instance.deletePublicDream(entryId);
+        print("Dream deleted successfully");
+        setState(() {
+          entryStatus = isPrivate;
+        });
+      }
+    } catch (error) {
+      // Handle error
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     Get.put(UserRepository());
     final entryId = widget.entry['entryid']; // Get the entry ID from the widget
@@ -51,22 +91,22 @@ class _EntryPublisherState extends State<EntryPublisher> {
                       splashColor:
                           Theme.of(context).colorScheme.onSurfaceVariant,
                       onTap: () async {
-                        if (entryStatus == isPublic) {
+                        if (entryStatus == isPrivate) {
                           try {
                             await UserRepository.instance
                                 .createPublicDream(widget.entry);
                             setState(() {
-                              entryStatus = isPrivate;
+                              entryStatus = isPublic;
                             });
                           } catch (error) {
                             // Handle error
                           }
-                        } else {
+                        } else if (entryStatus == isPublic) {
                           try {
                             await UserRepository.instance
                                 .deletePublicDream(entryId);
                             setState(() {
-                              entryStatus = isPublic;
+                              entryStatus = isPrivate;
                             });
                           } catch (error) {
                             // Handle error
