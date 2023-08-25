@@ -26,6 +26,7 @@ class _EntryPublisherState extends State<EntryPublisher> {
   Widget build(BuildContext context) {
     Get.put(UserRepository());
     final entryId = widget.entry['entryid']; // Get the entry ID from the widget
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -49,18 +50,37 @@ class _EntryPublisherState extends State<EntryPublisher> {
                     child: InkWell(
                       splashColor:
                           Theme.of(context).colorScheme.onSurfaceVariant,
-                      onTap: () {
-                        setState(() {
-                          entryStatus =
-                              entryStatus == isPublic ? isPrivate : isPublic;
-                        });
+                      onTap: () async {
+                        if (entryStatus == isPublic) {
+                          try {
+                            await UserRepository.instance
+                                .createPublicDream(widget.entry);
+                            setState(() {
+                              entryStatus = isPrivate;
+                            });
+                          } catch (error) {
+                            // Handle error
+                          }
+                        } else {
+                          try {
+                            await UserRepository.instance
+                                .deletePublicDream(entryId);
+                            setState(() {
+                              entryStatus = isPublic;
+                            });
+                          } catch (error) {
+                            // Handle error
+                          }
+                        }
                       },
                       child: SizedBox(
                         width: 50,
                         height: 50,
                         child: Center(
                           child: Icon(
-                            entryStatus == isPublic ? Icons.public : Icons.lock,
+                            entryStatus == isPublic
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
@@ -71,28 +91,6 @@ class _EntryPublisherState extends State<EntryPublisher> {
                 ],
               ),
               Spacer(),
-              ElevatedButton(
-                onPressed: () async {
-                  try {
-                    await UserRepository.instance
-                        .createPublicDream(widget.entry);
-                  } catch (error) {
-                    // Handle error
-                  }
-                },
-                child: Text("Test of creating entry"),
-              ),
-              Spacer(),
-              ElevatedButton(
-                onPressed: () async {
-                  try {
-                    await UserRepository.instance.deletePublicDream(entryId);
-                  } catch (error) {
-                    // Handle error
-                  }
-                },
-                child: Text("Test of deleting entry"),
-              )
             ],
           ),
         ),
