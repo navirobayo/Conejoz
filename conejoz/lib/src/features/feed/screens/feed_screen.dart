@@ -43,8 +43,9 @@ class _FeedScreenState extends State<FeedScreen> {
                           rabbit: post["rabbit"],
                           textentry: post["textentry"],
                           title: post["title"],
-                          timestamp: post["timestamp"].toString(),
-                          tags: tagsString, // Pass the converted tags string
+                          timestamp: post["timestamp"],
+                          tags: tagsString,
+                          dreamimage: post["dreamimage"],
                         );
                       },
                     );

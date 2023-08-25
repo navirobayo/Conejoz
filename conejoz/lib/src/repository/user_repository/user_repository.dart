@@ -85,34 +85,44 @@ class UserRepository extends GetxController {
 
   // * Functions used in the "Feed" feature:
 
-  Future<void> makeEntryPublic(String userId, String entryId) async {
+  Future<void> createPublicDreamFromEntryDashboard(
+      Map<String, dynamic> entryData) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final entryId = entryData['entryid']; // Access the entry ID from entryData
+
     try {
-      // Get a reference to the user's entry
-      final userDocumentRef =
-          FirebaseFirestore.instance.collection("rabbits").doc(userId);
-      final entrySnapshot = await userDocumentRef
-          .collection("cloudjournal")
-          .doc("entries")
-          .collection(entryId)
-          .get();
+      // Get the rabbit name by the user's unique ID
+      final rabbitName = await getRabbitNameByUserId();
 
-      if (entrySnapshot.docs.isNotEmpty) {
-        final entryData = entrySnapshot.docs.first.data();
+      // Copy the data from the entry and add it to the publicdreams collection
+      final attachments = entryData['attachments'];
+      final dreamImage = attachments != null && attachments.isNotEmpty
+          ? attachments[0]
+          : 'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691514996955.jpg?alt=media&token=efc0c98e-0600-406e-a215-7bf0ce9c3e89';
+      final publicDreamData = {
+        "dreamimage": dreamImage,
+        "rabbit":
+            rabbitName, // Store the rabbit name instead of the user unique ID
+        "textentry": entryData['dreamdescription'],
+        "entryid": entryData['entryid'],
+        "tags": List<String>.from(entryData['tags'] ?? []),
+        "timestamp": entryData['timestamp'],
+        "title": entryData['title'],
+      };
 
-        // Create a new document in the publicdreams collection with the same ID as the entry
-        await FirebaseFirestore.instance
-            .collection("publicdreams")
-            .doc(entryId)
-            .set(entryData);
-      } else {
-        print("Entry does not exist.");
-      }
+      await _db.collection("publicdreams").doc(entryId).set(publicDreamData);
+      print("Public dream created successfully!");
     } catch (error) {
-      print("Error making entry public: $error");
+      print("Error creating public dream: $error");
       throw error;
     }
   }
-
   // * Functions used in the "JournalManager" feature:
 
   Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {
@@ -200,39 +210,6 @@ class UserRepository extends GetxController {
       });
     } catch (error) {
       print("Error adding picture to entry: $error");
-      throw error;
-    }
-  }
-
-  Future<void> createPublicDreamFromEntryDashboard(
-      Map<String, dynamic> entryData) async {
-    final user = FirebaseAuth.instance.currentUser;
-
-    if (user == null) {
-      print("User is not authenticated.");
-      return;
-    }
-
-    final entryId = entryData['entryid']; // Access the entry ID from entryData
-
-    try {
-      // Copy the data from the entry and add it to the publicdreams collection
-      final publicDreamData = {
-        "dreamimage": entryData['attachments']
-                [0] ?? // Get the first attachment URL
-            "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691514996955.jpg?alt=media&token=efc0c98e-0600-406e-a215-7bf0ce9c3e89",
-        "rabbit": user.uid,
-        "textentry": entryData['dreamdescription'],
-        "entryid": entryData['entryid'],
-        "tags": List<String>.from(entryData['tags'] ?? []),
-        "timestamp": entryData['timestamp'],
-        "title": entryData['title'],
-      };
-
-      await _db.collection("publicdreams").doc(entryId).set(publicDreamData);
-      print("Public dream created successfully!");
-    } catch (error) {
-      print("Error creating public dream: $error");
       throw error;
     }
   }

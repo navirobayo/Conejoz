@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PublicDreamWidget extends StatefulWidget {
   final String rabbit;
   final String textentry;
   final String title;
-  final String timestamp;
+  final Timestamp timestamp;
   final String tags;
+  final String dreamimage;
   const PublicDreamWidget({
     Key? key,
     required this.rabbit,
@@ -13,6 +16,7 @@ class PublicDreamWidget extends StatefulWidget {
     required this.title,
     required this.timestamp,
     required this.tags,
+    required this.dreamimage,
   }) : super(key: key);
 
   @override
@@ -42,7 +46,8 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
               ),
               const Spacer(),
               Text(
-                widget.timestamp,
+                DateFormat('yy-MM-dd HH:mm:ss')
+                    .format(widget.timestamp.toDate()),
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
@@ -56,9 +61,8 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                image: NetworkImage(
-                    'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691514996955.jpg?alt=media&token=efc0c98e-0600-406e-a215-7bf0ce9c3e89'),
+              image: DecorationImage(
+                image: NetworkImage(widget.dreamimage),
                 fit: BoxFit.cover,
               ),
             ),
@@ -73,8 +77,6 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                     fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
-                    fontWeight:
-                        Theme.of(context).textTheme.titleMedium?.fontWeight,
                   ),
                 ),
               ),
