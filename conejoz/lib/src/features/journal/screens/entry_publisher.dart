@@ -70,6 +70,17 @@ class _EntryPublisherState extends State<EntryPublisher> {
                 ],
               ),
               Spacer(),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    await UserRepository.instance
+                        .createPublicDreamFromEntryDashboard(widget.entry);
+                  } catch (error) {
+                    // Handle error
+                  }
+                },
+                child: Text("Test Button"),
+              )
             ],
           ),
         ),

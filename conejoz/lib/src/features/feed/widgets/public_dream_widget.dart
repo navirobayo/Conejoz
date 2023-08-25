@@ -66,8 +66,8 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
           const SizedBox(height: 10),
           Row(
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
+              Expanded(
+                flex: 2,
                 child: Text(
                   widget.title,
                   style: TextStyle(

@@ -203,4 +203,37 @@ class UserRepository extends GetxController {
       throw error;
     }
   }
+
+  Future<void> createPublicDreamFromEntryDashboard(
+      Map<String, dynamic> entryData) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final entryId = entryData['entryid']; // Access the entry ID from entryData
+
+    try {
+      // Copy the data from the entry and add it to the publicdreams collection
+      final publicDreamData = {
+        "dreamimage": entryData['attachments']
+                [0] ?? // Get the first attachment URL
+            "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2Fdream_image_1691514996955.jpg?alt=media&token=efc0c98e-0600-406e-a215-7bf0ce9c3e89",
+        "rabbit": user.uid,
+        "textentry": entryData['dreamdescription'],
+        "entryid": entryData['entryid'],
+        "tags": List<String>.from(entryData['tags'] ?? []),
+        "timestamp": entryData['timestamp'],
+        "title": entryData['title'],
+      };
+
+      await _db.collection("publicdreams").doc(entryId).set(publicDreamData);
+      print("Public dream created successfully!");
+    } catch (error) {
+      print("Error creating public dream: $error");
+      throw error;
+    }
+  }
 }

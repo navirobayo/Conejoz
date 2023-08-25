@@ -36,12 +36,15 @@ class _FeedScreenState extends State<FeedScreen> {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final post = snapshot.data!.docs[index];
+                        final tags = List<String>.from(post["tags"] ?? []);
+                        final tagsString = tags.join(
+                            ', '); // Convert tags array to a single string
                         return PublicDreamWidget(
                           rabbit: post["rabbit"],
                           textentry: post["textentry"],
                           title: post["title"],
                           timestamp: post["timestamp"].toString(),
-                          tags: post["tags"],
+                          tags: tagsString, // Pass the converted tags string
                         );
                       },
                     );
