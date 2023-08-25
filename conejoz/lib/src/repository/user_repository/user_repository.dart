@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// * This file performs CRUD operations on the "rabbits" collection in the database.
-// * CRUD = Create, Read, Update, Delete
+// * All CRUD related operations for the app.
+// * ( CRUD = Create, Read, Update, Delete )
 
 class UserRepository extends GetxController {
   static UserRepository get instance =>
@@ -85,8 +85,7 @@ class UserRepository extends GetxController {
 
   // * Functions used in the "Feed" feature:
 
-  Future<void> createPublicDreamFromEntryDashboard(
-      Map<String, dynamic> entryData) async {
+  Future<void> createPublicDream(Map<String, dynamic> entryData) async {
     final user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {

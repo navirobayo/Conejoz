@@ -74,7 +74,7 @@ class _EntryPublisherState extends State<EntryPublisher> {
                 onPressed: () async {
                   try {
                     await UserRepository.instance
-                        .createPublicDreamFromEntryDashboard(widget.entry);
+                        .createPublicDream(widget.entry);
                   } catch (error) {
                     // Handle error
                   }
