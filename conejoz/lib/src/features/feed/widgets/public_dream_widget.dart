@@ -94,12 +94,15 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                     padding: EdgeInsets.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  child: Text(
-                    widget.tags,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSecondary,
-                      decoration: TextDecoration.underline,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.tags,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSecondary,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ),
