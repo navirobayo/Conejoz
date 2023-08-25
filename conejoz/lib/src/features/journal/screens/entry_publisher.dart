@@ -25,6 +25,7 @@ class _EntryPublisherState extends State<EntryPublisher> {
   @override
   Widget build(BuildContext context) {
     Get.put(UserRepository());
+    final entryId = widget.entry['entryid']; // Get the entry ID from the widget
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -79,7 +80,18 @@ class _EntryPublisherState extends State<EntryPublisher> {
                     // Handle error
                   }
                 },
-                child: Text("Test Button"),
+                child: Text("Test of creating entry"),
+              ),
+              Spacer(),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    await UserRepository.instance.deletePublicDream(entryId);
+                  } catch (error) {
+                    // Handle error
+                  }
+                },
+                child: Text("Test of deleting entry"),
               )
             ],
           ),

@@ -122,6 +122,24 @@ class UserRepository extends GetxController {
       throw error;
     }
   }
+
+  Future<void> deletePublicDream(String entryId) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    try {
+      await _db.collection("publicdreams").doc(entryId).delete();
+      print("Public dream deleted successfully!");
+    } catch (error) {
+      print("Error deleting public dream: $error");
+      throw error;
+    }
+  }
+
   // * Functions used in the "JournalManager" feature:
 
   Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {
