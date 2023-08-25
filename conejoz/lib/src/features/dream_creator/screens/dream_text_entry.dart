@@ -69,7 +69,7 @@ class _TextEntryState extends State<TextEntry> {
               Navigator.pop(context);
             },
           ),
-          title: Text("New Note Test",
+          title: Text("+",
               style: TextStyle(color: Theme.of(context).colorScheme.surface))),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -79,7 +79,7 @@ class _TextEntryState extends State<TextEntry> {
             TextField(
               controller: _titleEditingController,
               decoration: const InputDecoration(
-                hintText: 'Create a title here.',
+                hintText: 'Entry title',
                 border: InputBorder.none,
               ),
               maxLines: null,
@@ -88,7 +88,7 @@ class _TextEntryState extends State<TextEntry> {
             TextField(
               controller: _tagsEditingController,
               decoration: const InputDecoration(
-                hintText: 'Add tags here.',
+                hintText: 'Tags separated by commas',
                 border: InputBorder.none,
               ),
               maxLines: null,
@@ -97,7 +97,7 @@ class _TextEntryState extends State<TextEntry> {
             TextField(
               controller: _textEditingController,
               decoration: const InputDecoration(
-                hintText: 'Write your entry here.',
+                hintText: 'Entry',
                 border: InputBorder.none,
               ),
               maxLines: null,

@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conejoz/src/features/dream_creator/screens/dream_image_creator.dart';
+import 'package:conejoz/src/features/journal/screens/rabbit_images_selector.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +8,10 @@ import 'package:get/get.dart';
 
 class EntryEditor extends StatefulWidget {
   final Map<String, dynamic> entry;
-  final Function onImagePicked;
 
   const EntryEditor({
     Key? key,
     required this.entry,
-    required this.onImagePicked,
   }) : super(key: key);
 
   @override
@@ -87,23 +87,37 @@ class _EntryEditorState extends State<EntryEditor> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Add Attachment"),
+          title: const Text("Attachments"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text("Create new AI Image"),
+                  child: const Text("Create new image"),
                   onTap: () {
-                    // Navigate to AI image creator
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ImageCreator(),
+                      ),
+                    );
                   },
                 ),
-                Padding(padding: EdgeInsets.all(8.0)),
+                const SizedBox(height: 20),
                 GestureDetector(
-                  child: Text("AI Image already exists"),
+                  child: const Text("Add / remove image"),
                   onTap: () {
-                    widget.onImagePicked();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RabbitImagesSelector(
+                          entryId: widget.entry['entryid'],
+                        ),
+                      ),
+                    );
                   },
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -122,10 +136,17 @@ class _EntryEditorState extends State<EntryEditor> {
         child: ListView(
           children: [
             const SizedBox(height: 16),
+            Center(
+                child: Text(
+              "<        <      <    <  Edition mode  >    >      >        >",
+              style:
+                  TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+            )),
+            const SizedBox(height: 16),
             TextField(
               controller: _titleEditingController,
               decoration: const InputDecoration(
-                hintText: 'A fancy title',
+                hintText: 'Entry title',
                 border: InputBorder.none,
               ),
               maxLines: null,
@@ -202,7 +223,7 @@ class _EntryEditorState extends State<EntryEditor> {
             TextField(
               controller: _textEditingController,
               decoration: const InputDecoration(
-                hintText: 'What are you dreaming?',
+                hintText: 'Entry',
                 border: InputBorder.none,
               ),
               maxLines: null,

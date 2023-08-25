@@ -2,16 +2,17 @@ import 'package:conejoz/src/repository/authentication_repository/authentication_
 import 'package:flutter/material.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
-class ImagePicker extends StatefulWidget {
+class RabbitImagesSelector extends StatefulWidget {
   final String entryId;
 
-  const ImagePicker({Key? key, required this.entryId}) : super(key: key);
+  const RabbitImagesSelector({Key? key, required this.entryId})
+      : super(key: key);
 
   @override
-  State<ImagePicker> createState() => _ImagePickerState();
+  State<RabbitImagesSelector> createState() => _RabbitImagesSelectorState();
 }
 
-class _ImagePickerState extends State<ImagePicker> {
+class _RabbitImagesSelectorState extends State<RabbitImagesSelector> {
   List<String> userImageUrls = [];
 
   @override
@@ -48,6 +49,20 @@ class _ImagePickerState extends State<ImagePicker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: IconButton(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Adding image",
+          style: TextStyle(color: Theme.of(context).colorScheme.surface),
+        ),
+      ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

@@ -1,14 +1,79 @@
+import 'package:conejoz/src/features/feed/screens/feed_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
-class EntryPublisher extends StatelessWidget {
-  const EntryPublisher({super.key});
+double regularSpacer = 25;
+String isPublic = "Public";
+String isPrivate = "Private";
 
-  //! The user should be able to expand th e imageSpot to see it.
-  //! The image will expand but wont be shown directly next to the text.
-//! Is more like legos of information
+class EntryPublisher extends StatefulWidget {
+  final Map<String, dynamic> entry;
+
+  const EntryPublisher({
+    Key? key,
+    required this.entry,
+  }) : super(key: key);
+
+  @override
+  State<EntryPublisher> createState() => _EntryPublisherState();
+}
+
+class _EntryPublisherState extends State<EntryPublisher> {
+  String entryStatus = isPrivate;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    Get.put(UserRepository());
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: [
+              Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  Row(
+                    children: [
+                      Text("Entry Status: "),
+                      Text(entryStatus),
+                    ],
+                  ),
+                  Spacer(),
+                  Card(
+                    color: Theme.of(context).colorScheme.secondary,
+                    clipBehavior: Clip.hardEdge,
+                    child: InkWell(
+                      splashColor:
+                          Theme.of(context).colorScheme.onSurfaceVariant,
+                      onTap: () {
+                        setState(() {
+                          entryStatus =
+                              entryStatus == isPublic ? isPrivate : isPublic;
+                        });
+                      },
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Center(
+                          child: Icon(
+                            entryStatus == isPublic ? Icons.public : Icons.lock,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+              Spacer(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

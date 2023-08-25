@@ -33,25 +33,28 @@ class UserRepository extends GetxController {
     }
   }
 
-  // * Functions used in the "JournalManager" feature:
-
-  Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {
-    // This function gets the user's journal entries from his personal document.
-    final userDocument = await getUserDocument(userId);
-    if (userDocument != null) {
-      final cloudJournal = userDocument['cloudjournal'];
-      if (cloudJournal != null) {
-        final userEntries = <Map<String, dynamic>>[];
-        final entries = cloudJournal['entries'] ?? {};
-        entries.forEach((key, value) {
-          final entry = Map<String, dynamic>.from(value);
-          entry['uniqueid'] = key;
-          userEntries.add(entry);
-        });
-        return userEntries;
-      }
+  Future<String?> getRabbitNameByUserId() async {
+    // This function gets the rabbit username by the user's unique id.
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print("User is not authenticated.");
+      return null;
     }
-    return [];
+
+    final uid = user.uid;
+
+    try {
+      final docSnapshot = await _db.collection("rabbits").doc(uid).get();
+      if (docSnapshot.exists) {
+        return docSnapshot.data()?["rabbitname"];
+      } else {
+        print("User document does not exist in the 'rabbits' collection.");
+        return null;
+      }
+    } catch (error) {
+      print("Error getting rabbit name by userId: $error");
+      return null;
+    }
   }
 
   // * Functions used in the "Authentication" feature:
@@ -80,6 +83,57 @@ class UserRepository extends GetxController {
     });
   }
 
+  // * Functions used in the "Feed" feature:
+
+  Future<void> makeEntryPublic(String userId, String entryId) async {
+    try {
+      // Get a reference to the user's entry
+      final userDocumentRef =
+          FirebaseFirestore.instance.collection("rabbits").doc(userId);
+      final entrySnapshot = await userDocumentRef
+          .collection("cloudjournal")
+          .doc("entries")
+          .collection(entryId)
+          .get();
+
+      if (entrySnapshot.docs.isNotEmpty) {
+        final entryData = entrySnapshot.docs.first.data();
+
+        // Create a new document in the publicdreams collection with the same ID as the entry
+        await FirebaseFirestore.instance
+            .collection("publicdreams")
+            .doc(entryId)
+            .set(entryData);
+      } else {
+        print("Entry does not exist.");
+      }
+    } catch (error) {
+      print("Error making entry public: $error");
+      throw error;
+    }
+  }
+
+  // * Functions used in the "JournalManager" feature:
+
+  Future<List<Map<String, dynamic>>> getUserEntries(String userId) async {
+    // This function gets the user's journal entries from his personal document.
+    final userDocument = await getUserDocument(userId);
+    if (userDocument != null) {
+      final cloudJournal = userDocument['cloudjournal'];
+      if (cloudJournal != null) {
+        final userEntries = <Map<String, dynamic>>[];
+        final entries = cloudJournal['entries'] ?? {};
+        entries.forEach((key, value) {
+          final entry = Map<String, dynamic>.from(value);
+          entry['uniqueid'] = key;
+          userEntries.add(entry);
+        });
+        return userEntries;
+      }
+    }
+    return [];
+  }
+
   // * Functions used in the "Journal" feature:
 
   Future<void> addImageToUserGallery(String userId, String imageUrl) async {
@@ -95,8 +149,6 @@ class UserRepository extends GetxController {
       throw error;
     }
   }
-
-  // * Functions used in the "Text Entry" feature:
 
   Future<void> saveNote(
       // This function saves the text entry of a dream to the user's journal.
@@ -116,35 +168,10 @@ class UserRepository extends GetxController {
     }
   }
 
-  // * Functions used in the "Profile" feature:
-
-  Future<String?> getRabbitNameByUserId() async {
-    // This function gets the rabbit username by the user's unique id.
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      print("User is not authenticated.");
-      return null;
-    }
-
-    final uid = user.uid;
-
-    try {
-      final docSnapshot = await _db.collection("rabbits").doc(uid).get();
-      if (docSnapshot.exists) {
-        return docSnapshot.data()?["rabbitname"];
-      } else {
-        print("User document does not exist in the 'rabbits' collection.");
-        return null;
-      }
-    } catch (error) {
-      print("Error getting rabbit name by userId: $error");
-      return null;
-    }
-  }
-
-  //* Update entries TEXT
-
-  Future<void> updateEntry(String userId, String entryId,
+  Future<void> updateEntry(
+      // Updates Text entry
+      String userId,
+      String entryId,
       Map<String, dynamic> updatedEntryData) async {
     final userDocumentRef = _db.collection("rabbits").doc(userId);
 
@@ -158,52 +185,8 @@ class UserRepository extends GetxController {
     }
   }
 
-  //* Update entries IMAGE
-
-  Future<void> addAttachmentToEntry(
-    // ! Not working. Do not use.
-    String userId,
-    String entryId,
-    String imageUrl,
-  ) async {
-    try {
-      final userDoc = _db.collection('rabbits').doc(userId);
-      final entryDoc = userDoc
-          .collection('cloudjournal')
-          .doc('entries')
-          .collection(entryId)
-          .doc();
-
-      await entryDoc.update({
-        'attachments': FieldValue.arrayUnion([imageUrl]),
-      });
-    } catch (error) {
-      print("Error adding attachment to entry: $error");
-      throw error;
-    }
-  }
-
-  Future<void> deleteAttachmentFromEntry(
-      // ! Posibly faulty. Do not use.
-      String userId,
-      String entryId,
-      String attachmentId) async {
-    try {
-      final userDoc = _db.collection('rabbits').doc(userId);
-      final entryDoc = userDoc
-          .collection('cloudjournal')
-          .doc(entryId)
-          .collection('attachments')
-          .doc(attachmentId);
-
-      await entryDoc.delete();
-    } catch (error) {
-      print("Error deleting attachment from entry: $error");
-      throw error;
-    }
-  }
-
   Future<void> addPictureToEntry(
+    // Adds picture to entry
     String userId,
     String entryId,
     String attachmentId,
