@@ -28,7 +28,8 @@ class _FeedScreenState extends State<FeedScreen> {
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("publicdreams") // Updated collection name
-                    .orderBy("timestamp", descending: false)
+                    .orderBy("timestamp", descending: true)
+                    .limit(10)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
