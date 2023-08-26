@@ -7,19 +7,19 @@ double regularSpacer = 25;
 String isPublic = "Public";
 String isPrivate = "Private";
 
-class EntryPublisher extends StatefulWidget {
+class LogPublisher extends StatefulWidget {
   final Map<String, dynamic> entry;
 
-  const EntryPublisher({
+  const LogPublisher({
     Key? key,
     required this.entry,
   }) : super(key: key);
 
   @override
-  State<EntryPublisher> createState() => _EntryPublisherState();
+  State<LogPublisher> createState() => _LogPublisherState();
 }
 
-class _EntryPublisherState extends State<EntryPublisher> {
+class _LogPublisherState extends State<LogPublisher> {
   String entryStatus = isPrivate;
 
   @override

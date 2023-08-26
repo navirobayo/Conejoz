@@ -1,7 +1,6 @@
-import 'package:conejoz/src/features/profile/screens/update_profile.dart';
 import 'package:conejoz/src/features/settings/screens/about_screen.dart';
 import 'package:conejoz/src/features/settings/screens/conejoz_manual.dart';
-import 'package:conejoz/src/features/settings/screens/theme_screen.dart';
+import 'package:conejoz/src/features/settings/screens/theme_selector.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +47,7 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ThemeScreen(),
+                    builder: (context) => const ThemeSelector(),
                   ),
                 );
               },

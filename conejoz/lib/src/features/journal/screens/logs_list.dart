@@ -1,11 +1,11 @@
-import 'package:conejoz/src/features/journal/screens/entry_dashboard.dart';
+import 'package:conejoz/src/features/journal/screens/log_dashboard.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class JournalManager extends StatelessWidget {
-  const JournalManager({Key? key}) : super(key: key);
+class LogsList extends StatelessWidget {
+  const LogsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class _JournalManagerList extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            DateFormat('yy-MM-dd HH:mm:ss')
+            DateFormat('dd-MM-yy HH:mm:ss')
                 .format(entry['timestamp']?.toDate()),
             style: TextStyle(
               color: Theme.of(context).colorScheme.surface,
@@ -93,7 +93,7 @@ class _JournalManagerList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EntryDashboard(entry: entry),
+                builder: (context) => LogDashboard(entry: entry),
               ),
             );
           },

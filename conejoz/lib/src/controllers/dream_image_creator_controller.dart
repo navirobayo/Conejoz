@@ -7,8 +7,10 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-class DreamImageCreatorController extends GetxController {
-  static DreamImageCreatorController get instance => Get.find();
+// * Used in "Image Creator".
+
+class ImageCreatorController extends GetxController {
+  static ImageCreatorController get instance => Get.find();
 
   final RxBool _isLoading = false.obs;
   String? _imageUrl;

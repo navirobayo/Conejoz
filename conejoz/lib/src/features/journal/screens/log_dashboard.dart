@@ -1,25 +1,23 @@
 import 'package:conejoz/src/constants/conejoz_logos.dart';
-import 'package:conejoz/src/features/journal/screens/entry_editor.dart';
-import 'package:conejoz/src/features/journal/screens/entry_publisher.dart';
-import 'package:conejoz/src/features/journal/screens/rabbit_images_selector.dart';
-import 'package:conejoz/src/features/journal/screens/read_entry_screen.dart';
-import 'package:conejoz/src/features/journal/screens/voice_note_screen.dart';
+import 'package:conejoz/src/features/journal/screens/log_editor.dart';
+import 'package:conejoz/src/features/journal/screens/log_publisher.dart';
+import 'package:conejoz/src/features/journal/screens/log_visualizer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class EntryDashboard extends StatefulWidget {
+class LogDashboard extends StatefulWidget {
   final Map<String, dynamic> entry;
 
-  const EntryDashboard({
+  const LogDashboard({
     Key? key,
     required this.entry,
   }) : super(key: key);
 
   @override
-  State<EntryDashboard> createState() => _EntryDashboardState();
+  State<LogDashboard> createState() => _LogDashboardState();
 }
 
-class _EntryDashboardState extends State<EntryDashboard> {
+class _LogDashboardState extends State<LogDashboard> {
   // Index of the current screen
   int _currentIndex = 0;
 
@@ -44,13 +42,13 @@ class _EntryDashboardState extends State<EntryDashboard> {
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          ReadEntryScreen(
+          LogVisualizer(
             entry: widget.entry,
           ),
-          EntryEditor(
+          LogEditor(
             entry: widget.entry,
           ),
-          EntryPublisher(
+          LogPublisher(
             entry: widget.entry,
           )
         ],

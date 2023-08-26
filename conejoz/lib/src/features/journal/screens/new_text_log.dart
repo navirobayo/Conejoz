@@ -4,14 +4,14 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TextEntry extends StatefulWidget {
-  const TextEntry({Key? key}) : super(key: key);
+class NewTextLog extends StatefulWidget {
+  const NewTextLog({Key? key}) : super(key: key);
 
   @override
-  State<TextEntry> createState() => _TextEntryState();
+  State<NewTextLog> createState() => _NewTextLogState();
 }
 
-class _TextEntryState extends State<TextEntry> {
+class _NewTextLogState extends State<NewTextLog> {
   final TextEditingController _titleEditingController = TextEditingController();
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _tagsEditingController = TextEditingController();

@@ -20,6 +20,45 @@ class _FeedScreenState extends State<FeedScreen> {
           style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
         ),
+        actions: [
+          Card(
+            color: Theme.of(context).colorScheme.secondary,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: Theme.of(context).colorScheme.surface,
+              onTap: () {},
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: Center(
+                  child: Icon(
+                    Icons.language,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(width: 10),
+          Card(
+            color: Theme.of(context).colorScheme.secondary,
+            clipBehavior: Clip.hardEdge,
+            child: InkWell(
+              splashColor: Theme.of(context).colorScheme.onSurface,
+              onTap: () {},
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: Center(
+                  child: Icon(
+                    Icons.tag,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(

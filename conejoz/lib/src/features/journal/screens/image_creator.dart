@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +8,7 @@ class ImageCreator extends StatelessWidget {
   ImageCreator({super.key});
   @override
   Widget build(BuildContext context) {
-    final DreamImageCreatorController imageCreatorController = Get.find();
+    final ImageCreatorController imageCreatorController = Get.find();
 
     return Scaffold(
         appBar: AppBar(

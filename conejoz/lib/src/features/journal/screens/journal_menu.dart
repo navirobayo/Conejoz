@@ -1,10 +1,10 @@
 import 'package:conejoz/src/common_widgets/conejoz_route_button.dart';
 import 'package:conejoz/src/common_widgets/conejoz_text_for_route_button.dart';
-import 'package:conejoz/src/features/dream_creator/screens/dream_image_creator.dart';
-import 'package:conejoz/src/features/dream_creator/screens/dream_text_entry.dart';
-import 'package:conejoz/src/features/journal/screens/journal_manager.dart';
+import 'package:conejoz/src/features/journal/screens/image_creator.dart';
+import 'package:conejoz/src/features/journal/screens/new_text_log.dart';
+import 'package:conejoz/src/features/journal/screens/logs_list.dart';
 import 'package:conejoz/src/features/journal/screens/user_gallery.dart';
-import 'package:conejoz/src/features/tags_explorer/screens/tags_explorer_screen.dart';
+import 'package:conejoz/src/features/feed/screens/tags_explorer.dart';
 import 'package:flutter/material.dart';
 
 //* Main features of the app.
@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 double defaultTextSpacer = 60;
 double defaultCardSpacer = 20;
 
-class JournalScreen extends StatelessWidget {
-  const JournalScreen({super.key});
+class JournalMenu extends StatelessWidget {
+  const JournalMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class JournalScreen extends StatelessWidget {
                         ConejozRouteButton(
                             context: context,
                             icon: Icons.create_rounded,
-                            page: TextEntry()),
+                            page: NewTextLog()),
                         SizedBox(height: defaultCardSpacer),
                         ConejozRouteButton(
                             context: context,
@@ -76,7 +76,7 @@ class JournalScreen extends StatelessWidget {
                         ConejozRouteButton(
                             context: context,
                             icon: Icons.book,
-                            page: JournalManager()),
+                            page: LogsList()),
                         SizedBox(height: defaultCardSpacer),
                         ConejozRouteButton(
                             context: context,

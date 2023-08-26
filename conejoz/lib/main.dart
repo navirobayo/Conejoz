@@ -91,7 +91,7 @@ Future<void> initializeDependencies() async {
   Get.put(
       UserRepository()); // This repository handles data fetching and writing for the user's folder. // This controller handles the image creation.
   Get.put(
-      DreamImageCreatorController()); // This controller handles the image creation.
+      ImageCreatorController()); // This controller handles the image creation.
 }
 
 // The main function of the app.

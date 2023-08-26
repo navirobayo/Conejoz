@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ReadEntryScreen extends StatefulWidget {
+class LogVisualizer extends StatefulWidget {
   final Map<String, dynamic> entry;
 
-  const ReadEntryScreen({Key? key, required this.entry}) : super(key: key);
+  const LogVisualizer({Key? key, required this.entry}) : super(key: key);
 
   @override
-  State<ReadEntryScreen> createState() => _ReadEntryScreenState();
+  State<LogVisualizer> createState() => _LogVisualizerState();
 }
 
-class _ReadEntryScreenState extends State<ReadEntryScreen> {
+class _LogVisualizerState extends State<LogVisualizer> {
   @override
   Widget build(BuildContext context) {
     String title = widget.entry['title'];

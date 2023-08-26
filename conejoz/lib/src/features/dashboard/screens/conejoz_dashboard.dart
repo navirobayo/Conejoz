@@ -1,7 +1,7 @@
 import 'package:conejoz/src/constants/conejoz_logos.dart';
 import 'package:conejoz/src/features/feed/screens/feed_screen.dart';
-import 'package:conejoz/src/features/journal/screens/journal_screen.dart';
-import 'package:conejoz/src/features/profile/screens/profile_screen.dart';
+import 'package:conejoz/src/features/journal/screens/journal_menu.dart';
+import 'package:conejoz/src/features/journal/screens/user_profile.dart';
 import 'package:conejoz/src/features/settings/screens/settings_screen.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -60,10 +60,9 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
       ),
       body: IndexedStack(
         index: _currentIndex,
-        children: [
-          const FeedScreen(),
-          const JournalScreen(),
-          ProfileScreen(username: _username.toString()),
+        children: const [
+          FeedScreen(),
+          JournalMenu(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -93,19 +92,6 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
               onPressed: () {
                 setState(() {
                   _currentIndex = 1;
-                });
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.cloud,
-                color: _currentIndex == 2
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-              onPressed: () {
-                setState(() {
-                  _currentIndex = 2;
                 });
               },
             ),

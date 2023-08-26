@@ -2,17 +2,16 @@ import 'package:conejoz/src/repository/authentication_repository/authentication_
 import 'package:flutter/material.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
-class RabbitImagesSelector extends StatefulWidget {
+class ImagesSelector extends StatefulWidget {
   final String entryId;
 
-  const RabbitImagesSelector({Key? key, required this.entryId})
-      : super(key: key);
+  const ImagesSelector({Key? key, required this.entryId}) : super(key: key);
 
   @override
-  State<RabbitImagesSelector> createState() => _RabbitImagesSelectorState();
+  State<ImagesSelector> createState() => _ImagesSelectorState();
 }
 
-class _RabbitImagesSelectorState extends State<RabbitImagesSelector> {
+class _ImagesSelectorState extends State<ImagesSelector> {
   List<String> userImageUrls = [];
 
   @override

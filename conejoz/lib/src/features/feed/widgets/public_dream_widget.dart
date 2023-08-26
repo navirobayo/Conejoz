@@ -46,7 +46,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
               ),
               const Spacer(),
               Text(
-                DateFormat('yy-MM-dd HH:mm:ss')
+                DateFormat('dd-MM-yy HH:mm:ss')
                     .format(widget.timestamp.toDate()),
                 style: Theme.of(context)
                     .textTheme

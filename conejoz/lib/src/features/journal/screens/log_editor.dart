@@ -1,24 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conejoz/src/features/dream_creator/screens/dream_image_creator.dart';
-import 'package:conejoz/src/features/journal/screens/rabbit_images_selector.dart';
+import 'package:conejoz/src/features/journal/screens/image_creator.dart';
+import 'package:conejoz/src/features/journal/screens/images_selector.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EntryEditor extends StatefulWidget {
+class LogEditor extends StatefulWidget {
   final Map<String, dynamic> entry;
 
-  const EntryEditor({
+  const LogEditor({
     Key? key,
     required this.entry,
   }) : super(key: key);
 
   @override
-  State<EntryEditor> createState() => _EntryEditorState();
+  State<LogEditor> createState() => _LogEditorState();
 }
 
-class _EntryEditorState extends State<EntryEditor> {
+class _LogEditorState extends State<LogEditor> {
   final TextEditingController _titleEditingController = TextEditingController();
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _tagsEditingController = TextEditingController();
@@ -110,7 +110,7 @@ class _EntryEditorState extends State<EntryEditor> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RabbitImagesSelector(
+                        builder: (context) => ImagesSelector(
                           entryId: widget.entry['entryid'],
                         ),
                       ),

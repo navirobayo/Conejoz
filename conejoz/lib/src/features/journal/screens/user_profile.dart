@@ -1,20 +1,18 @@
-import 'package:conejoz/src/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:conejoz/src/repository/models/rabbit_model.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
 double regularSpacer = 25;
 
-class ProfileScreen extends StatefulWidget {
+class UserProfile extends StatefulWidget {
   final String username; // Add a parameter to the constructor
 
-  const ProfileScreen({Key? key, required this.username}) : super(key: key);
+  const UserProfile({Key? key, required this.username}) : super(key: key);
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _UserProfileState createState() => _UserProfileState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _UserProfileState extends State<UserProfile> {
   String? _username; // Store the username in a private variable
 
   @override
