@@ -32,7 +32,7 @@ class LogsList extends StatelessWidget {
           },
         ),
         title: Text(
-          "Journal Manager",
+          "Logs.",
           style: TextStyle(color: Theme.of(context).colorScheme.surface),
         ),
       ),

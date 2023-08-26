@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conejoz/src/features/feed/screens/tags_explorer.dart';
 import 'package:conejoz/src/features/feed/widgets/public_dream_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,9 @@ class _FeedScreenState extends State<FeedScreen> {
             clipBehavior: Clip.hardEdge,
             child: InkWell(
               splashColor: Theme.of(context).colorScheme.surface,
-              onTap: () {},
+              onTap: () {
+                // This button will refresh the feed
+              },
               child: SizedBox(
                 width: 50,
                 height: 50,
@@ -45,7 +48,14 @@ class _FeedScreenState extends State<FeedScreen> {
             clipBehavior: Clip.hardEdge,
             child: InkWell(
               splashColor: Theme.of(context).colorScheme.onSurface,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TagsExplorer(),
+                  ),
+                );
+              },
               child: SizedBox(
                 width: 50,
                 height: 50,
@@ -86,6 +96,8 @@ class _FeedScreenState extends State<FeedScreen> {
                           timestamp: post["timestamp"],
                           tags: tagsString,
                           dreamimage: post["dreamimage"],
+                          attachments:
+                              List<String>.from(post["attachments"] ?? []),
                         );
                       },
                     );

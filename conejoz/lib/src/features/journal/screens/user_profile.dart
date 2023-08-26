@@ -5,9 +5,9 @@ import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 double regularSpacer = 25;
 
 class UserProfile extends StatefulWidget {
-  final String username; // Add a parameter to the constructor
+  // Add a parameter to the constructor
 
-  const UserProfile({Key? key, required this.username}) : super(key: key);
+  const UserProfile({Key? key}) : super(key: key);
   @override
   _UserProfileState createState() => _UserProfileState();
 }
@@ -18,8 +18,6 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
-    _username = widget
-        .username; // Initialize the private variable with the value from the constructor
   }
 
   @override

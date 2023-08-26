@@ -113,6 +113,7 @@ class UserRepository extends GetxController {
         "tags": List<String>.from(entryData['tags'] ?? []),
         "timestamp": entryData['timestamp'],
         "title": entryData['title'],
+        "attachments": List<String>.from(entryData['attachments']) ?? [],
       };
 
       await _db.collection("publicdreams").doc(entryId).set(publicDreamData);

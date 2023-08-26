@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conejoz/src/features/feed/screens/log_reader.dart';
+import 'package:conejoz/src/features/feed/screens/rabbit_card.dart';
+import 'package:conejoz/src/features/journal/screens/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -9,6 +12,7 @@ class PublicDreamWidget extends StatefulWidget {
   final Timestamp timestamp;
   final String tags;
   final String dreamimage;
+  final List<String> attachments;
   const PublicDreamWidget({
     Key? key,
     required this.rabbit,
@@ -17,6 +21,7 @@ class PublicDreamWidget extends StatefulWidget {
     required this.timestamp,
     required this.tags,
     required this.dreamimage,
+    required this.attachments,
   }) : super(key: key);
 
   @override
@@ -24,6 +29,49 @@ class PublicDreamWidget extends StatefulWidget {
 }
 
 class _PublicDreamWidgetState extends State<PublicDreamWidget> {
+  void _onTitleTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LogReader(
+          rabbit: widget.rabbit,
+          textentry: widget.textentry,
+          title: widget.title,
+          timestamp: widget.timestamp,
+          tags: widget.tags,
+          dreamimage: widget.dreamimage,
+          attachments: widget.attachments,
+        ),
+      ),
+    );
+  }
+
+  void _onImageTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LogReader(
+          rabbit: widget.rabbit,
+          textentry: widget.textentry,
+          title: widget.title,
+          timestamp: widget.timestamp,
+          tags: widget.tags,
+          dreamimage: widget.dreamimage,
+          attachments: widget.attachments,
+        ),
+      ),
+    );
+  }
+
+  void _onUsernameTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RabbitCard(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,12 +85,15 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.rabbit,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Theme.of(context).colorScheme.onSurface),
+              GestureDetector(
+                onTap: _onUsernameTap,
+                child: Text(
+                  widget.rabbit,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
+                ),
               ),
               const Spacer(),
               Text(
@@ -56,73 +107,81 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
             ],
           ),
           const SizedBox(height: 10),
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: NetworkImage(widget.dreamimage),
-                fit: BoxFit.cover,
+          GestureDetector(
+            onTap: _onTitleTap,
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: NetworkImage(widget.dreamimage),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  widget.title,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
+          GestureDetector(
+            onTap: _onImageTap,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize:
+                          Theme.of(context).textTheme.titleMedium?.fontSize,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Text("("),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Do nothing here, as we want to show the popup menu immediately
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      widget.tags,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSecondary,
-                        decoration: TextDecoration.underline,
+                const SizedBox(
+                  width: 5,
+                ),
+                Text("("),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Do nothing here, as we want to show the popup menu immediately
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondary,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      padding: EdgeInsets.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.tags,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  // Handle tag selection if needed
-                },
-                itemBuilder: (BuildContext context) {
-                  return widget.tags.split(', ').map((tag) {
-                    return PopupMenuItem<String>(
-                      value: tag,
-                      child: Text(tag),
-                    );
-                  }).toList();
-                },
-              ),
-            ],
+                PopupMenuButton<String>(
+                  onSelected: (value) {
+                    // Handle tag selection if needed
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return widget.tags.split(', ').map((tag) {
+                      return PopupMenuItem<String>(
+                        value: tag,
+                        child: Text(tag),
+                      );
+                    }).toList();
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

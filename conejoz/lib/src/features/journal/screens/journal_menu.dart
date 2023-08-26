@@ -1,10 +1,11 @@
 import 'package:conejoz/src/common_widgets/conejoz_route_button.dart';
 import 'package:conejoz/src/common_widgets/conejoz_text_for_route_button.dart';
+import 'package:conejoz/src/constants/conejoz_logos.dart';
 import 'package:conejoz/src/features/journal/screens/image_creator.dart';
 import 'package:conejoz/src/features/journal/screens/new_text_log.dart';
 import 'package:conejoz/src/features/journal/screens/logs_list.dart';
 import 'package:conejoz/src/features/journal/screens/user_gallery.dart';
-import 'package:conejoz/src/features/feed/screens/tags_explorer.dart';
+import 'package:conejoz/src/features/journal/screens/user_profile.dart';
 import 'package:flutter/material.dart';
 
 //* Main features of the app.
@@ -51,10 +52,10 @@ class JournalMenu extends StatelessWidget {
                             text: "Logs", context: context),
                         SizedBox(height: defaultTextSpacer),
                         ConejozTextForRouteButton(
-                            text: "Images Gallery", context: context),
+                            text: "Lazarus", context: context),
                         SizedBox(height: defaultTextSpacer),
                         ConejozTextForRouteButton(
-                            text: "Tags Explorer", context: context),
+                            text: "Images Gallery", context: context),
                       ],
                     ),
                   ),
@@ -80,13 +81,13 @@ class JournalMenu extends StatelessWidget {
                         SizedBox(height: defaultCardSpacer),
                         ConejozRouteButton(
                             context: context,
-                            icon: Icons.image_search_rounded,
-                            page: UserGallery()),
+                            icon: ConejozLogos.conejozBlackFill,
+                            page: UserProfile()),
                         SizedBox(height: defaultCardSpacer),
                         ConejozRouteButton(
                             context: context,
-                            icon: Icons.tag,
-                            page: TagsExplorer()),
+                            icon: Icons.image_search_rounded,
+                            page: UserGallery()),
                       ],
                     ),
                   ),

@@ -40,11 +40,6 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(
-          ConejozLogos.conejozBlackFill,
-          size: 20,
-          color: Theme.of(context).colorScheme.onSurfaceVariant,
-        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Row(
           children: [
