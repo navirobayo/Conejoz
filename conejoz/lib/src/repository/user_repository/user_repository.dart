@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// * All CRUD related operations for the app.
-// * ( CRUD = Create, Read, Update, Delete )
+// * CRUD related operations for the app.
+// * CRUD = Create, Read, Update, Delete.
 
 class UserRepository extends GetxController {
   static UserRepository get instance =>
