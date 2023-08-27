@@ -31,14 +31,10 @@ class SignUpController extends GetxController {
   void createRabbitDocument() {
     // This function creates the RabbitDocument inside of the user's document.
     final rabbitDocument = {
-      "cloudjournal": {
-        "entries": [],
-        "profileimage": "",
-      },
-      "usergallery": {
-        "userimages": [],
-      },
       "rabbitname": rabbit.text.trim(),
+      "profileimage": "adefaultimage",
+      "entries": [], // *
+      "userimages": [], // *
     };
     userRepo.createRabbit(
         // This function is located in the UserRepository.

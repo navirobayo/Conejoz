@@ -160,17 +160,14 @@ class UserRepository extends GetxController {
     // This function gets the user's journal entries from his personal document.
     final userDocument = await getUserDocument(userId);
     if (userDocument != null) {
-      final cloudJournal = userDocument['cloudjournal'];
-      if (cloudJournal != null) {
-        final userEntries = <Map<String, dynamic>>[];
-        final entries = cloudJournal['entries'] ?? {};
-        entries.forEach((key, value) {
-          final entry = Map<String, dynamic>.from(value);
-          entry['uniqueid'] = key;
-          userEntries.add(entry);
-        });
-        return userEntries;
-      }
+      final userEntries = <Map<String, dynamic>>[];
+      final entries = userDocument['entries'] ?? {};
+      entries.forEach((key, value) {
+        final entry = Map<String, dynamic>.from(value);
+        entry['uniqueid'] = key;
+        userEntries.add(entry);
+      });
+      return userEntries;
     }
     return [];
   }
@@ -183,7 +180,7 @@ class UserRepository extends GetxController {
 
     try {
       await userDocumentRef.update({
-        "usergallery.userimages": FieldValue.arrayUnion([imageUrl]),
+        "userimages": FieldValue.arrayUnion([imageUrl]),
       });
     } catch (error) {
       print("Error adding image to user's gallery: $error");
@@ -201,7 +198,7 @@ class UserRepository extends GetxController {
 
     try {
       await userDocumentRef.update({
-        "cloudjournal.entries.$entryId": noteData,
+        "entries.$entryId": noteData,
       });
     } catch (error) {
       print("Error saving note: $error");
@@ -236,8 +233,7 @@ class UserRepository extends GetxController {
       final userDocumentRef = _db.collection("rabbits").doc(userId);
 
       await userDocumentRef.update({
-        "cloudjournal.entries.$entryId.attachments":
-            FieldValue.arrayUnion([attachmentId]),
+        "entries.$entryId.attachments": FieldValue.arrayUnion([attachmentId]),
       });
     } catch (error) {
       print("Error adding picture to entry: $error");

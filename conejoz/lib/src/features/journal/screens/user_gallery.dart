@@ -26,8 +26,7 @@ class _UserGalleryState extends State<UserGallery> {
           await UserRepository.instance.getUserDocument(userId);
       if (userDocument != null) {
         setState(() {
-          userImageUrls =
-              List<String>.from(userDocument['usergallery']['userimages']);
+          userImageUrls = List<String>.from(userDocument['userimages']);
         });
       }
     }
