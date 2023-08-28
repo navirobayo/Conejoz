@@ -44,6 +44,15 @@ class _ImagesSelectorState extends State<ImagesSelector> {
     }
   }
 
+  Future<void> updateAttachment(String imageUrl) async {
+    final user = AuthenticationRepository.instance.firebaseUser.value;
+    if (user != null) {
+      final userId = user.uid;
+      await UserRepository.instance
+          .addPictureToPublicEntry(userId, widget.entryId, imageUrl);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +87,7 @@ class _ImagesSelectorState extends State<ImagesSelector> {
                     imageUrl: userImageUrls[index],
                     onAdd: () {
                       addAttachment(userImageUrls[index]);
+                      updateAttachment(userImageUrls[index]);
                     },
                   );
                 },

@@ -215,8 +215,25 @@ class UserRepository extends GetxController {
 
     try {
       await userDocumentRef.update({
-        "cloudjournal.entries.$entryId": updatedEntryData,
+        "entries.$entryId": updatedEntryData,
       });
+    } catch (error) {
+      print("Error updating entry: $error");
+      throw error;
+    }
+  }
+
+  Future<void> updatePublicEntry(String userId, String entryId,
+      Map<String, dynamic> updatedEntryData) async {
+    final userDocumentRef = _db.collection("publicdreams").doc(entryId);
+
+    try {
+      final userDocument = await userDocumentRef.get();
+      if (userDocument.exists) {
+        await userDocumentRef.update(updatedEntryData);
+      } else {
+        print("Document does not exist.");
+      }
     } catch (error) {
       print("Error updating entry: $error");
       throw error;
@@ -235,6 +252,27 @@ class UserRepository extends GetxController {
       await userDocumentRef.update({
         "entries.$entryId.attachments": FieldValue.arrayUnion([attachmentId]),
       });
+    } catch (error) {
+      print("Error adding picture to entry: $error");
+      throw error;
+    }
+  }
+
+  Future<void> addPictureToPublicEntry(
+    String userId,
+    String entryId,
+    String attachmentId,
+  ) async {
+    try {
+      final userDocumentRef = _db.collection("publicdreams").doc(entryId);
+      final userDocument = await userDocumentRef.get();
+      if (userDocument.exists) {
+        await userDocumentRef.update({
+          "attachments": FieldValue.arrayUnion([attachmentId]),
+        });
+      } else {
+        print("Document does not exist.");
+      }
     } catch (error) {
       print("Error adding picture to entry: $error");
       throw error;

@@ -78,8 +78,40 @@ class _LogEditorState extends State<LogEditor> {
           colorText: Colors.red);
       print(error.toString());
     }
-
     Navigator.pop(context);
+  }
+
+  void updatePublicNote() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final userId = user.uid;
+    final entryId = widget.entry['uniqueid'];
+    final title = _titleEditingController.text;
+    final tags =
+        _tagsEditingController.text.split(',').map((e) => e.trim()).toList();
+    final dreamdescription = _textEditingController.text;
+    final timestamp = Timestamp.now();
+    final attachments = widget.entry['attachments'] ?? <String>[];
+
+    final updatedEntryData = {
+      'entryid': entryId,
+      'title': title,
+      'tags': tags,
+      'dreamdescription': dreamdescription,
+      'timestamp': timestamp,
+      'attachments': attachments,
+    };
+
+    try {
+      await UserRepository.instance
+          .updatePublicEntry(userId, entryId, updatedEntryData);
+    } catch (error) {
+      print(error.toString());
+    }
   }
 
   void showAttachmentOptions() {
@@ -236,7 +268,10 @@ class _LogEditorState extends State<LogEditor> {
       floatingActionButton: FloatingActionButton(
           splashColor: Theme.of(context).colorScheme.surface,
           backgroundColor: Theme.of(context).colorScheme.onError,
-          onPressed: updateNote,
+          onPressed: () {
+            updatePublicNote();
+            updateNote();
+          },
           child: Icon(
               color: Theme.of(context).colorScheme.onPrimary,
               Icons.check_circle_outline)),
