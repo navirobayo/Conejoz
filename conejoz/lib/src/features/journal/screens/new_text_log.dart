@@ -42,7 +42,7 @@ class _NewTextLogState extends State<NewTextLog> {
     final entryId = const Uuid().v4();
 
     try {
-      await userRepo.saveNote(userUniqueId, {
+      await userRepo.createLog(userUniqueId, {
         'title': _titleEditingController.text,
         'dreamdescription': _textEditingController.text,
         'tags': tags,

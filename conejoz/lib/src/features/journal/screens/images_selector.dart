@@ -34,22 +34,21 @@ class _ImagesSelectorState extends State<ImagesSelector> {
     }
   }
 
-  Future<void> addAttachment(String imageUrl) async {
+  Future<void> addPrivateAttachment(String imageUrl) async {
     final user = AuthenticationRepository.instance.firebaseUser.value;
     if (user != null) {
       final userId = user.uid;
       await UserRepository.instance
-          .addPictureToEntry(userId, widget.entryId, imageUrl);
-      Navigator.pop(context);
+          .addPictureToLog(userId, widget.entryId, imageUrl);
     }
   }
 
-  Future<void> updateAttachment(String imageUrl) async {
+  Future<void> updatePublicAttachment(String imageUrl) async {
     final user = AuthenticationRepository.instance.firebaseUser.value;
     if (user != null) {
       final userId = user.uid;
       await UserRepository.instance
-          .addPictureToPublicEntry(userId, widget.entryId, imageUrl);
+          .addPictureAndUpdatePublicCover(userId, widget.entryId, imageUrl);
     }
   }
 
@@ -86,8 +85,10 @@ class _ImagesSelectorState extends State<ImagesSelector> {
                   return _ImageDialog(
                     imageUrl: userImageUrls[index],
                     onAdd: () {
-                      addAttachment(userImageUrls[index]);
-                      updateAttachment(userImageUrls[index]);
+                      addPrivateAttachment(userImageUrls[index])
+                          .then((_) =>
+                              updatePublicAttachment(userImageUrls[index]))
+                          .then((_) => Navigator.pop(context));
                     },
                   );
                 },

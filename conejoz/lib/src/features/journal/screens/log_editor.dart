@@ -66,7 +66,7 @@ class _LogEditorState extends State<LogEditor> {
 
     try {
       await UserRepository.instance
-          .updateEntry(userId, entryId, updatedEntryData);
+          .updatePrivateLog(userId, entryId, updatedEntryData);
       Get.snackbar("Success", "Entry updated",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green.withOpacity(0.1),
@@ -108,7 +108,7 @@ class _LogEditorState extends State<LogEditor> {
 
     try {
       await UserRepository.instance
-          .updatePublicEntry(userId, entryId, updatedEntryData);
+          .updatePublicLog(userId, entryId, updatedEntryData);
     } catch (error) {
       print(error.toString());
     }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,7 +104,7 @@ class UserRepository extends GetxController {
       // Copy the data from the entry and add it to the publicdreams collection
       final attachments = entryData['attachments'];
       final dreamImage = attachments != null && attachments.isNotEmpty
-          ? attachments[0]
+          ? attachments[Random().nextInt(attachments.length)]
           : 'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2FNo%20attachments.png?alt=media&token=94eef887-5b6a-4a24-ab37-2ac1797f1560';
       final publicDreamData = {
         "dreamimage": dreamImage,
@@ -188,7 +190,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> saveNote(
+  Future<void> createLog(
       // This function saves the text entry of a dream to the user's journal.
       String userUniqueId,
       Map<String, dynamic> noteData) async {
@@ -206,7 +208,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> updateEntry(
+  Future<void> updatePrivateLog(
       // Updates Text entry
       String userId,
       String entryId,
@@ -223,7 +225,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> updatePublicEntry(String userId, String entryId,
+  Future<void> updatePublicLog(String userId, String entryId,
       Map<String, dynamic> updatedEntryData) async {
     final userDocumentRef = _db.collection("publicdreams").doc(entryId);
 
@@ -240,7 +242,7 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> addPictureToEntry(
+  Future<void> addPictureToLog(
     // Adds picture to entry
     String userId,
     String entryId,
@@ -258,11 +260,8 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> addPictureToPublicEntry(
-    String userId,
-    String entryId,
-    String attachmentId,
-  ) async {
+  Future<void> addPictureAndUpdatePublicCover(
+      String userId, String entryId, String attachmentId) async {
     try {
       final userDocumentRef = _db.collection("publicdreams").doc(entryId);
       final userDocument = await userDocumentRef.get();
@@ -270,11 +269,17 @@ class UserRepository extends GetxController {
         await userDocumentRef.update({
           "attachments": FieldValue.arrayUnion([attachmentId]),
         });
+        final attachments =
+            List<String>.from(userDocument.data()!['attachments'] ?? []);
+        final dreamImage = attachments[Random().nextInt(attachments.length)];
+        await userDocumentRef.update({
+          "dreamimage": dreamImage,
+        });
       } else {
         print("Document does not exist.");
       }
     } catch (error) {
-      print("Error adding picture to entry: $error");
+      print("Error adding picture and updating public cover: $error");
       throw error;
     }
   }
