@@ -21,6 +21,7 @@ class _FeedScreenState extends State<FeedScreen> {
           style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
         ),
+        automaticallyImplyLeading: false,
         actions: [
           Card(
             color: Theme.of(context).colorScheme.secondary,

@@ -26,6 +26,7 @@ class JournalMenu extends StatelessWidget {
           style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [

@@ -52,6 +52,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
             )
           ],
         ),
+        automaticallyImplyLeading: false,
       ),
       body: IndexedStack(
         index: _currentIndex,

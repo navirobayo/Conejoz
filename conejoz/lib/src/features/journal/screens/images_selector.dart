@@ -1,3 +1,5 @@
+import 'package:conejoz/src/features/dashboard/screens/conejoz_dashboard.dart';
+import 'package:conejoz/src/features/journal/screens/logs_list.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
@@ -88,7 +90,13 @@ class _ImagesSelectorState extends State<ImagesSelector> {
                       addPrivateAttachment(userImageUrls[index])
                           .then((_) =>
                               updatePublicAttachment(userImageUrls[index]))
-                          .then((_) => Navigator.pop(context));
+                          .then((_) => Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ConejozDashboard(),
+                                ),
+                              ));
                     },
                   );
                 },
