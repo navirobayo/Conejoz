@@ -1,3 +1,4 @@
+import 'package:conejoz/src/features/feed/screens/rabbit_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
@@ -7,8 +8,6 @@ String isPublic = "Public";
 String isPrivate = "Private";
 
 class UserProfile extends StatefulWidget {
-  // Add a parameter to the constructor
-
   const UserProfile({Key? key}) : super(key: key);
   @override
   _UserProfileState createState() => _UserProfileState();
@@ -16,11 +15,28 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   String cardStatus = isPrivate;
-  String? _username; // Store the username in a private variable
+  String? _username;
+  String? _profilePicture;
+  List<String> _collections = [];
+  String? _bio;
+  String? _contactInfo;
 
   @override
   void initState() {
     super.initState();
+
+    // *
+    /*
+    // Initialize the user data from the repository
+    final userRepo = UserRepository.instance;
+    final user = userRepo.getCard();
+    _username = user.username;
+    _profilePicture = user.profilePicture;
+    _collections = user.collections;
+    _bio = user.bio;
+    _contactInfo = user.contactInfo;
+    */
+    // *
   }
 
   @override
@@ -72,7 +88,7 @@ class _UserProfileState extends State<UserProfile> {
       body: Column(
         children: [
           SizedBox(height: regularSpacer),
-          /* Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
@@ -168,7 +184,11 @@ class _UserProfileState extends State<UserProfile> {
                   onTap: () async {
                     if (cardStatus == isPrivate) {
                       try {
-                        await UserRepository.instance.displayPublicCard();
+                        // *
+                        /*
+                        await UserRepository.instance
+                            .displayPublicCard(userData); */
+                        // *
                         setState(() {
                           cardStatus = isPublic;
                         });
@@ -177,7 +197,12 @@ class _UserProfileState extends State<UserProfile> {
                       }
                     } else if (cardStatus == isPublic) {
                       try {
-                        await UserRepository.instance.hidePublicCard(entryId);
+                        // *
+                        /*
+
+                        await UserRepository.instance
+                            .deletePublicCard(userData); */
+                        // *
                         setState(() {
                           cardStatus = isPrivate;
                         });
@@ -202,7 +227,7 @@ class _UserProfileState extends State<UserProfile> {
               ),
               Spacer(),
             ],
-          )*/
+          ),
           Spacer(),
         ],
       ),
