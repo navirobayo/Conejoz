@@ -1,4 +1,5 @@
 import 'package:conejoz/src/features/feed/screens/rabbit_card.dart';
+import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
@@ -14,6 +15,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  final _userRepo = UserRepository.instance;
   String cardStatus = isPrivate;
   String? _username;
   String? _profilePicture;
@@ -21,9 +23,12 @@ class _UserProfileState extends State<UserProfile> {
   String? _bio;
   String? _contactInfo;
 
+  final _newUsernameController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+    _getUsername();
 
     // *
     /*
@@ -37,6 +42,27 @@ class _UserProfileState extends State<UserProfile> {
     _contactInfo = user.contactInfo;
     */
     // *
+  }
+
+  Future<void> updateRabbitName(String newRabbitName) async {
+    final user = AuthenticationRepository.instance.firebaseUser.value;
+    if (user != null) {
+      final userId = user.uid;
+      await UserRepository.instance.updateRabbitName(newRabbitName);
+    }
+  }
+
+  void _getUsername() async {
+    final username = await _userRepo.getRabbitNameByUserId();
+    setState(() {
+      _username = username ?? "";
+    });
+  }
+
+  @override
+  void dispose() {
+    _newUsernameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,7 +88,39 @@ class _UserProfileState extends State<UserProfile> {
                   // Handle option 2
                   break;
                 case 'option3':
-                  // Handle option 3
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Change username'),
+                        content: TextField(
+                          controller: _newUsernameController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter new username',
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('Cancel'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              final newUsername = _newUsernameController.text;
+                              await updateRabbitName(newUsername);
+                              setState(() {
+                                _username = newUsername;
+                              });
+                              Navigator.pop(context);
+                            },
+                            child: Text('Save'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                   break;
               }
             },
@@ -70,7 +128,7 @@ class _UserProfileState extends State<UserProfile> {
               return [
                 PopupMenuItem<String>(
                   value: 'option1',
-                  child: Text('Create a collection'),
+                  child: Text('Create / delete a collection'),
                 ),
                 PopupMenuItem<String>(
                   value: 'option2',
@@ -99,7 +157,7 @@ class _UserProfileState extends State<UserProfile> {
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
                     image: NetworkImage(
-                        'https://avatars.githubusercontent.com/u/140388501?s=200&v=4'),
+                        'https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2FNo%20attachments.png?alt=media&token=94eef887-5b6a-4a24-ab37-2ac1797f1560'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -123,7 +181,7 @@ class _UserProfileState extends State<UserProfile> {
                   child: InkWell(
                     splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     onTap: () {
-                      // Open dream
+                      // Open collection
                     },
                     child: SizedBox(
                       width: 150,
@@ -146,7 +204,7 @@ class _UserProfileState extends State<UserProfile> {
                   child: InkWell(
                     splashColor: Theme.of(context).colorScheme.onSurfaceVariant,
                     onTap: () {
-                      // Open dream
+                      // Open collection
                     },
                     child: SizedBox(
                       width: 150,

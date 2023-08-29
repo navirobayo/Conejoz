@@ -59,6 +59,29 @@ class UserRepository extends GetxController {
     }
   }
 
+  // ! User name update test.
+  Future<void> updateRabbitName(String newRabbitName) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final uid = user.uid;
+
+    try {
+      await _db
+          .collection("rabbits")
+          .doc(uid)
+          .update({"rabbitname": newRabbitName});
+      print("Rabbit name updated successfully!");
+    } catch (error) {
+      print("Error updating rabbit name: $error");
+      throw error;
+    }
+  }
+// ! User name update test ends here.
+
   // * Functions used in the "Authentication" feature:
 
   Future<void> createRabbit(Map<String, dynamic> rabbitDocument) async {

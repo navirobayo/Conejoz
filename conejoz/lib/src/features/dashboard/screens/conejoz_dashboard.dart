@@ -47,7 +47,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
                 style: TextStyle(color: Theme.of(context).colorScheme.surface)),
             const SizedBox(width: 5),
             Text(
-              _username != null ? _username.toString() : " ",
+              _username ?? "Loading...",
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             )
           ],
