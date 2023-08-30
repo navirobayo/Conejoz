@@ -53,7 +53,7 @@ class JournalMenu extends StatelessWidget {
                             text: "Logs", context: context),
                         SizedBox(height: defaultTextSpacer),
                         ConejozTextForRouteButton(
-                            text: "Lazarus", context: context),
+                            text: "Rabbit", context: context),
                         SizedBox(height: defaultTextSpacer),
                         ConejozTextForRouteButton(
                             text: "Images Gallery", context: context),

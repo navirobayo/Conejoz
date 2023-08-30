@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conejoz/src/features/feed/screens/log_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
@@ -21,6 +23,30 @@ class _TagsExplorerState extends State<TagsExplorer> {
       _searchResults = searchResults;
     });
   }
+
+/*
+  void _navigateToLogReader(String selectedTag) {
+    // ! This function needs to be improved.
+    // Assuming you have access to the necessary information for the log entry
+    // such as rabbit, textentry, title, timestamp, tags, dreamimage, and attachments
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LogReader(
+          rabbit: 'Rabbit Name', // Replace with actual rabbit name
+          textentry: 'Text Entry', // Replace with actual text entry
+          title: 'Log Title', // Replace with actual log title
+          timestamp: Timestamp.now(), // Replace with actual timestamp
+          tags: selectedTag, // Pass the selected tag
+          dreamimage: 'Dream Image URL', // Replace with actual dream image URL
+          attachments: [
+            'Attachment URLs'
+          ], // Replace with actual attachment URLs
+        ),
+      ),
+    );
+  }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +83,10 @@ class _TagsExplorerState extends State<TagsExplorer> {
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   title: Text(_searchResults[index]),
+                  onTap: /* () {
+                    _navigateToLogReader(_searchResults[index]);
+                  }, */
+                      () {},
                 );
               },
             ),
