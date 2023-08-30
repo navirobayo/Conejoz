@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:conejoz/src/repository/user_repository/user_repository.dart';
 
 class TagsExplorer extends StatefulWidget {
   const TagsExplorer({Key? key});
@@ -11,16 +12,14 @@ class _TagsExplorerState extends State<TagsExplorer> {
   String _searchText = '';
   List<String> _searchResults = [];
 
-  void _onSearchTextChanged(String searchText) {
+  void _onSearchTextChanged(String searchText) async {
+    final searchResults =
+        await UserRepository.instance.getSearchResults(searchText);
+
     setState(() {
       _searchText = searchText;
-      _searchResults = _getSearchResults(searchText);
+      _searchResults = searchResults;
     });
-  }
-
-  List<String> _getSearchResults(String searchText) {
-    // Replace this with your own search logic
-    return ['Result 1', 'Result 2', 'Result 3'];
   }
 
   @override

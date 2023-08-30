@@ -32,9 +32,13 @@ class SignUpController extends GetxController {
     // This function creates the RabbitDocument inside of the user's document.
     final rabbitDocument = {
       "rabbitname": rabbit.text.trim(),
-      "profileimage": "adefaultimage",
-      "entries": [], // *
-      "userimages": [], // *
+      "profileimage":
+          "https://firebasestorage.googleapis.com/v0/b/conejoz-0000.appspot.com/o/DREAM_PICTURES%2FNo%20attachments.png?alt=media&token=94eef887-5b6a-4a24-ab37-2ac1797f1560",
+      "bio": "No bio.",
+      "contactinfo": "No contact information.",
+      "location": "Unknown.",
+      "entries": [],
+      "userimages": [],
     };
     userRepo.createRabbit(
         // This function is located in the UserRepository.

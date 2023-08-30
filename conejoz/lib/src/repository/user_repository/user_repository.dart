@@ -59,7 +59,6 @@ class UserRepository extends GetxController {
     }
   }
 
-  // ! User name update test.
   Future<void> updateRabbitName(String newRabbitName) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
@@ -80,7 +79,6 @@ class UserRepository extends GetxController {
       throw error;
     }
   }
-// ! User name update test ends here.
 
   // * Functions used in the "Authentication" feature:
 
@@ -356,5 +354,99 @@ class UserRepository extends GetxController {
       print("Error adding picture and updating public cover: $error");
       throw error;
     }
+  }
+
+  Future<void> addPictureToProfile(
+    // Adds picture to entry
+    String userId,
+    String attachmentId,
+  ) async {
+    try {
+      final userDocumentRef = _db.collection("rabbits").doc(userId);
+
+      await userDocumentRef.update({
+        "profileimage": attachmentId,
+      });
+      print("Profile image updated successfully!");
+    } catch (error) {
+      print("Error adding picture to profile: $error");
+      throw error;
+    }
+  }
+
+  Future<Map<String, dynamic>?> getRabbitDataByUserId() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print("User is not authenticated.");
+      return null;
+    }
+
+    final uid = user.uid;
+
+    try {
+      final docSnapshot = await _db.collection("rabbits").doc(uid).get();
+      if (docSnapshot.exists) {
+        return docSnapshot.data();
+      } else {
+        print("User document does not exist in the 'rabbits' collection.");
+        return null;
+      }
+    } catch (error) {
+      print("Error getting rabbit data by userId: $error");
+      return null;
+    }
+  }
+
+  Future<void> updateRabbitData({
+    required String rabbitname,
+    required String bio,
+    required String location,
+    required String contactinfo,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final uid = user.uid;
+
+    try {
+      final userDocumentRef = _db.collection("rabbits").doc(uid);
+      await userDocumentRef.update({
+        "rabbitname": rabbitname,
+        "bio": bio,
+        "location": location,
+        "contactinfo": contactinfo,
+      });
+    } catch (error) {
+      print("Error updating rabbit data: $error");
+    }
+  }
+
+  Future<List<String>> getSearchResults(String searchText) async {
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection('publicdreams').get();
+
+    final searchResults = <String>[];
+
+    for (final doc in querySnapshot.docs) {
+      final data = doc.data();
+      final tags = data['tags'] as List<dynamic>;
+
+      if (tags.any((tag) => tag.toString().contains(searchText))) {
+        searchResults.add(data['title'] as String);
+      }
+    }
+
+    return searchResults;
+  }
+
+  Future<Map<String, dynamic>> getDreamById(String dreamId) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('publicdreams')
+        .doc(dreamId)
+        .get();
+    return snapshot.data() as Map<String, dynamic>;
   }
 }
