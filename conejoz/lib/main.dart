@@ -81,6 +81,7 @@ import 'package:flutter/material.dart';
 // From Latin America, with love. For dreamers, by dreamers.
 
 // ! The app starts here.
+// ! Ver. 1.0.1
 
 // This function initializes the app's dependencies.
 Future<void> initializeDependencies() async {
