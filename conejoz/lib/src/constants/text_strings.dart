@@ -13,7 +13,7 @@ const String engEmail = "E-mail";
 const String engPassword = "Password";
 const String engAlreadyHaveAnAccount = "Already have an account?";
 const String engCreateAnAccount = "Create an account";
-const String engForgetPasswordTitle = "No problem";
+const String engForgetPasswordTitle = "I forgot my password";
 const String engForgetPasswordSubtitle =
     "Enter your email and we will send you a link to reset your password";
 

@@ -71,7 +71,7 @@ class LogReader extends StatelessWidget {
                   Expanded(
                     flex: 4,
                     child: Card(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).colorScheme.onError,
                       clipBehavior: Clip.hardEdge,
                       child: SizedBox(
                         height: 50,

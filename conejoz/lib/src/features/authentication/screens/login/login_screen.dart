@@ -1,12 +1,19 @@
-import 'package:conejoz/src/constants/text_strings.dart';
-import 'package:conejoz/src/features/authentication/screens/login/widgets/login_form_widget.dart';
+import 'package:conejoz/src/constants/conejoz_logos.dart';
+import 'package:conejoz/src/controllers/login_controller.dart';
+import 'package:conejoz/src/features/authentication/screens/forget_password/forget_password_widget.dart';
+import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
+import 'package:conejoz/src/repository/authentication_repository/exceptions/login_email_password_failure.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final loginController = Get.put(LoginController());
+    final loginFormKey = GlobalKey<FormState>();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -17,38 +24,82 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 100.0,
                 ),
-                const Text(
-                  engLogin,
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Icon(
+                      ConejozLogos.conejozBlackFill,
+                      size: 50.0,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    Spacer(),
+                    TextButton(
+                      onPressed: () async {
+                        if (loginFormKey.currentState!.validate()) {
+                          try {
+                            await AuthenticationRepository.instance
+                                .loginWithEmailAndPassword(
+                              loginController.email.text.trim(),
+                              loginController.password.text.trim(),
+                            );
+                          } on LogInWithEmailAndPasswordFailure catch (e) {
+                            // Handle login failure exception here.
+                            // Show an error message to the user.
+                            // For example: Show a snackbar or a dialog with the error message.
+                            print("LOGIN ERROR: ${e.message}");
+                          }
+                        }
+                      },
+                      child: const Text('Login ->'),
+                    ),
+                    const SizedBox(
+                      height: 100.0,
+                    ),
+                  ],
                 ),
-                const Text(
-                  "Cool text goes here",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const LoginFormWidget(),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                Form(
+                  key: loginFormKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("OR"),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: () {},
-                          icon:
-                              const Icon(Icons.account_balance_wallet_rounded),
-                          label: const Text("SignInWithGoogle"),
+                      TextFormField(
+                        controller: loginController.email,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email';
+                          }
+                          return null;
+                        },
                       ),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(engCreateAnAccount))
-                    ]),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: loginController.password,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          suffixIcon: Icon(
+                            Icons.remove_red_eye,
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your password';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      const ForgetPasswordWidget(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

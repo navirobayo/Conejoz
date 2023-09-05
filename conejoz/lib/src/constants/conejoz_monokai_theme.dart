@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ConejozMonokaiTheme {
   ConejozMonokaiTheme._();
 
-  static const Color _primaryColor = Color(0xFF354157); //* Do not modify.
+  static const Color _primaryColor = Color(0xFFEACB64); //* Do not modify.
   static const Color _primaryInverseColor =
       Color(0xFF4E432F); //* Do not modify.
   static const Color _onSurfaceColor = Color(0xFFA5E179); //* Do not modify.
@@ -16,7 +16,7 @@ class ConejozMonokaiTheme {
   static const Color _secondaryColor = Color(0xFF55393D); //* Do not modify.
   static const Color _primaryContainer = Color(0xFF394634); //* Do not modify.
   static const Color _errorColor = Color(0xFFF69C5E); //* Do not modify.
-  static const Color _onErrorColor = Color(0xFF24272E); //* Do not modify.
+  static const Color _onErrorColor = Color(0xFF354157); //* Do not modify.
 
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,

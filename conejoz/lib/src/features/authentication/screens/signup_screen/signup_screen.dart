@@ -1,3 +1,4 @@
+import 'package:conejoz/src/constants/conejoz_logos.dart';
 import 'package:conejoz/src/controllers/signup_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,15 +22,31 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 100.0),
-                const Text(
-                  'Register your info',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Icon(
+                      ConejozLogos.conejozBlackFill,
+                      size: 50.0,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        if (signUpFormKey.currentState!.validate()) {
+                          //This register the user with email and password into Firebase.
+                          SignUpController.instance.registerUser(
+                            signUpController.email.text.trim(),
+                            signUpController.password.text.trim(),
+                          );
+                        }
+                      },
+                      child: const Text('Continue ->'),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 50.0),
                 TextFormField(
+                  textCapitalization: TextCapitalization.words,
                   controller: signUpController.rabbit,
                   decoration: const InputDecoration(
                     labelText: 'Username',
@@ -83,25 +100,6 @@ class SignupScreen extends StatelessWidget {
                     return null;
                   },
                 ),
-                const SizedBox(height: 50.0),
-                ElevatedButton(
-                  onPressed: () {
-                    if (signUpFormKey.currentState!.validate()) {
-                      //This register the user with email and password into Firebase.
-                      SignUpController.instance.registerUser(
-                        signUpController.email.text.trim(),
-                        signUpController.password.text.trim(),
-                      );
-                    }
-                  },
-                  child: const Text('Register with Email'),
-                ),
-                const SizedBox(height: 20.0),
-                ElevatedButton(
-                  onPressed: () {}, // TODO: Implement Google Sign Up.
-                  child: const Text('Register with Google'),
-                ),
-                const SizedBox(height: 20.0),
               ],
             ),
           ),
