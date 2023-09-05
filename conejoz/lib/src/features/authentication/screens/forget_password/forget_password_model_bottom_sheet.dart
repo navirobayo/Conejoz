@@ -1,4 +1,5 @@
-import 'package:conejoz/src/constants/text_strings_eng.dart';
+import 'package:conejoz/src/constants/text_strings.dart';
+import 'package:conejoz/src/constants/ui_variables.dart';
 import 'package:flutter/material.dart';
 
 class ForgetPasswordScreen {
@@ -6,16 +7,16 @@ class ForgetPasswordScreen {
     return showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        padding: const EdgeInsets.all(eDefaultSize),
+        padding: const EdgeInsets.all(engDefaultSize),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text(
-            eForgetPasswordTitle,
+            engForgetPasswordTitle,
             style: TextStyle(
               fontSize: 30.0,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const Text(eForgotPassword),
+          const Text(engForgotPassword),
           const SizedBox(height: 30),
           Container(
             padding: const EdgeInsets.all(20),
@@ -31,7 +32,7 @@ class ForgetPasswordScreen {
                   child: TextFormField(
                     decoration: const InputDecoration(
                       border: InputBorder.none,
-                      hintText: eEmail,
+                      hintText: engEmail,
                     ),
                   ),
                 ),

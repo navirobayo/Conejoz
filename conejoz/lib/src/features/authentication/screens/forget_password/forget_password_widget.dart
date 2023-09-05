@@ -1,4 +1,4 @@
-import 'package:conejoz/src/constants/text_strings_eng.dart';
+import 'package:conejoz/src/constants/text_strings.dart';
 import 'package:conejoz/src/features/authentication/screens/forget_password/forget_password_model_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class ForgetPasswordWidget extends StatelessWidget {
         onPressed: () {
           ForgetPasswordScreen.buildShowModalBottomSheet(context);
         },
-        child: const Text(eForgetPasswordTitle),
+        child: const Text(engForgetPasswordTitle),
       ),
     );
   }

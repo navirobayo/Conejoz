@@ -1,4 +1,4 @@
-import 'package:conejoz/src/constants/text_strings_eng.dart';
+import 'package:conejoz/src/constants/text_strings.dart';
 import 'package:conejoz/src/features/authentication/screens/login/widgets/login_form_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
                   height: 100.0,
                 ),
                 const Text(
-                  eLogin,
+                  engLogin,
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
@@ -46,7 +46,8 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                          onPressed: () {}, child: const Text(eCreateAnAccount))
+                          onPressed: () {},
+                          child: const Text(engCreateAnAccount))
                     ]),
               ],
             ),
