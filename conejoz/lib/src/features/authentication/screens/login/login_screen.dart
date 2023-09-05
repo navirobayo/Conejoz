@@ -6,14 +6,20 @@ import 'package:conejoz/src/repository/authentication_repository/exceptions/logi
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final loginController = Get.put(LoginController());
-    final loginFormKey = GlobalKey<FormState>();
+  _LoginScreenState createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  final loginController = Get.put(LoginController());
+  final loginFormKey = GlobalKey<FormState>();
+  bool _isPasswordVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -78,12 +84,21 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: loginController.password,
-                        obscureText: true,
+                        obscureText: !_isPasswordVisible,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye,
-                            color: Theme.of(context).colorScheme.onPrimary,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
                           ),
                         ),
                         validator: (value) {
