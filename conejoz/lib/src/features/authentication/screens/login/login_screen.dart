@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         }
                       },
-                      child: const Text('Login ->'),
+                      child: Text('Login ->'.tr),
                     ),
                     const SizedBox(
                       height: 100.0,
@@ -69,12 +69,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       TextFormField(
                         controller: loginController.email,
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
+                        decoration: InputDecoration(
+                          labelText: 'Email'.tr,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
+                            return 'Enter an email'.tr;
                           }
                           return null;
                         },
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: loginController.password,
                         obscureText: !_isPasswordVisible,
                         decoration: InputDecoration(
-                          labelText: 'Password',
+                          labelText: 'Password'.tr,
                           suffixIcon: IconButton(
                             icon: Icon(
                               _isPasswordVisible
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
+                            return 'Enter your password'.tr;
                           }
                           return null;
                         },

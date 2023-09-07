@@ -40,7 +40,7 @@ class SignupScreen extends StatelessWidget {
                           );
                         }
                       },
-                      child: const Text('Continue ->'),
+                      child: Text('Continue ->'.tr),
                     ),
                   ],
                 ),
@@ -48,12 +48,12 @@ class SignupScreen extends StatelessWidget {
                 TextFormField(
                   textCapitalization: TextCapitalization.words,
                   controller: signUpController.rabbit,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
+                  decoration: InputDecoration(
+                    labelText: 'Username'.tr,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your rabbitname';
+                      return 'Enter a username'.tr;
                     }
                     return null;
                   },
@@ -62,12 +62,12 @@ class SignupScreen extends StatelessWidget {
                 TextFormField(
                   controller: signUpController.email,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
+                  decoration: InputDecoration(
+                    labelText: 'Email'.tr,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return 'Enter an email'.tr;
                     }
                     return null;
                   },
@@ -76,12 +76,12 @@ class SignupScreen extends StatelessWidget {
                 TextFormField(
                   controller: signUpController.password,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
+                  decoration: InputDecoration(
+                    labelText: 'Password'.tr,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
+                      return 'Enter your password'.tr;
                     }
                     return null;
                   },
@@ -90,12 +90,12 @@ class SignupScreen extends StatelessWidget {
                 TextFormField(
                   controller: signUpController.confirmPassword,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Confirm Password',
+                  decoration: InputDecoration(
+                    labelText: 'Confirm password'.tr,
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
+                      return 'Confirm your password'.tr;
                     }
                     return null;
                   },

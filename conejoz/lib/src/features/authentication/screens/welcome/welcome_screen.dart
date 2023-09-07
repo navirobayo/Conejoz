@@ -45,7 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             height: 10,
                           ),
                           Text(
-                            'hello'.tr,
+                            'Conejoz',
                             style: TextStyle(
                               color: Theme.of(context)
                                   .colorScheme
@@ -76,7 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   children: [
                     const Spacer(),
                     Text(
-                      'Welcome',
+                      'Welcome'.tr,
                       style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
@@ -113,7 +113,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     );
                   },
                   child: Text(
-                    'Login',
+                    'Login'.tr,
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.onPrimary),
                   ),
@@ -130,7 +130,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     );
                   },
                   child: Text(
-                    'Register',
+                    'Register'.tr,
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.onPrimary),
                   ),
