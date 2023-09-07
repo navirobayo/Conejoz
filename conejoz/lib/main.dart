@@ -113,9 +113,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: Messages(),
-      locale: const Locale('es', 'ES'),
+      locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
-      title: 'Conejoz Prototype',
+      title: 'Conejoz',
       theme: ConejozMonokaiTheme.lightTheme,
       darkTheme: ConejozMonokaiTheme.darkTheme,
       debugShowCheckedModeBanner: false,

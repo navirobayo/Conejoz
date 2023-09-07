@@ -3,6 +3,7 @@ import 'package:conejoz/src/constants/global_strings.dart';
 import 'package:conejoz/src/features/authentication/screens/login/login_screen.dart';
 import 'package:conejoz/src/features/authentication/screens/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -85,7 +86,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     const Spacer(),
                     DropdownButton<String>(
                       value: _selectedLanguage,
-                      items: <String>['English', 'Spanish'].map((String value) {
+                      items: <String>['English', 'Español'].map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Text(value),
@@ -94,6 +95,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       onChanged: (String? newValue) {
                         setState(() {
                           _selectedLanguage = newValue ?? 'English';
+                          Get.updateLocale(Locale(
+                              _selectedLanguage == 'English' ? 'en' : 'es'));
                         });
                       },
                     ),
