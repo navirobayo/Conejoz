@@ -3,6 +3,7 @@ import 'package:conejoz/src/constants/global_strings.dart';
 import 'package:conejoz/src/features/authentication/screens/login/login_screen.dart';
 import 'package:conejoz/src/features/authentication/screens/signup_screen/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key});
@@ -43,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             height: 10,
                           ),
                           Text(
-                            'Conejoz',
+                            'hello'.tr,
                             style: TextStyle(
                               color: Theme.of(context)
                                   .colorScheme
