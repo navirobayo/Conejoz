@@ -1,5 +1,6 @@
 import 'package:conejoz/src/constants/conejoz_atari_theme.dart';
 import 'package:conejoz/src/constants/conejoz_monokai_theme.dart';
+import 'package:conejoz/src/constants/multi_lang_app_strings.dart';
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
@@ -81,6 +82,7 @@ import 'package:flutter/material.dart';
 // From Latin America, with love. For dreamers, by dreamers.
 
 // ! The app starts here.
+// ! Ver. 1.0.1
 
 // This function initializes the app's dependencies.
 Future<void> initializeDependencies() async {
@@ -110,7 +112,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Conejoz Prototype',
+      translations: Messages(),
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('en', 'US'),
+      title: 'Conejoz',
       theme: ConejozMonokaiTheme.lightTheme,
       darkTheme: ConejozMonokaiTheme.darkTheme,
       debugShowCheckedModeBanner: false,

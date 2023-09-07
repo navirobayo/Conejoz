@@ -198,7 +198,7 @@ class _LogEditorState extends State<LogEditor> {
                 Expanded(
                   flex: 1,
                   child: Card(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.onError,
                     clipBehavior: Clip.hardEdge,
                     child: SizedBox(
                       height: 50,

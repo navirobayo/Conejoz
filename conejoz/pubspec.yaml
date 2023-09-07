@@ -2,7 +2,7 @@ name: conejoz
 description: Dream journal.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: '>=3.0.2 <4.0.0'
@@ -22,8 +22,6 @@ dependencies:
   path_provider: ^2.0.15
   firebase_ui_auth: ^1.6.2
   get: ^4.6.5
-  loading_indicator: ^3.1.1
-  intl: ^0.18.0
   uuid: ^3.0.7
 
 dev_dependencies:
