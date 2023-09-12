@@ -27,7 +27,7 @@ class _FeedScreenState extends State<FeedScreen> {
             color: Theme.of(context).colorScheme.secondary,
             clipBehavior: Clip.hardEdge,
             child: InkWell(
-              splashColor: Theme.of(context).colorScheme.surface,
+              splashColor: Theme.of(context).colorScheme.primary,
               onTap: () {
                 // This button will refresh the feed
               },

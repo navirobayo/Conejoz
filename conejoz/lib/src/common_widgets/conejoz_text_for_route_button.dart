@@ -15,7 +15,7 @@ class ConejozTextForRouteButton extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: Theme.of(context).colorScheme.surface,
+        color: Theme.of(context).colorScheme.primary,
         fontSize: 15,
       ),
     );

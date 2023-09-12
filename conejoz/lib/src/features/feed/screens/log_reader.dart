@@ -126,7 +126,7 @@ class LogReader extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize:
                         Theme.of(context).textTheme.titleMedium?.fontSize),
               ),
@@ -144,7 +144,7 @@ class LogReader extends StatelessWidget {
               Row(children: [
                 Text(rabbit,
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.surface)),
+                        color: Theme.of(context).colorScheme.primary)),
               ]),
             ],
           ),

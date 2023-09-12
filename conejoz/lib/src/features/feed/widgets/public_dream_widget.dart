@@ -102,7 +102,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall!
-                    .copyWith(color: Theme.of(context).colorScheme.surface),
+                    .copyWith(color: Theme.of(context).colorScheme.primary),
               ),
             ],
           ),

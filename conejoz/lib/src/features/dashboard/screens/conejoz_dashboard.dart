@@ -44,7 +44,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         title: Row(
           children: [
             Text("Welcome",
-                style: TextStyle(color: Theme.of(context).colorScheme.surface)),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary)),
             const SizedBox(width: 5),
             Text(
               _username ?? "Loading...",
@@ -62,6 +62,7 @@ class _ConejozDashboardState extends State<ConejozDashboard> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).colorScheme.primary,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
