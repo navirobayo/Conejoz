@@ -1,4 +1,5 @@
 import 'package:conejoz/src/constants/multi_lang_app_strings.dart';
+import 'package:conejoz/src/constants/theme_and_font_manager.dart';
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'src/features/settings/offline_themes/flutter_monokai_theme.dart';
+import 'src/constants/offline_themes/flutter_monokai_theme.dart';
 
 // * Welcome
 
@@ -110,12 +111,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeAndFontManager = ThemeAndFontManager.instance;
     return GetMaterialApp(
       translations: Messages(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
       title: 'Conejoz',
-      theme: FlutterMonokaiTheme.lightTheme,
+      theme: themeAndFontManager.selectedLightTheme,
+      darkTheme: themeAndFontManager.selectedDarkTheme,
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
     );
