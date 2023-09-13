@@ -1,5 +1,6 @@
 import 'package:conejoz/src/features/settings/screens/about_screen.dart';
 import 'package:conejoz/src/features/settings/screens/conejoz_manual.dart';
+import 'package:conejoz/src/features/settings/screens/lang_selector.dart';
 import 'package:conejoz/src/features/settings/screens/theme_selector.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,12 @@ class SettingsScreen extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.language_outlined),
               onPressed: () {
-                // Navigate to the language settings screen.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LangSelector(),
+                  ),
+                );
               },
             ),
             title: Text(
@@ -62,21 +68,21 @@ class SettingsScreen extends StatelessWidget {
           ),
           ListTile(
             leading: IconButton(
-              icon: const Icon(Icons.person),
+              icon: const Icon(Icons.help_outline_rounded),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const AboutScreen(),
+                    builder: (context) => const ConejozManual(),
                   ),
                 );
               },
             ),
             title: Text(
-              'Profile',
+              'Manual',
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            subtitle: const Text('Customize that rabbit pal'),
+            subtitle: const Text('Some cool stuff here'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.primary),
           ),
@@ -112,26 +118,6 @@ class SettingsScreen extends StatelessWidget {
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
             subtitle: const Text('See you later rabbitz'),
-            trailing: Icon(Icons.arrow_forward_ios,
-                color: Theme.of(context).colorScheme.primary),
-          ),
-          ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.help),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ConejozManual(),
-                  ),
-                );
-              },
-            ),
-            title: Text(
-              'Manual',
-              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-            ),
-            subtitle: const Text('Some cool stuff here'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.primary),
           ),

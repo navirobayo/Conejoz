@@ -18,6 +18,7 @@ class Messages extends Translations {
           "Confirm password": "Confirm password",
           "Confirm your password": "Confirm your password",
           "I forgot my password": "I forgot my password",
+          "Hola": "Hello",
         },
         'es_ES': {
           "Welcome": "Bienvenido",
@@ -34,6 +35,7 @@ class Messages extends Translations {
           "Confirm password": "Confirmar contraseña",
           "Confirm your password": "Confirma tu contraseña",
           "I forgot my password": "Olvidé mi contraseña",
+          "Hola": "Hola",
         }
       };
 }
