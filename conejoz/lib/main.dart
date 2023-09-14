@@ -1,7 +1,7 @@
 import 'package:conejoz/src/constants/multi_lang_app_strings.dart';
 import 'package:conejoz/src/constants/offline_themes/flutter_atari_theme.dart';
-import 'package:conejoz/src/constants/theme_and_font_manager.dart';
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
+import 'package:conejoz/src/controllers/theme_manager.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
@@ -112,7 +112,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeAndFontManager = ThemeAndFontManager.instance;
     return GetMaterialApp(
       translations: Messages(),
       locale: Get.deviceLocale,
