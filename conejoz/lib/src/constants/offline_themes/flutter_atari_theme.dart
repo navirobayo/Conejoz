@@ -6,15 +6,15 @@ class FlutterAtariTheme {
   // If you want to modify both themes at once, modify the colors below.
 
   static const Color _primaryColor = Color.fromARGB(255, 30, 14, 211);
-  static const Color _primaryInverseColor = Color(0xFF4E432F);
+  static const Color _primaryInverseColor = Color.fromARGB(255, 60, 69, 123);
   static const Color _onSurfaceColor = Color.fromARGB(255, 47, 239, 9);
   static const Color _onSurfaceVariant = Color(0xFFFF6578);
   static const Color _onPrimaryColor = Color.fromARGB(255, 255, 121, 3);
-  static const Color _surfaceColor = Color(0xFF4E432F);
+  static const Color _surfaceColor = Color.fromARGB(255, 191, 165, 115);
   static const Color _backgroundColor = Color(0xFF373C4B);
   static const Color _onSecondaryColor = Color(0xFFE1E3E4);
   static const Color _onBackgroundColor = Color(0xFF828A9A);
-  static const Color _secondaryColor = Color(0xFF55393D);
+  static const Color _secondaryColor = Color.fromARGB(255, 255, 247, 2);
   static const Color _primaryContainer = Color(0xFF394634);
   static const Color _errorColor = Color(0xFFF69C5E);
   static const Color _onErrorColor = Color(0xFF354157);

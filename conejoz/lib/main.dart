@@ -1,4 +1,5 @@
 import 'package:conejoz/src/constants/multi_lang_app_strings.dart';
+import 'package:conejoz/src/constants/offline_themes/flutter_atari_theme.dart';
 import 'package:conejoz/src/constants/theme_and_font_manager.dart';
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
@@ -117,8 +118,8 @@ class App extends StatelessWidget {
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
       title: 'Conejoz',
-      theme: themeAndFontManager.selectedLightTheme,
-      darkTheme: themeAndFontManager.selectedDarkTheme,
+      theme: FlutterAtariTheme.lightTheme,
+      darkTheme: FlutterAtariTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
     );
