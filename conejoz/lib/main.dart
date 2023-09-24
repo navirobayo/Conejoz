@@ -117,8 +117,8 @@ class App extends StatelessWidget {
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
       title: 'Conejoz',
-      theme: FlutterAtariTheme.lightTheme,
-      darkTheme: FlutterAtariTheme.darkTheme,
+      theme: FlutterMonokaiTheme.lightTheme,
+      darkTheme: FlutterMonokaiTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
     );
