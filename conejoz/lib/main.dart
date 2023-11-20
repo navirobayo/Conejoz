@@ -83,7 +83,7 @@ import 'src/constants/offline_themes/flutter_monokai_theme.dart';
 // From Latin America, with love. For dreamers, by dreamers.
 
 // ! The app starts here.
-// ! Ver. 1.0.1
+// ! Ver. 1.1.1
 
 // This function initializes the app's dependencies.
 Future<void> initializeDependencies() async {
