@@ -115,7 +115,7 @@ class App extends StatelessWidget {
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
       theme: DefaultAppTheme.lightTheme,
-      darkTheme: DefaultAppTheme.darkTheme,
+      darkTheme: DefaultAppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
     );
