@@ -1,3 +1,6 @@
+import 'package:conejoz/src/back_end/repositories/user_repository/user_repository.dart';
+import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
+import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_monokai_theme.dart';
 import 'package:conejoz/src/front_end/screens/app_dashboard_screen/app_dashboard_screen.dart';
 import 'package:conejoz/src/front_end/screens/authentication_screen/welcome_screen.dart';
 import 'package:conejoz/src/back_end/repositories/authentication_repository/exceptions/login_email_password_failure.dart';
@@ -26,12 +29,37 @@ class AuthenticationRepository extends GetxController {
     ever(firebaseUser, _setInitialScreen);
   }
 
-  _setInitialScreen(User? user) {
-    // This method is called every time the firebaseUser variable changes.
-    // It redirects the user to the correct screen.
-    user == null
-        ? Get.offAll(() => const WelcomeScreen())
-        : Get.offAll(() => const ConejozDashboard());
+  _setInitialScreen(User? user) async {
+    if (user == null) {
+      Get.offAll(() => const WelcomeScreen());
+    } else {
+      // Fetch the user's document from the database
+      final userDocument =
+          await UserRepository.instance.getUserDocument(user.uid);
+
+      // Check if the userDocument contains the "apptheme" field
+      if (userDocument != null && userDocument.data()?["apptheme"] != null) {
+        // Change the theme based on the "apptheme" field
+        changeThemeBasedOnAppTheme(userDocument.data()?["apptheme"]);
+      }
+
+      Get.offAll(() => const ConejozDashboard());
+    }
+  }
+
+  void changeThemeBasedOnAppTheme(String appTheme) {
+    switch (appTheme) {
+      case "atari":
+        Get.changeTheme(FlutterAtariTheme.lightTheme);
+        break;
+      case "monokai":
+        Get.changeTheme(FlutterMonokaiTheme.lightTheme);
+        break;
+      // Add more cases for additional themes as needed
+      default:
+        // If it's the default theme, no need to change
+        break;
+    }
   }
 
   Future<void> createUserWithEmailAndPassword(

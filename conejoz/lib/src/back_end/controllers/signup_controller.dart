@@ -39,6 +39,7 @@ class SignUpController extends GetxController {
       "location": "Unknown.",
       "entries": [],
       "userimages": [],
+      "apptheme": "default"
     };
     userRepo.createRabbit(
         // This function is located in the UserRepository.

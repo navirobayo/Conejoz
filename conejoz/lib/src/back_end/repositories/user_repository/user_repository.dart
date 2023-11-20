@@ -80,6 +80,42 @@ class UserRepository extends GetxController {
     }
   }
 
+  // * Change the app theme:
+
+  Future<void> updateUserAppTheme(String selectedTheme) async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final userId = user.uid;
+
+    try {
+      await updateAppTheme(userId, selectedTheme);
+      await user.reload(); // Refresh the user to get the updated data
+      print("User app theme updated successfully!");
+    } catch (error) {
+      print("Error updating user app theme: $error");
+      throw error;
+    }
+  }
+
+  Future<void> updateAppTheme(String userId, String selectedTheme) async {
+    final userDocumentRef = _db.collection("rabbits").doc(userId);
+
+    try {
+      await userDocumentRef.update({
+        "apptheme": selectedTheme,
+      });
+      print("App theme updated in the database successfully!");
+    } catch (error) {
+      print("Error updating app theme in the database: $error");
+      throw error;
+    }
+  }
+
   // * Functions used in the "Authentication" feature:
 
   Future<void> createRabbit(Map<String, dynamic> rabbitDocument) async {

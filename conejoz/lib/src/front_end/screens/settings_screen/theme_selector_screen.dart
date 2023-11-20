@@ -1,3 +1,4 @@
+import 'package:conejoz/src/back_end/repositories/user_repository/user_repository.dart';
 import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
 import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_monokai_theme.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,8 @@ class ThemeSelector extends StatelessWidget {
                             leading: const Icon(Icons.palette_outlined),
                             title: const Text('Monokai'),
                             onTap: () {
+                              UserRepository.instance
+                                  .updateUserAppTheme('monokai');
                               Get.changeTheme(FlutterMonokaiTheme.lightTheme);
                             },
                           ),
@@ -47,6 +50,8 @@ class ThemeSelector extends StatelessWidget {
                             leading: const Icon(Icons.palette_outlined),
                             title: const Text('Atari'),
                             onTap: () {
+                              UserRepository.instance
+                                  .updateUserAppTheme('atari');
                               Get.changeTheme(FlutterAtariTheme.lightTheme);
                             },
                           ),

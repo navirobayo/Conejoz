@@ -4,10 +4,9 @@ import 'package:conejoz/src/front_end/screens/authentication_screen/email_regist
 import 'package:conejoz/src/front_end/screens/authentication_screen/log_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key});
+  const WelcomeScreen({super.key});
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();

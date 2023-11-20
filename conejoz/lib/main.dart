@@ -1,4 +1,5 @@
 import 'package:conejoz/src/front_end/global_components/app_strings/multi_lang_app_strings.dart';
+import 'package:conejoz/src/front_end/global_components/offline_themes/default_app_theme.dart';
 
 import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
 import 'package:conejoz/src/back_end/controllers/dream_image_creator_controller.dart';
@@ -113,9 +114,8 @@ class App extends StatelessWidget {
       translations: Messages(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
-      title: 'Conejoz',
-      theme: FlutterMonokaiTheme.lightTheme,
-      darkTheme: FlutterMonokaiTheme.darkTheme,
+      theme: DefaultAppTheme.lightTheme,
+      darkTheme: DefaultAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
     );
