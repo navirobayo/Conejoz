@@ -1,15 +1,16 @@
-import 'package:conejoz/src/constants/conejoz_atari_theme.dart';
-import 'package:conejoz/src/constants/conejoz_monokai_theme.dart';
 import 'package:conejoz/src/constants/multi_lang_app_strings.dart';
+import 'package:conejoz/src/constants/offline_themes/flutter_atari_theme.dart';
 import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
+import 'package:conejoz/src/controllers/theme_manager.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
 import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
 import 'package:conejoz/src/repository/user_repository/user_repository.dart'; // Import UserRepository
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:conejoz/src/constants/conejoz_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'src/constants/offline_themes/flutter_monokai_theme.dart';
 
 // * Welcome
 
@@ -116,10 +117,9 @@ class App extends StatelessWidget {
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
       title: 'Conejoz',
-      theme: ConejozMonokaiTheme.lightTheme,
-      darkTheme: ConejozMonokaiTheme.darkTheme,
+      theme: FlutterMonokaiTheme.lightTheme,
+      darkTheme: FlutterMonokaiTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
       home: const WelcomeScreen(),
     );
   }

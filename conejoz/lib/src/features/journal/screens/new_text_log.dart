@@ -69,8 +69,8 @@ class _NewTextLogState extends State<NewTextLog> {
               Navigator.pop(context);
             },
           ),
-          title: Text("+",
-              style: TextStyle(color: Theme.of(context).colorScheme.surface))),
+          title: Text("New log.",
+              style: TextStyle(color: Theme.of(context).colorScheme.primary))),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(

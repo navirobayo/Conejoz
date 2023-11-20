@@ -33,7 +33,7 @@ class LogsList extends StatelessWidget {
         ),
         title: Text(
           "Logs.",
-          style: TextStyle(color: Theme.of(context).colorScheme.surface),
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
@@ -86,7 +86,7 @@ class _JournalManagerList extends StatelessWidget {
             DateFormat('dd-MM-yy HH:mm:ss')
                 .format(entry['timestamp']?.toDate()),
             style: TextStyle(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ),
           onTap: () {
