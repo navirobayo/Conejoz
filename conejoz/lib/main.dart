@@ -1,24 +1,25 @@
-import 'package:conejoz/src/constants/multi_lang_app_strings.dart';
-import 'package:conejoz/src/constants/offline_themes/flutter_atari_theme.dart';
-import 'package:conejoz/src/controllers/dream_image_creator_controller.dart';
-import 'package:conejoz/src/controllers/theme_manager.dart';
+import 'package:conejoz/src/front_end/global_components/app_strings/multi_lang_app_strings.dart';
+
+import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
+import 'package:conejoz/src/back_end/controllers/dream_image_creator_controller.dart';
+import 'package:conejoz/src/back_end/controllers/theme_manager.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
-import 'package:conejoz/src/features/authentication/screens/welcome/welcome_screen.dart';
-import 'package:conejoz/src/repository/authentication_repository/authentication_repository.dart';
-import 'package:conejoz/src/repository/user_repository/user_repository.dart'; // Import UserRepository
+import 'package:conejoz/src/front_end/screens/authentication_screen/welcome_screen.dart';
+import 'package:conejoz/src/back_end/repositories/authentication_repository/authentication_repository.dart';
+import 'package:conejoz/src/back_end/repositories/user_repository/user_repository.dart'; // Import UserRepository
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'src/constants/offline_themes/flutter_monokai_theme.dart';
+import 'src/front_end/global_components/offline_themes/flutter_monokai_theme.dart';
 
 // * Welcome
 
-// Thank you for passing by :sunglassesemoji: This is the version 0.0.1 of Conejoz.
+// Thank you for passing by :sunglassesemoji: This is the version 1.1.0 of Conejoz.
 
 // * Glossary:
 
-// A 'rabbit' is a user of the app.
+// A 'rabbit' is how the user of the app is called in the code.
 
 // * App dependencies:
 
@@ -41,14 +42,10 @@ import 'src/constants/offline_themes/flutter_monokai_theme.dart';
 
 // ! publicdreams:
 
-// Responsible for storing all the public dreamObjects of the users.
-// Each dreamObject in this collection will be displayed in the public feed.
+// Responsible for storing all the public dreams of the users.
+// Each 'dream' in this collection will be displayed in the public feed.
 
 // * Folder structure:
-
-// ! src:
-
-// This folder contains all the code of the app.
 
 // ! src/features:
 
@@ -79,8 +76,8 @@ import 'src/constants/offline_themes/flutter_monokai_theme.dart';
 // * About:
 
 // Conejoz. A dream journaling app.
-// Created by Ivan Robayo. Published by BINOCU. 2023.
-// From Latin America, with love. For dreamers, by dreamers.
+// Binocu 2023.
+// For dreamers, by dreamers.
 
 // ! The app starts here.
 // ! Ver. 1.1.1
