@@ -24,7 +24,7 @@ class JournalMenu extends StatelessWidget {
         title: Text(
           "Journal.",
           style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
+              color: Theme.of(context).colorScheme.onSurface, fontSize: 18),
         ),
         automaticallyImplyLeading: false,
       ),
@@ -42,7 +42,7 @@ class JournalMenu extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         ConejozTextForRouteButton(
-                            text: "New Text Entry", context: context),
+                            text: "New Log", context: context),
                         SizedBox(height: defaultTextSpacer),
                         ConejozTextForRouteButton(
                             text: "AI Image", context: context),

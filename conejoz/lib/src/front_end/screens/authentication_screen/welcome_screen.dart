@@ -33,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     Icon(
                       ConejozLogos.conejozBlackFill,
                       size: 50.0,
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     const Spacer(),
                     Container(
@@ -44,11 +44,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             height: 10,
                           ),
                           Text(
-                            'Conejoz',
+                            appName,
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                           const SizedBox(
@@ -57,9 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           Text(
                             "ver. $appVersion",
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                           ),
                         ],
@@ -79,11 +75,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     const Spacer(),
                     DropdownButton<String>(
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface),
                       value: _selectedLanguage,
                       items: <String>['English', 'Español'].map((String value) {
                         return DropdownMenuItem<String>(
@@ -114,11 +112,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text(
                     'Login'.tr,
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                const Text("-"),
+                Text(
+                  "-",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                ),
                 const SizedBox(height: 20.0),
                 TextButton(
                   onPressed: () {
@@ -131,7 +133,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text(
                     'Register'.tr,
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant),
                   ),
                 ),
                 const SizedBox(height: 20.0),

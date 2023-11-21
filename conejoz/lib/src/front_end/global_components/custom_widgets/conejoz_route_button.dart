@@ -32,7 +32,7 @@ class ConejozRouteButton extends StatelessWidget {
           height: 50,
           child: Center(
             child: Icon(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.onSurface,
               icon,
             ),
           ),

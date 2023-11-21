@@ -19,7 +19,7 @@ class _FeedScreenState extends State<FeedScreen> {
         title: Text(
           "Public Logs.",
           style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
+              color: Theme.of(context).colorScheme.onSurface, fontSize: 18),
         ),
         automaticallyImplyLeading: false,
         actions: [
@@ -29,7 +29,7 @@ class _FeedScreenState extends State<FeedScreen> {
             child: InkWell(
               splashColor: Theme.of(context).colorScheme.primary,
               onTap: () {
-                // This button will refresh the feed
+                //! This button will refresh the feed
               },
               child: SizedBox(
                 width: 50,
@@ -37,7 +37,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 child: Center(
                   child: Icon(
                     Icons.language,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -63,7 +63,7 @@ class _FeedScreenState extends State<FeedScreen> {
                 child: Center(
                   child: Icon(
                     Icons.tag,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),

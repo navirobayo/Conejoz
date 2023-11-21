@@ -91,7 +91,7 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
-                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
+                      .copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               const Spacer(),
@@ -139,19 +139,23 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                 const SizedBox(
                   width: 5,
                 ),
-                Text("("),
+                Text(
+                  "(",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
                       // Do nothing here, as we want to show the popup menu immediately
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondary,
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                       padding: EdgeInsets.zero,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      tapTargetSize:
+                          MaterialTapTargetSize.shrinkWrap, // * What is this?
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
@@ -161,12 +165,18 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onSecondary,
                           decoration: TextDecoration.underline,
+                          decorationColor:
+                              Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
                     ),
                   ),
                 ),
                 PopupMenuButton<String>(
+                  icon: Icon(
+                    Icons.more_vert,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
                   onSelected: (value) {
                     // Handle tag selection if needed
                   },
@@ -174,7 +184,11 @@ class _PublicDreamWidgetState extends State<PublicDreamWidget> {
                     return widget.tags.split(', ').map((tag) {
                       return PopupMenuItem<String>(
                         value: tag,
-                        child: Text(tag),
+                        child: Text(
+                          tag,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
                       );
                     }).toList();
                   },

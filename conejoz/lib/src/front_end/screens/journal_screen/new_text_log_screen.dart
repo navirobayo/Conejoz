@@ -69,7 +69,7 @@ class _NewTextLogState extends State<NewTextLog> {
               Navigator.pop(context);
             },
           ),
-          title: Text("New log.",
+          title: Text("New log",
               style: TextStyle(color: Theme.of(context).colorScheme.primary))),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -77,17 +77,29 @@ class _NewTextLogState extends State<NewTextLog> {
           children: [
             const SizedBox(height: 16),
             TextField(
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
               controller: _titleEditingController,
-              decoration: const InputDecoration(
-                hintText: 'Entry title',
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+                hintText: 'Title',
                 border: InputBorder.none,
               ),
               maxLines: null,
             ),
             const SizedBox(height: 5),
             TextField(
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               controller: _tagsEditingController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
                 hintText: 'Tags separated by commas',
                 border: InputBorder.none,
               ),
@@ -96,8 +108,11 @@ class _NewTextLogState extends State<NewTextLog> {
             const SizedBox(height: 5),
             TextField(
               controller: _textEditingController,
-              decoration: const InputDecoration(
-                hintText: 'Entry',
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+                hintText: 'Write as much as you need here.',
                 border: InputBorder.none,
               ),
               maxLines: null,
@@ -107,7 +122,7 @@ class _NewTextLogState extends State<NewTextLog> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          splashColor: Theme.of(context).colorScheme.surface,
+          splashColor: Theme.of(context).colorScheme.onSurface,
           backgroundColor: Theme.of(context).colorScheme.onError,
           onPressed: _saveNote,
           child: Icon(
