@@ -65,12 +65,14 @@ class ImageCreator extends StatelessWidget {
                   ),
                 ),
                 TextField(
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onPrimary),
                   controller: _textEditingController,
                   decoration: InputDecoration(
                     hintStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.onSecondary,
+                      color: Theme.of(context).colorScheme.onBackground,
                     ),
-                    hintText: 'Write the prompt here.',
+                    hintText: 'Write the prompt here',
                     border: InputBorder.none,
                   ),
                   maxLines: null,

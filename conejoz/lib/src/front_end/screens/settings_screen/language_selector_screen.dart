@@ -61,6 +61,7 @@ class _LangSelectorState extends State<LangSelector> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           onPressed: () {
             Navigator.push(
               context,

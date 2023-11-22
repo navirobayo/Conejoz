@@ -1,9 +1,6 @@
 import 'package:conejoz/src/front_end/global_components/app_strings/multi_lang_app_strings.dart';
 import 'package:conejoz/src/front_end/global_components/offline_themes/default_app_theme.dart';
-
-import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
 import 'package:conejoz/src/back_end/controllers/dream_image_creator_controller.dart';
-import 'package:conejoz/src/back_end/controllers/theme_manager.dart';
 import 'package:conejoz/src/private/firebase_options.dart';
 import 'package:conejoz/src/front_end/screens/authentication_screen/welcome_screen.dart';
 import 'package:conejoz/src/back_end/repositories/authentication_repository/authentication_repository.dart';
@@ -12,11 +9,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'src/front_end/global_components/offline_themes/flutter_monokai_theme.dart';
-
 // * Welcome
 
-// Thank you for passing by :sunglassesemoji: This is the version 1.1.0 of Conejoz.
+// Thank you for passing by :sunglassesemoji: This is the version 2.0.0 of Conejoz.
 
 // * Glossary:
 
@@ -114,8 +109,8 @@ class App extends StatelessWidget {
       translations: Messages(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
+      themeMode: ThemeMode.light,
       theme: DefaultAppTheme.lightTheme,
-      darkTheme: DefaultAppTheme.lightTheme,
       debugShowCheckedModeBanner: false,
       home: const WelcomeScreen(),
     );

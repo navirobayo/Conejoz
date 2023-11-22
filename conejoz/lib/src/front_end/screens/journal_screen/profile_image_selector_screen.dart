@@ -54,8 +54,8 @@ class _ProfileImageSelectorState extends State<ProfileImageSelector> {
           },
         ),
         title: Text(
-          "Adding image",
-          style: TextStyle(color: Theme.of(context).colorScheme.surface),
+          "Profile image",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: GridView.builder(

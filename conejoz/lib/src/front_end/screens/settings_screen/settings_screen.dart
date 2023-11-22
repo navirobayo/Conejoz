@@ -14,112 +14,83 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         leading: IconButton(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
           icon: const Icon(Icons.arrow_back_outlined),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         title: Text("Settings",
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurfaceVariant)),
+            style: TextStyle(color: Theme.of(context).colorScheme.primary)),
       ),
       body: ListView(
         children: [
           ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.language_outlined),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LangSelector(),
-                  ),
-                );
-              },
-            ),
+            leading: const Icon(Icons.language_outlined),
             title: Text(
               'Language',
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            subtitle: const Text('Change journal\'s language'),
+            subtitle: const Text('Change the app\'s language'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.primary),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LangSelector(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.palette_outlined),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ThemeSelector(),
-                  ),
-                );
-              },
-            ),
+            leading: const Icon(Icons.palette_outlined),
             title: Text(
               'Theme',
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            subtitle: const Text('Change journal\'s theme'),
+            subtitle: const Text('Change the app\'s theme'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.primary),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ThemeSelector(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.help_outline_rounded),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ConejozManual(),
-                  ),
-                );
-              },
-            ),
-            title: Text(
-              'Manual',
-              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
-            ),
-            subtitle: const Text('Some cool stuff here'),
-            trailing: Icon(Icons.arrow_forward_ios,
-                color: Theme.of(context).colorScheme.primary),
-          ),
-          ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.info_outline_rounded),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const AboutScreen(),
-                  ),
-                );
-              },
-            ),
+            leading: const Icon(Icons.help_outline_rounded),
             title: Text(
               'About',
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            subtitle: const Text('What\'s Conejoz anyway?'),
+            subtitle: const Text('Interesting stuff here'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.primary),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ConejozManual(),
+                ),
+              );
+            },
           ),
           ListTile(
-            leading: IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                AuthenticationRepository.instance.logout();
-              },
-            ),
+            leading: const Icon(Icons.logout),
             title: Text(
               'Logout',
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
-            subtitle: const Text('See you later rabbitz'),
+            subtitle: const Text('See you later rabbit'),
             trailing: Icon(Icons.arrow_forward_ios,
                 color: Theme.of(context).colorScheme.primary),
+            onTap: () {
+              AuthenticationRepository.instance.logout();
+            },
           ),
         ],
       ),

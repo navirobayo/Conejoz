@@ -32,7 +32,7 @@ class LogsList extends StatelessWidget {
           },
         ),
         title: Text(
-          "Logs.",
+          "Logs",
           style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
@@ -73,7 +73,7 @@ class _JournalManagerList extends StatelessWidget {
           title: Text(
             entry['title'] ?? '',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           subtitle: Text(
@@ -93,7 +93,7 @@ class _JournalManagerList extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => LogDashboard(entry: entry),
+                builder: (context) => LogScreen(entry: entry),
               ),
             );
           },

@@ -78,8 +78,16 @@ class _LogPublisherState extends State<LogPublisher> {
                   Spacer(),
                   Row(
                     children: [
-                      Text("Entry Status: "),
-                      Text(entryStatus),
+                      Text(
+                        "Status:               ",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                      Text(
+                        entryStatus,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
                     ],
                   ),
                   Spacer(),
@@ -118,8 +126,8 @@ class _LogPublisherState extends State<LogPublisher> {
                         child: Center(
                           child: Icon(
                             entryStatus == isPublic
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),

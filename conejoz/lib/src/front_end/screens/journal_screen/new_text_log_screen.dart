@@ -107,12 +107,13 @@ class _NewTextLogState extends State<NewTextLog> {
             ),
             const SizedBox(height: 5),
             TextField(
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
               controller: _textEditingController,
               decoration: InputDecoration(
                 hintStyle: TextStyle(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
-                hintText: 'Write as much as you need here.',
+                hintText: 'Write as much as you need here',
                 border: InputBorder.none,
               ),
               maxLines: null,

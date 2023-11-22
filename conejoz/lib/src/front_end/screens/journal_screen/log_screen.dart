@@ -5,20 +5,19 @@ import 'package:conejoz/src/front_end/screens/journal_screen/log_preview_screen.
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class LogDashboard extends StatefulWidget {
+class LogScreen extends StatefulWidget {
   final Map<String, dynamic> entry;
 
-  const LogDashboard({
+  const LogScreen({
     Key? key,
     required this.entry,
   }) : super(key: key);
 
   @override
-  State<LogDashboard> createState() => _LogDashboardState();
+  State<LogScreen> createState() => _LogScreenState();
 }
 
-class _LogDashboardState extends State<LogDashboard> {
-  // Index of the current screen
+class _LogScreenState extends State<LogScreen> {
   int _currentIndex = 0;
 
   @override
@@ -36,7 +35,7 @@ class _LogDashboardState extends State<LogDashboard> {
         ),
         title: Text(
           DateFormat('yy-MM-dd HH:mm:ss').format(entryDate),
-          style: TextStyle(color: Theme.of(context).colorScheme.surface),
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
       body: IndexedStack(
@@ -54,6 +53,7 @@ class _LogDashboardState extends State<LogDashboard> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).colorScheme.primary,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

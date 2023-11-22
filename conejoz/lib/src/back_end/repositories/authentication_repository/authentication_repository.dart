@@ -1,5 +1,5 @@
 import 'package:conejoz/src/back_end/repositories/user_repository/user_repository.dart';
-import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
+import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_midnight_neon_theme.dart';
 import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_monokai_theme.dart';
 import 'package:conejoz/src/front_end/screens/app_dashboard_screen/app_dashboard_screen.dart';
 import 'package:conejoz/src/front_end/screens/authentication_screen/welcome_screen.dart';
@@ -50,7 +50,7 @@ class AuthenticationRepository extends GetxController {
   void changeThemeBasedOnAppTheme(String appTheme) {
     switch (appTheme) {
       case "atari":
-        Get.changeTheme(FlutterAtariTheme.lightTheme);
+        Get.changeTheme(FluttterMidnightNeonTheme.lightTheme);
         break;
       case "monokai":
         Get.changeTheme(FlutterMonokaiTheme.lightTheme);

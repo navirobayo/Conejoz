@@ -116,6 +116,45 @@ class UserRepository extends GetxController {
     }
   }
 
+  // * Update user information:
+
+  Future<void> updateUserInformation({
+    String? newBio,
+    String? newLocation,
+    String? newContactInfo,
+  }) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print("User is not authenticated.");
+      return;
+    }
+
+    final uid = user.uid;
+
+    try {
+      final userDocumentRef = _db.collection("rabbits").doc(uid);
+      final Map<String, dynamic> updatedUserData = {};
+
+      if (newBio != null) {
+        updatedUserData["bio"] = newBio;
+      }
+
+      if (newLocation != null) {
+        updatedUserData["location"] = newLocation;
+      }
+
+      if (newContactInfo != null) {
+        updatedUserData["contactinfo"] = newContactInfo;
+      }
+
+      await userDocumentRef.update(updatedUserData);
+      print("User information updated successfully!");
+    } catch (error) {
+      print("Error updating user information: $error");
+      throw error;
+    }
+  }
+
   // * Functions used in the "Authentication" feature:
 
   Future<void> createRabbit(Map<String, dynamic> rabbitDocument) async {

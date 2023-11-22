@@ -25,7 +25,7 @@ class _LogVisualizerState extends State<LogVisualizer> {
             const SizedBox(height: 16),
             Text(title,
                 style:
-                    TextStyle(color: Theme.of(context).colorScheme.onPrimary)),
+                    TextStyle(color: Theme.of(context).colorScheme.onSurface)),
             const SizedBox(height: 5),
             const SizedBox(height: 5),
             Row(

@@ -1,15 +1,16 @@
 import 'package:conejoz/src/back_end/repositories/user_repository/user_repository.dart';
-import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_atari_theme.dart';
+import 'package:conejoz/src/front_end/global_components/custom_icons/custom_icons.dart';
+import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_midnight_neon_theme.dart';
 import 'package:conejoz/src/front_end/global_components/offline_themes/flutter_monokai_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 final List<ThemeData> availableThemes = [
   FlutterMonokaiTheme.lightTheme,
-  FlutterMonokaiTheme.darkTheme,
-  FlutterAtariTheme.lightTheme,
-  FlutterAtariTheme.darkTheme,
+  FluttterMidnightNeonTheme.lightTheme,
 ];
+
+//! If you add themes you need to update the User Repository functions.
 
 class ThemeSelector extends StatelessWidget {
   const ThemeSelector({Key? key});
@@ -18,22 +19,29 @@ class ThemeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Theme Selector"),
+        title: Text(
+          "Theme Selector",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Select any of the themes below to change the app\'s theme.',
-            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 Get.bottomSheet(
-                  Container(
+                  SizedBox(
                       height: 200,
                       child: ListView(
                         children: [
@@ -52,45 +60,22 @@ class ThemeSelector extends StatelessWidget {
                             onTap: () {
                               UserRepository.instance
                                   .updateUserAppTheme('atari');
-                              Get.changeTheme(FlutterAtariTheme.lightTheme);
+                              Get.changeTheme(
+                                  FluttterMidnightNeonTheme.lightTheme);
                             },
                           ),
                         ],
                       )),
                 );
               },
-              child: const Text('Select Theme'),
+              child: const Icon(ConejozLogos.conejozBlackFill),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.back();
-        },
-        tooltip: 'done',
-        child: const Icon(Icons.check),
-      ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* final List<ThemeData> availableThemes = [
   FlutterMonokaiTheme.lightTheme,

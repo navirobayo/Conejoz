@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conejoz/src/front_end/global_components/app_strings/global_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -39,7 +40,7 @@ class LogReader extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
                 Spacer(),
-                Text('Conejoz Ver. 0.0.1')
+                Text("$appName ver. $appVersion")
               ]),
               SizedBox(
                 height: 20,

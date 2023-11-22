@@ -31,6 +31,8 @@ class _LogEditorState extends State<LogEditor> {
     _tagsEditingController.text = widget.entry['tags']?.join(', ') ?? '';
   }
 
+  // ! Separate logic if possible.
+
   @override
   void dispose() {
     _titleEditingController.dispose();
@@ -119,7 +121,7 @@ class _LogEditorState extends State<LogEditor> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Attachments"),
+          title: const Text("+"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -137,7 +139,7 @@ class _LogEditorState extends State<LogEditor> {
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
-                  child: const Text("Add / remove image"),
+                  child: const Text("Add image"),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -170,12 +172,13 @@ class _LogEditorState extends State<LogEditor> {
             const SizedBox(height: 16),
             Center(
                 child: Text(
-              "<        <      <    <  Edition mode  >    >      >        >",
+              "Edition mode ! Save your changes before leaving",
               style:
                   TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             )),
             const SizedBox(height: 16),
             TextField(
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
               controller: _titleEditingController,
               decoration: const InputDecoration(
                 hintText: 'Entry title',
@@ -185,6 +188,7 @@ class _LogEditorState extends State<LogEditor> {
             ),
             const SizedBox(height: 5),
             TextField(
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
               controller: _tagsEditingController,
               decoration: const InputDecoration(
                 hintText: 'Tags separated by commas',
@@ -253,6 +257,7 @@ class _LogEditorState extends State<LogEditor> {
             ),
             const SizedBox(height: 5),
             TextField(
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
               controller: _textEditingController,
               decoration: const InputDecoration(
                 hintText: 'Entry',

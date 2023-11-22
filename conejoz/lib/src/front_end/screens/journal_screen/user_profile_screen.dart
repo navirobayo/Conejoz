@@ -29,19 +29,6 @@ class _UserProfileState extends State<UserProfile> {
   void initState() {
     super.initState();
     _getRabbitData();
-
-    // *
-    /*
-    // Initialize the user data from the repository
-    final userRepo = UserRepository.instance;
-    final user = userRepo.getCard();
-    _username = user.username;
-    _profilePicture = user.profilePicture;
-    _collections = user.collections;
-    _bio = user.bio;
-    _contactInfo = user.contactInfo;
-    */
-    // *
   }
 
   Future<void> updateRabbitName(String newRabbitName) async {
@@ -73,11 +60,17 @@ class _UserProfileState extends State<UserProfile> {
     Get.put(UserRepository());
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-          "Profile.",
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.onPrimary, fontSize: 18),
+          "Rabbit",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
         actions: [
           PopupMenuButton<String>(
@@ -89,25 +82,36 @@ class _UserProfileState extends State<UserProfile> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('Bio'),
+                        title: const Text('+'),
                         content: Column(
                           children: [
                             TextField(
                               controller: _newBioController,
                               decoration: InputDecoration(
-                                hintText: '¿Quién es $_username?',
-                              ),
+                                  hintText: 'Who is $_username?',
+                                  hintStyle: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground)),
                             ),
                             TextField(
                               controller: _newLocationController,
                               decoration: InputDecoration(
                                 hintText: 'Real or virtual location is ok',
+                                hintStyle: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
                               ),
                             ),
                             TextField(
                               controller: _newContactInfoController,
                               decoration: InputDecoration(
                                 hintText: 'Where can people reach you?',
+                                hintStyle: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
                               ),
                             ),
                           ],
@@ -117,19 +121,26 @@ class _UserProfileState extends State<UserProfile> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                           ),
                           ElevatedButton(
-                            onPressed: () /* async */ {
-                              /*
+                            onPressed: () async {
                               final newBio = _newBioController.text;
-                              await updateRabbitBio(newBio);
-                              setState(() {
-                                _bio = newBio;
-                              });
-                              Navigator.pop(context); */
+                              final newLocation = _newLocationController.text;
+                              final newContactInfo =
+                                  _newContactInfoController.text;
+
+                              await UserRepository.instance
+                                  .updateUserInformation(
+                                newBio: newBio,
+                                newLocation: newLocation,
+                                newContactInfo: newContactInfo,
+                              );
+
+                              _getRabbitData(); // Refresh the displayed user data
+                              Navigator.pop(context);
                             },
-                            child: Text('Save'),
+                            child: const Text('Save'),
                           ),
                         ],
                       );
@@ -149,11 +160,14 @@ class _UserProfileState extends State<UserProfile> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('Change username'),
+                        title: const Text('New username'),
                         content: TextField(
                           controller: _newUsernameController,
                           decoration: InputDecoration(
                             hintText: 'Enter new username',
+                            hintStyle: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
                           ),
                         ),
                         actions: [
@@ -161,7 +175,7 @@ class _UserProfileState extends State<UserProfile> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                           ),
                           ElevatedButton(
                             onPressed: () async {
@@ -170,9 +184,9 @@ class _UserProfileState extends State<UserProfile> {
                               setState(() {
                                 _username = newUsername;
                               });
-                              Navigator.pop(context);
+                              Navigator.pop(context); // ! Fix this.
                             },
-                            child: Text('Save'),
+                            child: const Text('Save'),
                           ),
                         ],
                       );
@@ -182,7 +196,7 @@ class _UserProfileState extends State<UserProfile> {
               }
             },
             itemBuilder: (BuildContext context) {
-              return [
+              return const [
                 PopupMenuItem<String>(
                   value: 'option1',
                   child: Text('Update information'),
@@ -219,7 +233,9 @@ class _UserProfileState extends State<UserProfile> {
                 ),
               ),
               // Access username from _username variable
-              Text(_username ?? "Loading..."),
+              Text(_username ?? "Loading...",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimary)),
               SizedBox(
                 width: regularSpacer,
               )
@@ -229,7 +245,9 @@ class _UserProfileState extends State<UserProfile> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("Bio:"),
+              Text("Bio:",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary)),
               Text(_bio ?? "Loading..."),
             ],
           ),
@@ -237,7 +255,9 @@ class _UserProfileState extends State<UserProfile> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("Location:"),
+              Text("Location:",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary)),
               Text(_location ?? "Loading..."),
             ],
           ),
@@ -245,7 +265,9 @@ class _UserProfileState extends State<UserProfile> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("Contact info:"),
+              Text("Contact info:",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary)),
               Text(_contactInfo ?? "Loading..."),
             ],
           ),

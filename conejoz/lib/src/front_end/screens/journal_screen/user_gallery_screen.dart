@@ -18,6 +18,8 @@ class _UserGalleryState extends State<UserGallery> {
     loadUserImages(); // Load user images when the widget initializes
   }
 
+  //! Separate logic if possible.
+
   Future<void> loadUserImages() async {
     final user = AuthenticationRepository.instance.firebaseUser.value;
     if (user != null) {
@@ -37,7 +39,21 @@ class _UserGalleryState extends State<UserGallery> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("User Gallery"),
+        leading: IconButton(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "User Gallery",
+          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+        ),
+        //* Activate the following line once the logic to delete the pictures is ready
+        /* actions: const [
+          IconButton(onPressed: null, icon: Icon(Icons.more_vert))
+        ], */
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -53,7 +69,19 @@ class _UserGalleryState extends State<UserGallery> {
             child: InkWell(
               splashColor: Theme.of(context).cardColor,
               onTap: () {
-                // Add onTap action here
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      child: SizedBox(
+                        child: Image.network(
+                          userImageUrls[index],
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
               child: Image.network(
                 userImageUrls[index],

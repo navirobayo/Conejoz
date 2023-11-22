@@ -51,8 +51,20 @@ class _TagsExplorerState extends State<TagsExplorer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          icon: const Icon(Icons.arrow_back_outlined),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Tags Explorer"),
+        title: Text(
+          "Public tags explorer",
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -61,7 +73,10 @@ class _TagsExplorerState extends State<TagsExplorer> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search tags',
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+                border: const OutlineInputBorder(),
               ),
               onChanged: _onSearchTextChanged,
             ),
