@@ -239,57 +239,6 @@ class UserRepository extends GetxController {
     }
   }
 
-  // ! TEST STARTS HERE.
-  Future<void> displayPublicCard(Map<String, dynamic> userData) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      print("User is not authenticated.");
-      return;
-    }
-
-    final uid = user.uid; // Get the user's unique id.
-
-    final publicCardData = {
-      "username": userData['username'],
-      "collections": List<String>.from(userData['collections'] ?? []),
-      "profilepicture": userData['profilepicture'],
-      "bio": userData['bio'],
-      "contactinfo": userData['contactinfo'],
-    };
-
-    await _db.collection("publiccards").doc(uid).set(publicCardData).then((_) {
-      Get.snackbar("Success", "Contact information is now public",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green.withOpacity(0.1),
-          colorText: Colors.green);
-    }).catchError((error, stackTrace) {
-      Get.snackbar("Error", "Something went wrong. Try again",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.1),
-          colorText: Colors.red);
-      print(error.toString());
-    });
-  }
-
-  Future<void> deletePublicCard(String uid) async {
-    final user = FirebaseAuth.instance.currentUser;
-
-    if (user == null) {
-      print("User is not authenticated.");
-      return;
-    }
-
-    try {
-      await _db.collection("publiccards").doc(uid).delete();
-      print("Public card deleted successfully!");
-    } catch (error) {
-      print("Error deleting public card: $error");
-      throw error;
-    }
-  }
-
-  // ! TEST ENDS HERE.
-
   Future<String> fetchEntryStatus(String entryId) async {
     final docSnapshot = await FirebaseFirestore.instance
         .collection("publicdreams")
@@ -469,33 +418,6 @@ class UserRepository extends GetxController {
     } catch (error) {
       print("Error getting rabbit data by userId: $error");
       return null;
-    }
-  }
-
-  Future<void> updateRabbitData({
-    required String rabbitname,
-    required String bio,
-    required String location,
-    required String contactinfo,
-  }) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) {
-      print("User is not authenticated.");
-      return;
-    }
-
-    final uid = user.uid;
-
-    try {
-      final userDocumentRef = _db.collection("rabbits").doc(uid);
-      await userDocumentRef.update({
-        "rabbitname": rabbitname,
-        "bio": bio,
-        "location": location,
-        "contactinfo": contactinfo,
-      });
-    } catch (error) {
-      print("Error updating rabbit data: $error");
     }
   }
 
